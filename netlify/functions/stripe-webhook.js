@@ -99,6 +99,24 @@ exports.handler = async (event) => {
     // Activate plan and challenge
     await activatePlan(userId, plan, challengeId);
 
+    // Send payment confirmation email
+    try {
+      const { data: prof } = await sb.from('profiles').select('prenom,email').eq('id', userId).single();
+      const userEmail = prof?.email || session.customer_email || '';
+      if (userEmail) {
+        const https = require('https');
+        const emailBody = JSON.stringify({
+          email: userEmail, prenom: prof?.prenom || '',
+          plan, challengeName: challengeId || '', amount: plan === 'annual' ? '49,00' : '3,99'
+        });
+        const siteUrl = new URL(process.env.SITE_URL || 'https://boostme.social');
+        await new Promise((res) => {
+          const r = https.request({ hostname: siteUrl.hostname, path: '/.netlify/functions/send-payment-confirm', method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(emailBody) } }, (resp) => { resp.resume(); resp.on('end', res); });
+          r.on('error', res); r.write(emailBody); r.end();
+        });
+      }
+    } catch(emailErr) { console.warn('[stripe-webhook] email error:', emailErr.message); }
+
     // Update payment record status
     if (paymentId) {
       await sb.from('payments').update({

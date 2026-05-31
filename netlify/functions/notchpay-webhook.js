@@ -134,6 +134,21 @@ exports.handler = async (event) => {
 
       await activatePlan(userId, plan, challengeId);
 
+      // Send payment confirmation email (non-blocking)
+      try {
+        const { data: prof } = await sb.from('profiles').select('prenom,email').eq('id', userId).single();
+        const userEmail = prof?.email || '';
+        if (userEmail) {
+          const emailBody = JSON.stringify({ email: userEmail, prenom: prof?.prenom || '', plan, challengeName: challengeId || '', amount: plan === 'annual' ? '49,00' : '3,99' });
+          const https2 = require('https');
+          const siteUrl = new URL(process.env.SITE_URL || 'https://boostme.social');
+          await new Promise((res) => {
+            const r = https2.request({ hostname: siteUrl.hostname, path: '/.netlify/functions/send-payment-confirm', method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(emailBody) } }, (resp) => { resp.resume(); resp.on('end', res); });
+            r.on('error', res); r.write(emailBody); r.end();
+          });
+        }
+      } catch(eErr) { console.warn('[np-webhook] email err:', eErr.message); }
+
       // Log payment
       await sb.from('payments').upsert({
         user_id: userId,
