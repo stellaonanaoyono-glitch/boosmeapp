@@ -105,7 +105,7 @@ exports.handler = async (event) => {
 
     try {
       await brevo({
-        sender: { name: 'Gaëlle · BOOST.ME', email: process.env.BREVO_SENDER || 'hello@boostme.social' },
+        sender: { name: 'Gaëlle · BOOST.ME', email: process.env.BREVO_SENDER || 'aeliservicescmr@gmail.com' },
         to: [{ email: p.email, name: p.prenom || p.email }],
         subject: `🔥 ${p.prenom || 'Hé'}, ton challenge ${chName} t'attend — Jour ${uc.current_day}`,
         htmlContent: html,

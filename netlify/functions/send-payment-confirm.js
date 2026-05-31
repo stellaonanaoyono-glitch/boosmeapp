@@ -76,7 +76,7 @@ exports.handler = async (event) => {
 </body></html>`;
 
     const r = await brevo({
-      sender: { name: 'Gaëlle · BOOST.ME', email: process.env.BREVO_SENDER || 'hello@boostme.social' },
+      sender: { name: 'Gaëlle · BOOST.ME', email: process.env.BREVO_SENDER || 'aeliservicescmr@gmail.com' },
       to: [{ email, name: prenom || email }],
       subject: `✓ Paiement confirmé — ${isAnnual ? 'Accès Annuel BOOST.ME' : 'Challenge ' + (challengeName || '')}`,
       htmlContent: html,
