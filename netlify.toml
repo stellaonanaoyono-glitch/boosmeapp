@@ -19,3 +19,9 @@
   from = "/paiement-success"
   to = "/paiement-success.html"
   status = 200
+
+[[functions]]
+  path = "/.netlify/functions/send-weekly-reminder"
+
+[functions.send-weekly-reminder]
+  schedule = "0 9 * * 1"

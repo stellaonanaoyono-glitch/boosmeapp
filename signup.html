@@ -113,6 +113,10 @@ async function signup(){
   }
   var uid=r.data.user.id;
   await sb3.from("profiles").upsert({id:uid,prenom:pn,pays:py||"other",plan:_plan==="free"?"free":"pending"});
+  // Send welcome email (non-blocking)
+  var _wem=em,_wpn=pn;
+  setTimeout(function(){fetch("/.netlify/functions/send-welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:_wem,prenom:_wpn})}).catch(function(){});},500);
+
   if(_plan==="free"){
     await sb3.from("user_challenges").upsert({user_id:uid,challenge_id:"boostme-starter",current_day:1,status:"active",streak:0},{onConflict:"user_id,challenge_id"});
     document.getElementById("suc-msg").textContent="Ton acc\u00e8s gratuit est activ\u00e9. Le BoostMe Starter t\u2019attend !";
