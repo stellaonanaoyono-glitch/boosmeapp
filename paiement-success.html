@@ -50,6 +50,64 @@ h1{font-size:1.35rem;font-weight:900;margin-bottom:.5rem}
 var _sb=window.supabase.createClient("https://hddxbjmdtbxvxwmmdxmj.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ");
 var CH_NAMES={"cash-clarity": "Cash Clarity", "glow-up": "Glow Up", "mental-detox": "Mental Detox", "morning-power": "Morning Power", "unshakeable-confidence": "Unshakeable Confidence", "body-reset": "Body Reset", "build-your-brand": "Build Your Brand", "side-hustle-starter": "Side Hustle Starter", "own-the-room": "Own The Room", "deep-work-mode": "Deep Work Mode", "network-like-a-pro": "Network Like a Pro", "read-and-lead": "Read & Lead"};
 
+
+// Called when NotchPay payment link redirects back
+async function activateFromPending(uid, plan, chId){
+  if(!uid) return;
+  // Read pending payment if no plan/chId in URL
+  if(!plan || !chId){
+    var pp=await _sb.from('pending_payments').select('*').eq('user_id',uid).maybeSingle();
+    if(pp.data){
+      if(!plan) plan=pp.data.plan;
+      if(!chId) chId=pp.data.challenge_id||'';
+    }
+  }
+  if(!plan) return;
+  // Update profile plan
+  await _sb.from('profiles').update({
+    plan: plan,
+    plan_updated_at: new Date().toISOString(),
+    plan_expires_at: plan==='annual'
+      ? new Date(Date.now()+365*24*60*60*1000).toISOString()
+      : null
+  }).eq('id',uid);
+  // Activate challenge
+  if(plan==='unit' && chId){
+    await _sb.from('user_challenges').update({status:'paused'})
+      .eq('user_id',uid).eq('status','active').neq('challenge_id',chId);
+    await _sb.from('user_challenges').upsert({
+      user_id:uid, challenge_id:chId,
+      current_day:1, status:'active', streak:0,
+      last_active:new Date().toISOString()
+    },{onConflict:'user_id,challenge_id'});
+  } else if(plan==='annual'){
+    var ALL=['cash-clarity','glow-up','mental-detox','morning-power',
+      'unshakeable-confidence','body-reset','build-your-brand',
+      'side-hustle-starter','own-the-room','deep-work-mode',
+      'network-like-a-pro','read-and-lead'];
+    var ex=await _sb.from('user_challenges').select('challenge_id').eq('user_id',uid);
+    var exIds=(ex.data||[]).map(function(x){return x.challenge_id;});
+    for(var i=0;i<ALL.length;i++){
+      if(!exIds.includes(ALL[i])){
+        await _sb.from('user_challenges').upsert({
+          user_id:uid, challenge_id:ALL[i],
+          current_day:1, status:'available', streak:0
+        },{onConflict:'user_id,challenge_id'});
+      }
+    }
+  }
+  // Log payment
+  await _sb.from('payments').insert({
+    user_id:uid, plan:plan, challenge_id:chId||null,
+    amount_eur:plan==='annual'?49:3.99,
+    provider:'notchpay', status:'confirmed',
+    confirmed_at:new Date().toISOString()
+  }).select();
+  // Clean up pending
+  await _sb.from('pending_payments').delete().eq('user_id',uid);
+  console.log('[success] activated plan='+plan+' ch='+chId);
+}
+
 async function run(){
   var params=new URLSearchParams(window.location.search);
   var plan=params.get('plan')||'annual';
@@ -64,6 +122,11 @@ async function run(){
   }
   var uid=r.data.session.user.id;
 
+  // If no Stripe session_id, this is a NotchPay payment link return — activate immediately
+  var sessionId=params.get('session_id');
+  if(!sessionId && (plan==='unit'||plan==='annual')){
+    await activateFromPending(uid, plan, chId);
+  }
   // Poll for activation
   var attempts=0;
   var interval=setInterval(async function(){
