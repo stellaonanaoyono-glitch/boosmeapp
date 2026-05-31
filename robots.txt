@@ -1,11 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard
-Disallow: /challenge/*/day/
-Disallow: /profil
-Disallow: /progression
-Disallow: /certificats
-Disallow: /communaute
-Disallow: /notifications
-
 Sitemap: https://boostme.social/sitemap.xml
