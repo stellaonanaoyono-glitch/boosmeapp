@@ -235,6 +235,8 @@ async function processPayment(){
   }
 }
 
+// Update price immediately from URL params
+if(typeof updateOrder==='function')updateOrder();
 run();
 </script>
 </body>
