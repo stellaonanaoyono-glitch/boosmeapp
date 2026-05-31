@@ -1,20 +1,24 @@
 const https = require('https');
 
-function npPost(path, body) {
+function npPost(path, body, secretKey) {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify(body);
+    
+    // NotchPay accepte: soit "sk.xxx" soit "Bearer sk.xxx" selon les versions
+    const authHeader = secretKey.startsWith('Bearer ') ? secretKey : secretKey;
+    
     const opts = {
       hostname: 'api.notchpay.co',
       path: path,
       method: 'POST',
       headers: {
-        'Authorization': process.env.NOTCHPAY_SECRET_KEY,
-        'X-Grant': process.env.NOTCHPAY_SECRET_KEY,
+        'Authorization': authHeader,
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Content-Length': Buffer.byteLength(data),
       },
     };
+    
     const req = https.request(opts, res => {
       let buf = '';
       res.on('data', d => buf += d);
@@ -34,19 +38,25 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  const secretKey = process.env.NOTCHPAY_SECRET_KEY;
+  if (!secretKey) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'NOTCHPAY_SECRET_KEY manquante dans les variables Netlify' })
+    };
+  }
+
   try {
     const { plan, amount, userId, email, phone, provider, paymentId } = JSON.parse(event.body);
     const SITE_URL = process.env.SITE_URL || 'https://boostme.social';
 
-    // NotchPay channel codes
-    const CHANNELS = {
-      mtn:    'cm.mtn',
-      orange: 'cm.orange',
-      wave:   'sn.wave',
-    };
+    const CHANNELS = { mtn: 'cm.mtn', orange: 'cm.orange', wave: 'sn.wave' };
+
+    // Convertir EUR → XAF (1 EUR ≈ 655.957 XAF, on arrondit à 656)
+    const amountXAF = Math.round(amount * 656);
 
     const payload = {
-      amount: Math.round(amount * 655.957), // EUR → XAF (1 EUR ≈ 655.957 XAF)
+      amount: amountXAF,
       currency: 'XAF',
       description: plan === 'annual'
         ? 'BOOST.ME — Accès Annuel Illimité'
@@ -59,11 +69,23 @@ exports.handler = async (event) => {
       redirect: SITE_URL + '/paiement-success',
     };
 
-    const result = await npPost('/payments/initialize', payload);
+    console.log('NotchPay payload:', JSON.stringify(payload));
+    console.log('Secret key prefix:', secretKey.substring(0, 8) + '...');
 
-    // Log for debugging
-    console.log('NotchPay response status:', result.status);
-    console.log('NotchPay response body:', JSON.stringify(result.body));
+    const result = await npPost('/payments/initialize', payload, secretKey);
+
+    console.log('NotchPay status:', result.status);
+    console.log('NotchPay body:', JSON.stringify(result.body));
+
+    if (result.status === 401) {
+      return {
+        statusCode: 401,
+        body: JSON.stringify({
+          error: 'Clé API NotchPay invalide. Vérifie que NOTCHPAY_SECRET_KEY contient la clé secrète (sk.xxx) et non la clé publique (pk.xxx).',
+          hint: 'Va sur app.notchpay.co > Settings > API Keys > copie la Secret Key'
+        })
+      };
+    }
 
     if (result.body && result.body.transaction && result.body.transaction.authorization_url) {
       return {
@@ -73,7 +95,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // If redirect URL is in a different field
     if (result.body && result.body.authorization_url) {
       return {
         statusCode: 200,
@@ -83,7 +104,7 @@ exports.handler = async (event) => {
     }
 
     const errMsg = (result.body && result.body.message) || JSON.stringify(result.body);
-    throw new Error('NotchPay: ' + errMsg + ' (status ' + result.status + ')');
+    throw new Error('NotchPay erreur: ' + errMsg + ' (status ' + result.status + ')');
 
   } catch (err) {
     console.error('create-notchpay error:', err.message);
