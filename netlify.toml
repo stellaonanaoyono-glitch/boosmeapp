@@ -20,8 +20,70 @@
   to = "/paiement-success.html"
   status = 200
 
-[[functions]]
-  path = "/.netlify/functions/send-weekly-reminder"
+[[redirects]]
+  from = "/challenges"
+  to = "/challenges.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/mon-espace"
+  to = "/mon-espace.html"
+  status = 200
+
+[[redirects]]
+  from = "/challenge-day"
+  to = "/challenge-day.html"
+  status = 200
+
+[[redirects]]
+  from = "/tarifs"
+  to = "/tarifs.html"
+  status = 200
+
+[[redirects]]
+  from = "/certificat"
+  to = "/certificat.html"
+  status = 200
+
+[[redirects]]
+  from = "/journal"
+  to = "/journal.html"
+  status = 200
+
+[[redirects]]
+  from = "/detente"
+  to = "/detente.html"
+  status = 200
+
+[[redirects]]
+  from = "/signup"
+  to = "/signup.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/profil"
+  to = "/profil.html"
+  status = 200
+
+[[redirects]]
+  from = "/progression"
+  to = "/progression.html"
+  status = 200
+
+[[redirects]]
+  from = "/communaute"
+  to = "/communaute.html"
+  status = 200
 
 [functions.send-weekly-reminder]
   schedule = "0 9 * * 1"
