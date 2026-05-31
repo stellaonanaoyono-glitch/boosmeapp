@@ -4,204 +4,240 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Challenges &#8212; BOOST.ME</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:#F2F2F2;color:#111;-webkit-font-smoothing:antialiased;padding-bottom:68px}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;height:60px;display:flex;align-items:center;padding:0 1.25rem;gap:1rem;justify-content:space-between}
-.nav-logo{height:34px;width:auto;object-fit:contain;flex-shrink:0}
+body{font-family:'Poppins',sans-serif;background:#F2F2F2;color:#111;-webkit-font-smoothing:antialiased;padding-bottom:70px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;height:60px;display:flex;align-items:center;padding:0 1.25rem;justify-content:space-between}
+.nav-logo{height:34px;width:auto;object-fit:contain}
 .nav-r{display:flex;align-items:center;gap:.6rem}
-.nav-nm{font-size:.8rem;font-weight:600;color:#333}
+.nav-nm{font-size:.8rem;font-weight:600;color:#333;display:none}
 .nav-pl{background:#FFF8E1;color:#E5AC00;font-size:.62rem;font-weight:800;padding:.15rem .5rem;border-radius:4px;text-transform:uppercase}
-.btn-sm{padding:.4rem .85rem;background:none;border:1.5px solid #E2E2E2;border-radius:8px;font:600 .74rem Poppins,sans-serif;cursor:pointer;color:#666;text-decoration:none;display:inline-flex;align-items:center}
-.btn-sm:hover{border-color:#111;color:#111}
+.btn-sm{padding:.4rem .85rem;background:none;border:1.5px solid #E2E2E2;border-radius:8px;font:600 .74rem Poppins,sans-serif;cursor:pointer;color:#666}
 .bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E2E2E2;display:grid;grid-template-columns:repeat(5,1fr);height:58px;z-index:100}
 .bn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:.58rem;font-weight:600;color:#999;text-decoration:none;border:none;background:none;font-family:Poppins,sans-serif;cursor:pointer;transition:color .15s}
 .bn.on,.bn:hover{color:#FFC107}.bni{font-size:1.1rem;line-height:1}
 .pg{margin-top:60px;padding:1.5rem 1.25rem;max-width:860px;margin-left:auto;margin-right:auto}
 .by{display:inline-flex;align-items:center;justify-content:center;padding:.78rem 1.4rem;background:#FFC107;color:#111;font:700 .86rem Poppins,sans-serif;border:none;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none}
-.by:hover{background:#E5AC00}.by:disabled{background:#ccc;color:#888;cursor:not-allowed}
-.bg{display:inline-flex;align-items:center;padding:.65rem 1.1rem;background:none;color:#666;font:600 .8rem Poppins,sans-serif;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer;text-decoration:none}
-.bg:hover{border-color:#111;color:#111}
-.card{background:#fff;border-radius:14px;padding:1.25rem;border:1px solid #E2E2E2;margin-bottom:1rem}
-.sec-h{font-size:.9rem;font-weight:800;margin-bottom:.9rem}
-.spin{width:18px;height:18px;border:2.5px solid #E2E2E2;border-top-color:#FFC107;border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0}
-@keyframes sp{to{transform:rotate(360deg)}}
+.by:hover{background:#E5AC00}
+.bg2{display:inline-flex;align-items:center;padding:.65rem 1.1rem;background:none;color:#666;font:600 .8rem Poppins,sans-serif;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer;text-decoration:none}
+.bg2:hover{border-color:#111;color:#111}
 .toast{position:fixed;bottom:4.5rem;right:1rem;background:#111;color:#fff;padding:.62rem 1rem;border-radius:10px;font-size:.74rem;font-weight:600;border-left:3px solid #FFC107;transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none;z-index:999}
 .toast.show{transform:translateY(0);opacity:1}
-.pg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
-.pg-h{font-size:1.2rem;font-weight:900}
-.fbars{display:flex;gap:.4rem;flex-wrap:wrap}
-.fb{padding:.35rem .78rem;border:1.5px solid #E2E2E2;border-radius:50px;font:600 .72rem Poppins,sans-serif;cursor:pointer;background:#fff;color:#666;transition:all .15s}
+@media(min-width:600px){.nav-nm{display:block}}
+.filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.fb{padding:.35rem .8rem;border:1.5px solid #E2E2E2;border-radius:50px;font:600 .73rem Poppins,sans-serif;cursor:pointer;background:#fff;color:#666;transition:all .15s}
 .fb:hover{border-color:#FFC107;color:#E5AC00}.fb.on{background:#111;color:#fff;border-color:#111}
-.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-.ch-card{background:#fff;border-radius:14px;padding:1.1rem;border:1.5px solid #E2E2E2;cursor:pointer;transition:all .2s;display:flex;flex-direction:column}
-.ch-card:hover{border-color:#FFC107;transform:translateY(-2px);box-shadow:0 4px 16px rgba(255,193,7,.1)}
-.ch-card.cur{border-color:#22C55E;background:#F0FDF4}
-.ch-ico{font-size:1.8rem;display:block;margin-bottom:.5rem}
-.ch-nm{font-size:.86rem;font-weight:800;margin-bottom:.12rem;line-height:1.3}
-.ch-cat{font-size:.66rem;color:#999;margin-bottom:.4rem;font-weight:600}
-.ch-tg{font-size:.76rem;color:#555;line-height:1.5;margin-bottom:.65rem;flex:1}
-.ch-ft{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.ch-dur{font-size:.66rem;font-weight:700;color:#bbb}
+.ch-list{display:flex;flex-direction:column;gap:1rem}
+.ch-card{background:#fff;border-radius:16px;border:1.5px solid #E2E2E2;overflow:hidden;transition:all .2s;cursor:pointer}
+.ch-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.07);transform:translateY(-2px)}
+.ch-card.cur{border-color:#22C55E}
+.ch-card-top{padding:1.25rem 1.25rem .9rem;display:flex;align-items:flex-start;gap:.85rem}
+.ch-ico2{font-size:2.2rem;flex-shrink:0;line-height:1}
+.ch-top-r{flex:1;min-width:0}
+.ch-nm{font-size:1rem;font-weight:800;margin-bottom:.12rem;color:#111}
+.ch-cat{font-size:.68rem;color:#999;font-weight:600;margin-bottom:.45rem}
+.ch-tagline{font-size:.82rem;color:#555;line-height:1.55;margin-bottom:.7rem}
+.ch-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .bdg{font-size:.62rem;font-weight:800;padding:.15rem .48rem;border-radius:4px}
-.bdg-f{background:#D1FAE5;color:#065F46}
-.bdg-i{background:#DBEAFE;color:#1E40AF}
-.bdg-p{background:#F3F4F6;color:#555}
-.bdg-c{background:#D1FAE5;color:#065F46}
+.bdg-f{background:#D1FAE5;color:#065F46}.bdg-i{background:#DBEAFE;color:#1E40AF}
+.bdg-p{background:#F3F4F6;color:#555}.bdg-c{background:#D1FAE5;color:#065F46}
+.ch-dur-lbl{font-size:.68rem;color:#bbb;font-weight:600}
+.ch-detail{display:none;border-top:1px solid #F0F0F0;padding:1.1rem 1.25rem;background:#FAFAFA}
+.ch-detail.open{display:block}
+.ch-promise{font-size:.82rem;color:#333;line-height:1.7;margin-bottom:.85rem;font-style:italic;border-left:3px solid #FFC107;padding-left:.75rem}
+.ba-row{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.85rem}
+.ba-box{border-radius:10px;padding:.8rem .9rem}
+.ba-bef{background:#FEF3C7;border:1px solid rgba(234,179,8,.2)}
+.ba-aft{background:#D1FAE5;border:1px solid rgba(34,197,94,.2)}
+.ba-bef h5{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.35rem;color:#D97706}
+.ba-aft h5{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.35rem;color:#059669}
+.ba-box p{font-size:.78rem;line-height:1.55;color:#444}
+.weeks-grid{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.85rem}
+.wk{display:flex;align-items:flex-start;gap:.55rem;font-size:.78rem;color:#444;line-height:1.5}
+.wk-n{width:22px;height:22px;border-radius:50%;background:#111;color:#FFC107;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ch-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.pay-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;align-items:flex-end;justify-content:center}
+.pay-modal-bg.open{display:flex}
+.pay-sheet{background:#fff;border-radius:20px 20px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:500px}
+.pay-sheet h3{font-size:1rem;font-weight:800;margin-bottom:.2rem}
+.pay-ch-sub{font-size:.82rem;color:#666;margin-bottom:1.25rem}
+.pay-opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.85rem}
+.pay-opt{display:flex;align-items:center;gap:.85rem;background:#F8F8F8;border:1.5px solid #E2E2E2;border-radius:12px;padding:.9rem 1rem;cursor:pointer;transition:all .15s}
+.pay-opt:hover{border-color:#E5AC00}
+.pay-opt.on{border-color:#FFC107;background:#FFFAEC}
+.po-rb{width:18px;height:18px;border-radius:50%;border:2px solid #ccc;flex-shrink:0;position:relative}
+.pay-opt.on .po-rb{background:#FFC107;border-color:#FFC107}
+.pay-opt.on .po-rb::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:#111;top:50%;left:50%;transform:translate(-50%,-50%)}
+.po-info{flex:1}.po-nm{font-size:.86rem;font-weight:700;margin-bottom:.12rem}
+.po-ds{font-size:.72rem;color:#666}.po-px{font-size:1rem;font-weight:900;white-space:nowrap}
 .login-banner{background:#FFF8E1;border:1px solid rgba(255,193,7,.3);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
 .login-banner p{font-size:.82rem;color:#666;flex:1}
-@media(max-width:480px){.ch-grid{grid-template-columns:1fr}}
-
-.pay-modal{position:fixed;inset:0;z-index:500;display:none;align-items:flex-end;justify-content:center}
-.pay-modal.open{display:flex}
-.pay-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-.pay-sheet{position:relative;z-index:1;background:#fff;border-radius:20px 20px 0 0;padding:1.5rem 1.25rem 2rem;width:100%;max-width:500px;animation:slideUp .25s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.pay-sheet h3{font-size:1rem;font-weight:800;margin-bottom:.35rem}
-.pay-sheet p{font-size:.8rem;color:#666;margin-bottom:1.25rem;line-height:1.55}
-.pay-opt{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.75rem}
-.pay-btn-unit{width:100%;padding:.9rem;background:#FFC107;color:#111;font:700 .9rem Poppins,sans-serif;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
-.pay-btn-unit:hover{background:#E5AC00}
-.pay-btn-annual{width:100%;padding:.9rem;background:#111;color:#fff;font:700 .9rem Poppins,sans-serif;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
-.pay-btn-annual:hover{background:#333}
-.pay-btn-cancel{width:100%;padding:.75rem;background:none;color:#999;font:600 .84rem Poppins,sans-serif;border:1.5px solid #E2E2E2;border-radius:12px;cursor:pointer;transition:all .15s}
-.pay-btn-cancel:hover{border-color:#111;color:#111}
-.opt-left{text-align:left}.opt-price{font-size:.82rem;font-weight:800;opacity:.85}
 </style>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <nav class="nav"><a href="/"><img class="nav-logo" src="data:image/png;base64,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" alt="BOOST.ME"></a><div class="nav-r"><span class="nav-nm" id="nav-nm"></span><span class="nav-pl" id="nav-pl">Starter</span><button class="btn-sm" onclick="doLogout()">Quitter</button></div></nav><nav class="bnav"><a class="bn" href="/dashboard"><span class="bni">&#127968;</span>Accueil</a><a class="bn on" href="/challenges"><span class="bni">&#127919;</span>Challenges</a><a class="bn" href="/progression"><span class="bni">&#128200;</span>Progr.</a><a class="bn" href="/communaute"><span class="bni">&#128101;</span>Communaut&#233;</a><a class="bn" href="/mon-espace"><span class="bni">&#128100;</span>Mon espace</a></nav>
-<div class="pg"><div id="banner-zone"></div><div class="pg-top"><div class="pg-h">Tous les challenges &#127919;</div><div class="fbars"><button class="fb on" onclick="flt(this,'all')">Tous</button><button class="fb" onclick="flt(this,'Mind')">Mind</button><button class="fb" onclick="flt(this,'Money')">Money</button><button class="fb" onclick="flt(this,'Performance')">Performance</button><button class="fb" onclick="flt(this,'Carrière')">Carrière</button></div></div><div id="grid" class="ch-grid"></div></div>
+<div class="pg">
+<div id="banner-zone"></div>
+<div style="font-size:1.2rem;font-weight:900;margin-bottom:.25rem">Les challenges &#127919;</div>
+<div style="font-size:.8rem;color:#666;margin-bottom:1rem">Clique sur un challenge pour voir la fiche complète.</div>
+<div class="filters">
+<button class="fb on" onclick="flt(this,'all')">Tous</button>
+<button class="fb" onclick="flt(this,'Mind')">Mind</button>
+<button class="fb" onclick="flt(this,'Money')">Money</button>
+<button class="fb" onclick="flt(this,'Performance')">Performance</button>
+<button class="fb" onclick="flt(this,'Carrière')">Carrière</button>
+</div>
+<div id="ch-list" class="ch-list"></div>
+</div>
+<div class="pay-modal-bg" id="pay-modal">
+<div class="pay-sheet">
+<h3 id="pm-title">Accéder à ce challenge</h3>
+<div class="pay-ch-sub" id="pm-sub">Choisis comment accéder :</div>
+<div class="pay-opts">
+<div class="pay-opt on" id="po-unit" onclick="selPO('unit')">
+<div class="po-rb"></div>
+<div class="po-info"><div class="po-nm">Acheter ce challenge seul</div><div class="po-ds">Accès à vie · Ce challenge uniquement</div></div>
+<div class="po-px" style="color:#111">&#8364;3,99</div>
+</div>
+<div class="pay-opt" id="po-annual" onclick="selPO('annual')">
+<div class="po-rb"></div>
+<div class="po-info"><div class="po-nm">Plan annuel illimité &#11088;</div><div class="po-ds">13 challenges · Toute l'année · <strong style="color:#22C55E">Meilleur deal</strong></div></div>
+<div class="po-px" style="color:#E5AC00">&#8364;49<small style="font-size:.65rem;font-weight:500">/an</small></div>
+</div>
+</div>
+<button class="by" id="pm-btn" onclick="proceedPay()" style="width:100%">Acheter &#8212; &#8364;3,99</button>
+<button class="bg2" onclick="closePM()" style="width:100%;justify-content:center;margin-top:.5rem">Annuler</button>
+</div></div>
 <div class="toast" id="toast"></div>
-<script>var _sb=window.supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ');
+<script>
+var _sb=window.supabase.createClient("https://hddxbjmdtbxvxwmmdxmj.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ");
 var _u=null,_p=null,_tt;
-function toast(m){var e=document.getElementById('toast');if(!e)return;e.textContent=m;e.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove('show')},3000);}
-function doLogout(){_sb.auth.signOut().then(function(){window.location.href='/';});}
-async function initUser(){
-  var r=await _sb.auth.getSession();
-  if(!r.data.session){window.location.href='/login';return null;}
-  _u=r.data.session.user;
-  var pr=await _sb.from('profiles').select('*').eq('id',_u.id).single();
-  _p=pr.data||{};
-  var n=document.getElementById('nav-nm');if(n)n.textContent=_p.prenom||'';
-  var pl=document.getElementById('nav-pl');
-  if(pl){var lb={free:'Starter',unit:'Challenge',annual:'Annuel',pending:'En attente'};
-  pl.textContent=lb[(_p&&_p.plan)||'free']||'Starter';}
-  return _u;
-}
-var ALL_CH=[
-  {id:"boostme-starter",name:"BoostMe Starter",cat:"Multi-piliers",ico:"&#9889;",tag:"7 jours pour découvrir ta meilleure version.",dur:7,price:0,free:true},
-  {id:"cash-clarity",name:"Cash Clarity",cat:"Money",ico:"&#128176;",tag:"Reprends le contrôle de ton argent.",dur:30,price:3.99,free:false},
-  {id:"glow-up",name:"Glow Up",cat:"Mind",ico:"&#10024;",tag:"Deviens la femme que tu regardes de loin.",dur:30,price:3.99,free:false},
-  {id:"mental-detox",name:"Mental Detox",cat:"Mind",ico:"&#129504;",tag:"Libère ton esprit et retrouve ta clarté.",dur:30,price:3.99,free:false},
-  {id:"morning-power",name:"Morning Power",cat:"Performance",ico:"&#127749;",tag:"Possède tes matins, possède ta vie.",dur:30,price:3.99,free:false},
-  {id:"unshakeable-confidence",name:"Unshakeable Confidence",cat:"Mind",ico:"&#128170;",tag:"La confiance se construit, pas se cherche.",dur:30,price:3.99,free:false},
-  {id:"body-reset",name:"Body Reset",cat:"Performance",ico:"&#128154;",tag:"Ton corps est ton premier outil de performance.",dur:30,price:3.99,free:false},
-  {id:"build-your-brand",name:"Build Your Brand",cat:"Carrière",ico:"&#128640;",tag:"Tu existes déjà. Le monde doit le savoir.",dur:30,price:3.99,free:false},
-  {id:"side-hustle-starter",name:"Side Hustle Starter",cat:"Money",ico:"&#128161;",tag:"Lance ton activité secondaire.",dur:30,price:3.99,free:false},
-  {id:"own-the-room",name:"Own The Room",cat:"Carrière",ico:"&#127908;",tag:"Prendre la parole avec impact.",dur:30,price:3.99,free:false},
-  {id:"deep-work-mode",name:"Deep Work Mode",cat:"Performance",ico:"&#127919;",tag:"Produis 3x plus en moins de temps.",dur:30,price:3.99,free:false},
-  {id:"network-like-a-pro",name:"Network Like a Pro",cat:"Carrière",ico:"&#129309;",tag:"Ton réseau est ton tremplin.",dur:30,price:3.99,free:false},
-  {id:"read-and-lead",name:"Read & Lead",cat:"Performance",ico:"&#128214;",tag:"Tu lis pour changer, pas pour savoir.",dur:30,price:3.99,free:false},
-]; function chById(id){return ALL_CH.find(function(x){return x.id===id;})||ALL_CH[0];}
-var _aid=null,_cat="all",_auth=false;
+function toast(m){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.classList.add("show");clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove("show")},3000);}
+function doLogout(){_sb.auth.signOut().then(function(){window.location.href="/";});}
+var CH_DATA=[{"id": "boostme-starter", "name": "BoostMe Starter", "cat": "Multi-piliers", "ico": "⚡", "dur": 7, "price": 0, "free": true, "tagline": "7 jours pour découvrir ta meilleure version.", "promise": "En 7 jours, tu installes les fondations de ta transformation : conscience de toi-même, énergie, posture, discours intérieur et première action courageuse. Tu sors avec une routine de 5 minutes et la preuve que tu peux te choisir.", "before": "Tu veux changer quelque chose dans ta vie mais tu ne sais pas par où commencer. Tu te sens parfois coincé(e) dans tes habitudes.", "after": "Tu as une routine de 5 minutes. Tu te parles autrement. Tu as fait une chose qui te faisait peur. Tu as les bases pour aller plus loin.", "for_who": "Toute personne qui veut découvrir BOOST.ME et s'engager dans une première semaine de transformation.", "weeks": ["Wake Up — Qui es-tu aujourd'hui ?", "Build — Installe tes fondations", "Push — Une action courageuse", "Own It — Mesure et continue"], "color": "#FFC107"}, {"id": "glow-up", "name": "Glow Up", "cat": "Mind", "ico": "✨", "dur": 30, "price": 3.99, "free": false, "tagline": "Deviens la femme que tu regardes de loin.", "promise": "En 30 jours, tu passes de femme qui s'oublie à femme qui s'investit. Routine soin, énergie, image, posture, voix, style — une transformation méthodique, visible et durable.", "before": "Tu t'habilles vite, tu te regardes peu, tu t'occupes des autres en dernier. Tu sais que tu pourrais rayonner davantage.", "after": "Tu as une routine qui prend soin de toi. Tu te présentes au monde avec intention. Tu occupes l'espace différemment — et tu le ressens.", "for_who": "Toute femme qui s'est mise en veille et veut se réinvestir sans savoir par où commencer.", "weeks": ["Vois-toi — Audit honnête corps et image", "Prends soin de toi — Routines soin, sommeil, mouvement", "Présente-toi — Style, posture, voix, espace", "Possède-toi — Discours intérieur, ancrage, certificat"], "color": "#EC4899"}, {"id": "cash-clarity", "name": "Cash Clarity", "cat": "Money", "ico": "💰", "dur": 30, "price": 3.99, "free": false, "tagline": "Reprends le contrôle de ton argent avant qu'il ne contrôle ta vie.", "promise": "En 30 jours, tu passes de quelqu'un qui subit ses finances à quelqu'un qui les dirige. Budget, épargne automatique, élimination des fuites, premiers investissements.", "before": "Tu arrives en fin de mois sans comprendre où est passé ton argent. Tu évites de regarder ton compte. Tu repousses les décisions financières.", "after": "Tu connais ton argent avec précision. Tu as un budget qui fonctionne. Tu as une épargne automatique en place. Tu prends des décisions sans anxiété.", "for_who": "Toute personne qui veut reprendre le contrôle de ses finances, quel que soit son revenu.", "weeks": ["Vois-toi — Audit revenus, dépenses, dettes", "Structure — Budget, épargne automatique, objectifs", "Optimise — Traque les fuites, renégocie, coupe", "Construis — Investissement, protection, vision 10 ans"], "color": "#22C55E"}, {"id": "mental-detox", "name": "Mental Detox", "cat": "Mind", "ico": "🧠", "dur": 30, "price": 3.99, "free": false, "tagline": "Libère ton esprit et retrouve ta clarté.", "promise": "En 30 jours, tu nettoies ton espace mental, reprends le contrôle de tes pensées et installes des pratiques de clarté quotidiennes. Moins de bruit, plus de focus.", "before": "Ton esprit tourne en boucle. Tu te sens submergé(e), dispersé(e), avec du mal à te concentrer sur ce qui compte vraiment.", "after": "Tu as des outils concrets pour calmer ton mental. Tu distingues ce qui mérite ton attention de ce qui te vide. Tu penses avec clarté.", "for_who": "Toute personne qui se sent mentalement surchargée et veut retrouver de l'espace intérieur.", "weeks": ["Observe — Cartographie ton mental", "Nettoie — Élimine le bruit", "Restructure — Installe de nouvelles habitudes mentales", "Maîtrise — Ancre la clarté durablement"], "color": "#6366F1"}, {"id": "morning-power", "name": "Morning Power", "cat": "Performance", "ico": "🌅", "dur": 30, "price": 3.99, "free": false, "tagline": "Celui qui possède ses matins possède sa vie.", "promise": "En 30 jours, tu construis une routine matinale sur mesure qui définit positivement ton état pour toute la journée. Énergie, focus, intention — avant 8h.", "before": "Tu te lèves au dernier moment, tu vérifies ton téléphone immédiatement, tu commences la journée en réaction plutôt qu'en intention.", "after": "Tu as un rituel de 20-30 minutes qui t'appartient. Tu commences chaque journée avec intention. Ton énergie est plus stable, ton focus plus fort.", "for_who": "Toute personne qui veut reprendre possession de ses matins et transformer la qualité de ses journées.", "weeks": ["Observe — Audit de tes matins actuels", "Installe — Construis les éléments de base", "Optimise — Ajuste, intensifie, personnalise", "Maîtrise — Ancre et automatise ton rituel"], "color": "#F97316"}, {"id": "unshakeable-confidence", "name": "Unshakeable Confidence", "cat": "Mind", "ico": "💪", "dur": 30, "price": 3.99, "free": false, "tagline": "La confiance ne se trouve pas. Elle se construit.", "promise": "En 30 jours, tu passes d'une confiance conditionnelle (quand tout va bien) à une confiance fondamentale (quand rien ne va). Basée sur des preuves, pas des affirmations.", "before": "Ta confiance dépend du regard des autres, des résultats obtenus, des circonstances. Elle s'effondre au premier obstacle.", "after": "Ta confiance est ancrée dans tes valeurs et tes preuves personnelles. Tu agis malgré l'incertitude. Tu ne cherches plus l'approbation.", "for_who": "Toute personne dont la confiance est conditionnelle et qui veut la rendre solide et indépendante.", "weeks": ["Évalue — Cartographie ta confiance actuelle", "Construis — Accumule des preuves réelles", "Teste — Agis malgré l'inconfort", "Ancre — Installe une confiance durable"], "color": "#8B5CF6"}, {"id": "body-reset", "name": "Body Reset", "cat": "Performance", "ico": "💚", "dur": 30, "price": 3.99, "free": false, "tagline": "Ton corps est ton premier outil de performance.", "promise": "En 30 jours, tu réinstalle les piliers physiologiques de la performance : mouvement, sommeil, hydratation, nutrition de base. Pas un régime — une réinitialisation.", "before": "Tu sais que tu devrais bouger plus, mieux dormir, mieux manger. Mais tu ne sais pas par où commencer sans te surcharger.", "after": "Tu bouges tous les jours. Tu dors mieux. Tu as une relation plus consciente à la nourriture. Ton énergie physique est mesurable.", "for_who": "Toute personne qui veut remettre son corps en mouvement sans pression, sans régime et sans salle de sport obligatoire.", "weeks": ["Évalue — Audit de tes habitudes physiques", "Active — Installe mouvement et sommeil", "Nourris — Conscience alimentaire et hydratation", "Consolide — Ancre les habitudes physiques"], "color": "#10B981"}, {"id": "build-your-brand", "name": "Build Your Brand", "cat": "Carrière", "ico": "🚀", "dur": 30, "price": 3.99, "free": false, "tagline": "Tu existes déjà. Le monde doit le savoir.", "promise": "En 30 jours, tu construis une marque personnelle authentique et cohérente : positionnement, présence en ligne, contenu, visibilité. Sans te trahir.", "before": "Tu existes mais tu es invisible. Tu ne sais pas comment te présenter, quoi dire, comment te démarquer sans avoir l'air arrogant(e).", "after": "Tu as un positionnement clair. Ta présence en ligne reflète qui tu es vraiment. Tu crées du contenu avec confiance. Les bonnes personnes te trouvent.", "for_who": "Entrepreneur(e), freelance, professionnel(le) qui veut développer sa visibilité et son attractivité sans perdre son authenticité.", "weeks": ["Qui es-tu — Positionnement et valeurs", "Construis — Bio, profils, ligne éditoriale", "Crée — Premiers contenus authentiques", "Amplifie — Visibilité, réseau, consistance"], "color": "#3B82F6"}, {"id": "side-hustle-starter", "name": "Side Hustle Starter", "cat": "Money", "ico": "💡", "dur": 30, "price": 3.99, "free": false, "tagline": "Lance ton activité secondaire et gagne plus.", "promise": "En 30 jours, tu identifies ta compétence monétisable, tu la structures en offre, tu trouves tes premiers clients et tu génères tes premiers euros.", "before": "Tu veux gagner plus mais tu ne sais pas quoi proposer, à qui, comment. Tu as des idées mais aucune ne semble réaliste.", "after": "Tu as une offre claire. Tu sais à qui tu t'adresses. Tu as prospecté et tu as fait tes premières ventes — ou tu es sur le point de les faire.", "for_who": "Salarié(e), étudiant(e) ou indépendant(e) qui veut une source de revenus complémentaire sans quitter son emploi.", "weeks": ["Identifie — Compétences, marché, positionnement", "Crée — Offre, tarifs, supports", "Prospecte — Premiers contacts, premiers clients", "Lance — Ventes, feedback, itérations"], "color": "#F59E0B"}, {"id": "own-the-room", "name": "Own The Room", "cat": "Carrière", "ico": "🎤", "dur": 30, "price": 3.99, "free": false, "tagline": "Prendre la parole avec impact et convaincre.", "promise": "En 30 jours, tu transformes ta prise de parole : voix, posture, structure du message, gestion du stress, présence. Tu passes de celui/celle qui hésite à celui/celle qui captive.", "before": "Tu te sens petit(e) quand tu parles en public. Ta voix tremble. Tu perds le fil. Tu penses que certains sont 'naturellement' à l'aise — et pas toi.", "after": "Tu structures tes messages clairement. Tu gères ton stress. Tu captes l'attention. Tu parles avec autorité sans agressivité.", "for_who": "Toute personne qui veut améliorer sa communication orale, en réunion, en présentation, ou en networking.", "weeks": ["Évalue — Enregistre-toi, cartographie tes blocages", "Voix et corps — Travaille les fondamentaux", "Structure — Construis des messages qui marquent", "Présente — Prise de parole réelle et feedback"], "color": "#EF4444"}, {"id": "deep-work-mode", "name": "Deep Work Mode", "cat": "Performance", "ico": "🎯", "dur": 30, "price": 3.99, "free": false, "tagline": "Concentre-toi mieux et produis 3x plus.", "promise": "En 30 jours, tu éradiques les distractions, tu installes des blocs de concentration profonde et tu produis plus en moins de temps. Inspiré de Cal Newport.", "before": "Tu travailles beaucoup mais tu as l'impression de ne rien accomplir vraiment. Les notifications, les réunions, le multitâche te vident sans te faire avancer.", "after": "Tu travailles en blocs de concentration profonde. Tu protèges ton temps. Tu produis en 4 heures ce qui prenait 8. Tu termines tes journées avec de l'énergie.", "for_who": "Tout professionnel, créatif ou étudiant qui veut produire du travail de haute qualité sans s'épuiser.", "weeks": ["Audite — Cartographie tes voleurs d'attention", "Protège — Installe les barrières anti-distraction", "Concentre — Blocs de deep work quotidiens", "Produis — Systématise et mesure tes résultats"], "color": "#0EA5E9"}, {"id": "network-like-a-pro", "name": "Network Like a Pro", "cat": "Carrière", "ico": "🤝", "dur": 30, "price": 3.99, "free": false, "tagline": "Ton réseau est ton tremplin vers le sommet.", "promise": "En 30 jours, tu passes du networking anxiogène au networking naturel. Tu sais qui contacter, comment, et tu crées des relations qui ont de la valeur pour les deux parties.", "before": "Tu évites les événements networking. Tu ne sais pas quoi dire. Tu te sens manipulateur(trice) quand tu contactes quelqu'un pour 'quelque chose'.", "after": "Tu as une stratégie réseau claire. Tu sais donner avant de demander. Tu as pris contact avec 20+ personnes stratégiques. Certaines t'ont déjà ouvert des portes.", "for_who": "Toute personne qui veut développer son réseau professionnel de façon authentique et stratégique.", "weeks": ["Cartographie — Qui as-tu, qui te manque ?", "Donne — Crée de la valeur sans attente", "Contacte — Messages, rencontres, LinkedIn", "Entretiens — Suivi, réciprocité, durabilité"], "color": "#7C3AED"}, {"id": "read-and-lead", "name": "Read & Lead", "cat": "Performance", "ico": "📖", "dur": 30, "price": 3.99, "free": false, "tagline": "Tu lis pour changer, pas juste pour savoir.", "promise": "En 30 jours, tu installes une habitude de lecture stratégique et tu apprends à transformer ce que tu lis en décisions et en actions concrètes dans ta vie.", "before": "Tu voudrais lire plus mais tu n'y arrives pas. Ou tu lis mais tu oublies tout en 3 jours. La lecture est une intention, pas encore une habitude.", "after": "Tu lis 20-30 minutes par jour. Tu retiens l'essentiel. Tu appliques ce que tu lis. La lecture est devenue ton avantage compétitif discret.", "for_who": "Toute personne qui veut faire de la lecture un outil de croissance personnelle et professionnelle réel.", "weeks": ["Système — Comment lire pour retenir", "Habitude — Installe le rituel quotidien", "Profondeur — Lecture active et prise de notes", "Application — Transforme tes lectures en actions"], "color": "#92400E"}];
+
+var _aid=null,_cat="all",_auth=false,_pmId=null,_pmOpt="unit";
 
 async function run(){
   var r=await _sb.auth.getSession();
   if(r.data.session){
     _auth=true;_u=r.data.session.user;
-    var pr=await _sb.from('profiles').select('*').eq('id',_u.id).single();
+    var pr=await _sb.from("profiles").select("*").eq("id",_u.id).single();
     _p=pr.data||{};
-    var n=document.getElementById('nav-nm');if(n)n.textContent=_p.prenom||'';
-    var pl=document.getElementById('nav-pl');
-    if(pl){var lb={free:'Starter',unit:'Challenge',annual:'Annuel',pending:'En attente'};pl.textContent=lb[(_p&&_p.plan)||'free']||'Starter';}
-    var ac=await _sb.from('user_challenges').select('challenge_id').eq('user_id',_u.id).eq('status','active').maybeSingle();
+    var n=document.getElementById("nav-nm");if(n)n.textContent=_p.prenom||"";
+    var pl=document.getElementById("nav-pl");
+    if(pl){var lb={free:"Starter",unit:"Challenge",annual:"Annuel",pending:"En attente"};pl.textContent=lb[(_p&&_p.plan)||"free"]||"Starter";}
+    var ac=await _sb.from("user_challenges").select("challenge_id").eq("user_id",_u.id).eq("status","active").maybeSingle();
     _aid=ac.data?ac.data.challenge_id:null;
   }else{
-    document.getElementById('banner-zone').innerHTML=
-      '<div class="login-banner"><p>Connecte-toi pour d\u00e9marrer un challenge et suivre ta progression.</p>'+
-      '<div style="display:flex;gap:.5rem"><a class="bg" href="/login" style="font-size:.78rem">Connexion</a><a class="by" href="/signup" style="font-size:.78rem">Cr\u00e9er un compte</a></div></div>';
+    document.getElementById("banner-zone").innerHTML='<div class="login-banner"><p>Connecte-toi pour démarrer un challenge.</p><div style="display:flex;gap:.5rem"><a class="bg2" href="/login" style="font-size:.78rem">Connexion</a><a class="by" href="/signup" style="font-size:.78rem">Créer un compte</a></div></div>';
   }
   render();
 }
 
 function flt(btn,cat){
-  document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');_cat=cat;render();
+  document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on");_cat=cat;render();
 }
 
 function render(){
-  var list=_cat==='all'?ALL_CH:ALL_CH.filter(function(c){return c.cat===_cat;});
-  var html='';
+  var list=_cat==="all"?CH_DATA:CH_DATA.filter(function(c){return c.cat===_cat;});
+  var html="";
   list.forEach(function(ch){
     var isCur=ch.id===_aid;
-    var canAcc=ch.free||(_p&&(_p.plan==='annual'||_p.plan==='unit'));
-    var bdg=isCur?'<span class="bdg bdg-c">En cours</span>':
-            ch.free?'<span class="bdg bdg-f">Gratuit</span>':
-            canAcc?'<span class="bdg bdg-i">Inclus</span>':
-            '<span class="bdg bdg-p">\u20ac'+ch.price+'</span>';
-    var fn=_auth?'onClick(\''+ch.id+'\','+isCur+','+canAcc+')':'window.location.href=\'/signup\'';
-    html+='<div class="ch-card'+(isCur?' cur':'')+'" onclick="'+fn+'">'+
-      '<span class="ch-ico">'+ch.ico+'</span>'+
-      '<div class="ch-nm">'+ch.name+'</div>'+
-      '<div class="ch-cat">'+ch.cat+'</div>'+
-      '<div class="ch-tg">'+ch.tag+'</div>'+
-      '<div class="ch-ft"><span class="ch-dur">'+ch.dur+' jours</span>'+bdg+'</div>'+
-      '</div>';
+    var canAcc=ch.free||(_p&&_p.plan==="annual");
+    var bdg=isCur?"<span class=\"bdg bdg-c\">En cours</span>":
+            ch.free?"<span class=\"bdg bdg-f\">Gratuit</span>":
+            canAcc?"<span class=\"bdg bdg-i\">Inclus</span>":
+            "<span class=\"bdg bdg-p\">&euro;"+ch.price+"/challenge</span>";
+    var weeksHtml="";
+    ch.weeks.forEach(function(w,i){weeksHtml+="<div class=\"wk\"><div class=\"wk-n\">"+(i+1)+"</div><span>"+w+"</span></div>";});
+    var actionBtn="";
+    if(!_auth){
+      actionBtn="<a class=\"by\" href=\"/signup\" style=\"font-size:.84rem\">Créer un compte gratuit</a>";
+    }else if(isCur){
+      actionBtn="<a class=\"by\" href=\"/challenge-day\" style=\"font-size:.84rem\">Continuer &rarr;</a>";
+    }else if(ch.free||canAcc){
+      actionBtn="<button class=\"by\" onclick=\"startCh(event,'"+ch.id+"')\" style=\"font-size:.84rem\">Démarrer ce challenge</button>";
+    }else{
+      actionBtn="<button class=\"by\" onclick=\"openPM(event,'"+ch.id+"','"+ch.name.replace(/'/g,"\\'")+"')\" style=\"font-size:.84rem\">Accéder &mdash; &euro;3,99</button>";
+    }
+    html+="<div class=\"ch-card"+(isCur?" cur":"")+"\"";
+    html+=" id=\"card-"+ch.id+"\" onclick=\"toggleCard('"+ch.id+"')\">";
+    html+="<div class=\"ch-card-top\">";
+    html+="<span class=\"ch-ico2\">"+ch.ico+"</span>";
+    html+="<div class=\"ch-top-r\">";
+    html+="<div class=\"ch-nm\">"+ch.name+"</div>";
+    html+="<div class=\"ch-cat\">"+ch.cat+"</div>";
+    html+="<div class=\"ch-tagline\">"+ch.tagline+"</div>";
+    html+="<div class=\"ch-meta\">"+bdg+"<span class=\"ch-dur-lbl\">"+ch.dur+" jours</span></div>";
+    html+="</div>";
+    html+="<span style=\"color:#bbb;font-size:.8rem;flex-shrink:0\" id=\"arr-"+ch.id+"\">&#9660;</span>";
+    html+="</div>";
+    html+="<div class=\"ch-detail\" id=\"det-"+ch.id+"\">";
+    html+="<p class=\"ch-promise\">"+ch.promise+"</p>";
+    html+="<div class=\"ba-row\">";
+    html+="<div class=\"ba-box ba-bef\"><h5>Avant</h5><p>"+ch.before+"</p></div>";
+    html+="<div class=\"ba-box ba-aft\"><h5>Après</h5><p>"+ch.after+"</p></div>";
+    html+="</div>";
+    html+="<div style=\"font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#bbb;margin-bottom:.5rem\">Les 4 semaines</div>";
+    html+="<div class=\"weeks-grid\">"+weeksHtml+"</div>";
+    html+="<div style=\"font-size:.72rem;color:#666;margin-bottom:.85rem\"><strong style=\"color:#111\">Pour qui :</strong> "+ch.for_who+"</div>";
+    html+="<div class=\"ch-actions\">"+actionBtn+"</div>";
+    html+="</div></div>";
   });
-  document.getElementById('grid').innerHTML=html||'<p style="color:#999;font-size:.84rem;grid-column:1/-1;padding:1rem">Aucun challenge dans cette cat\u00e9gorie.</p>';
+  document.getElementById("ch-list").innerHTML=html||"<p style=\"color:#999;font-size:.84rem;padding:1rem 0\">Aucun challenge dans cette catégorie.</p>";
 }
 
-async function onClick(id,isCur,canAcc){
-  if(isCur){window.location.href='/challenge-day';return;}
-  if(!canAcc){toast('Ce challenge n\u00e9cessite le plan annuel');setTimeout(function(){window.location.href='/tarifs';},1800);return;}
-  if(_aid&&_aid!==id){if(!confirm('Tu as d\u00e9j\u00e0 un challenge en cours. En d\u00e9marrer un nouveau le mettra en pause. Continuer ?'))return;}
-  toast('D\u00e9marrage&#8230;');
-  await _sb.from('user_challenges').upsert({user_id:_u.id,challenge_id:id,current_day:1,status:'active',streak:0,last_active:new Date().toISOString()},{onConflict:'user_id,challenge_id'});
-  setTimeout(function(){window.location.href='/dashboard';},1200);
+function toggleCard(id){
+  var det=document.getElementById("det-"+id);
+  var arr=document.getElementById("arr-"+id);
+  var wasOpen=det.classList.contains("open");
+  document.querySelectorAll(".ch-detail").forEach(function(d){d.classList.remove("open");});
+  document.querySelectorAll("[id^=arr-]").forEach(function(a){a.innerHTML="&#9660;";});
+  if(!wasOpen){det.classList.add("open");if(arr)arr.innerHTML="&#9650;";}
+}
+
+async function startCh(e,id){
+  if(e)e.stopPropagation();
+  if(!_auth){window.location.href="/signup";return;}
+  if(_aid&&_aid!==id){if(!confirm("Mettre en pause ton challenge actuel pour démarrer celui-ci ?"))return;}
+  toast("Démarrage…");
+  await _sb.from("user_challenges").upsert({user_id:_u.id,challenge_id:id,current_day:1,status:"active",streak:0,last_active:new Date().toISOString()},{onConflict:"user_id,challenge_id"});
+  setTimeout(function(){window.location.href="/dashboard";},1200);
+}
+
+function openPM(e,id,name){
+  if(e)e.stopPropagation();
+  _pmId=id;
+  document.getElementById("pm-title").textContent="Accéder à "+name;
+  document.getElementById("pm-btn").textContent="Acheter ce challenge — €3,99";
+  _pmOpt="unit";
+  document.getElementById("po-unit").classList.add("on");
+  document.getElementById("po-annual").classList.remove("on");
+  document.getElementById("pay-modal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closePM(){
+  document.getElementById("pay-modal").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function selPO(opt){
+  _pmOpt=opt;
+  document.getElementById("po-unit").classList.toggle("on",opt==="unit");
+  document.getElementById("po-annual").classList.toggle("on",opt==="annual");
+  var btn=document.getElementById("pm-btn");
+  btn.textContent=opt==="unit"?"Acheter ce challenge — €3,99":"Plan annuel — €49/an";
+}
+
+function proceedPay(){
+  closePM();
+  if(_pmOpt==="unit"){window.location.href="/paiement?plan=unit&ch="+encodeURIComponent(_pmId);}
+  else{window.location.href="/paiement?plan=annual";}
 }
 
 run();
-</script>
-
-<div class="pay-modal" id="pay-modal">
-  <div class="pay-overlay" onclick="closePayModal()"></div>
-  <div class="pay-sheet">
-    <h3>&#128640; Démarrer ce challenge</h3>
-    <p id="modal-ch-name" style="font-weight:700;color:#111;font-size:.9rem;margin-bottom:.2rem"></p>
-    <p>Choisis comment accéder à ce challenge :</p>
-    <div class="pay-opt">
-      <button class="pay-btn-unit" id="btn-unit" onclick="buyUnit()">
-        <div class="opt-left"><div>Acheter ce challenge</div><div style="font-size:.72rem;font-weight:600;opacity:.75">Accès à vie · Ce challenge uniquement</div></div>
-        <span class="opt-price">&#8364;3,99</span>
-      </button>
-      <button class="pay-btn-annual" onclick="buyAnnual()">
-        <div class="opt-left"><div>Plan annuel illimité &#11088;</div><div style="font-size:.72rem;font-weight:600;opacity:.65">13 challenges · Toute l'année</div></div>
-        <span class="opt-price">&#8364;49/an</span>
-      </button>
-    </div>
-    <button class="pay-btn-cancel" onclick="closePayModal()">Annuler</button>
-  </div>
-</div>
-
-<script>
-var _modalChId=null;
-function showPayModal(id){
-  _modalChId=id;
-  var ch=chById(id);
-  document.getElementById('modal-ch-name').textContent=ch.ico+' '+ch.name;
-  document.getElementById('pay-modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closePayModal(){
-  document.getElementById('pay-modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function buyUnit(){
-  window.location.href='/paiement?plan=unit&ch='+encodeURIComponent(_modalChId);
-}
-function buyAnnual(){
-  window.location.href='/paiement?plan=annual';
-}
 </script>
 </body>
 </html>
