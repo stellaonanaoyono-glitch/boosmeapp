@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="description" content="Contacte l'équipe BOOST.ME — Email, WhatsApp, formulaire. Réponse garantie sous 24h.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — BOOST.ME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>:root{--white:#FFFFFF;--bg:#F2F2F2;--bg2:#F7F7F7;--black:#111111;--ch:#333333;--gray:#666666;--muted:#999999;--line:#E2E2E2;--line2:#CCCCCC;--y:#FFC107;--yd:#E5AC00;--ylt:#FFF8E1;--ybg:#FFFAEC;--green:#22C55E;--red:#EF4444;--purple:#8B5CF6;--r8:8px;--r12:12px;--r16:16px;--r20:20px;--sh1:0 1px 4px rgba(0,0,0,.06);--sh2:0 4px 16px rgba(0,0,0,.09);--sh3:0 12px 36px rgba(0,0,0,.11);--nav-h:68px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased;overflow-y:scroll}a{text-decoration:none;color:inherit}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 6%;justify-content:space-between;transition:box-shadow .25s}
+.nav.stuck{box-shadow:var(--sh2)}.nav-logo a{display:flex;height:38px}.nav-logo img{height:38px;width:auto}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-g{padding:.48rem 1.15rem;border-radius:var(--r8);border:1.5px solid var(--line2);background:none;font:600 .83rem/1 'Poppins',sans-serif;color:var(--ch);cursor:pointer;transition:all .15s}
+.btn-g:hover{border-color:var(--black);color:var(--black)}
+.btn-y{padding:.48rem 1.25rem;border-radius:var(--r8);background:var(--y);border:none;font:700 .83rem/1 'Poppins',sans-serif;color:var(--black);cursor:pointer;transition:all .15s}
+.btn-y:hover{background:var(--yd);transform:translateY(-1px)}
+.ph{background:var(--black);padding:5rem 6% 3.5rem;margin-top:var(--nav-h)}
+.ph-in{max-width:1100px;margin:0 auto}
+.ph-ey{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,193,7,.6);margin-bottom:.7rem}
+.ph-t{font-size:2.4rem;font-weight:900;line-height:1.08;letter-spacing:-.5px;color:var(--white);margin-bottom:.7rem}
+.ph-t em{font-style:normal;color:var(--y)}
+.ph-s{font-size:.88rem;color:rgba(255,255,255,.45);max-width:540px;line-height:1.7}
+.body-wrap{max-width:900px;margin:0 auto;padding:3.5rem 6% 5rem}
+.body-wrap.wide{max-width:1100px}
+h2{font-size:1.3rem;font-weight:800;letter-spacing:-.2px;margin:2rem 0 .65rem;color:var(--black)}
+h2 em{font-style:normal;color:var(--yd)}
+h3{font-size:1.05rem;font-weight:700;margin:1.5rem 0 .5rem;color:var(--black)}
+p{font-size:.87rem;color:var(--ch);line-height:1.85;margin-bottom:.9rem}
+p strong{color:var(--black);font-weight:700}
+p a{color:var(--yd);font-weight:600}
+p a:hover{text-decoration:underline}
+ul,ol{padding-left:1.35rem;margin-bottom:.9rem}
+li{font-size:.87rem;color:var(--ch);line-height:1.75;margin-bottom:.2rem}
+.divider{height:1px;background:var(--line);margin:2rem 0}
+.highlight-box{background:var(--ybg);border:1px solid rgba(255,193,7,.25);border-radius:var(--r16);padding:1.1rem 1.3rem;margin:1.25rem 0}
+.highlight-box p{margin:0;font-size:.84rem;color:var(--ch)}
+.info-box{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r16);padding:1.1rem 1.3rem;margin:1.25rem 0}
+.info-box p{margin:0;font-size:.82rem;color:var(--gray)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.contact-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r20);padding:1.35rem;text-align:center;transition:all .2s}
+.contact-card:hover{border-color:var(--y);box-shadow:var(--sh2)}
+.cc-ico{font-size:1.8rem;display:block;margin-bottom:.55rem}
+.cc-nm{font-size:.85rem;font-weight:800;margin-bottom:.2rem}
+.cc-ds{font-size:.75rem;color:var(--gray);margin-bottom:.85rem}
+.cc-btn{width:100%;padding:.65rem;background:var(--y);color:var(--black);font:700 .78rem/1 'Poppins',sans-serif;border:none;border-radius:var(--r8);cursor:pointer;transition:all .15s}
+.cc-btn:hover{background:var(--yd)}
+.form-section{background:var(--white);border:1px solid var(--line);border-radius:var(--r20);padding:1.75rem;box-shadow:var(--sh1);margin:1.5rem 0}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.74rem;font-weight:700;color:#444;margin-bottom:.35rem}
+.fi{width:100%;padding:.72rem .95rem;border:1.5px solid var(--line);border-radius:var(--r12);font:500 .87rem/1 'Poppins',sans-serif;color:var(--black);background:var(--bg2);outline:none;transition:border-color .15s}
+.fi:focus{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,193,7,.1);background:var(--white)}
+.fi::placeholder{color:#bbb}
+textarea.fi{min-height:110px;resize:vertical;line-height:1.6}
+.sel-wrap{position:relative}.sel-wrap::after{content:'▾';position:absolute;right:.9rem;top:50%;transform:translateY(-50%);color:var(--gray);font-size:.75rem;pointer-events:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.btn-submit{width:100%;padding:.95rem;background:var(--y);color:var(--black);font:700 .92rem/1 'Poppins',sans-serif;border:none;border-radius:var(--r12);cursor:pointer;box-shadow:0 4px 14px rgba(255,193,7,.3);transition:all .2s}
+.btn-submit:hover{background:var(--yd);transform:translateY(-1px)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;font-size:.88rem;font-weight:600;cursor:pointer;user-select:none;gap:1rem;transition:color .15s}
+.faq-q:hover{color:var(--yd)}
+.faq-tog{width:26px;height:26px;border-radius:50%;background:var(--bg2);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--yd);transition:all .2s;flex-shrink:0}
+.faq-item.open .faq-tog{transform:rotate(45deg);background:var(--ylt);border-color:var(--y)}
+.faq-a{display:none;padding:0 2rem .95rem 0;font-size:.83rem;color:var(--gray);line-height:1.75}
+.faq-item.open .faq-a{display:block}
+.ai-note{display:inline-flex;align-items:center;gap:.3rem;background:var(--ylt);color:#7A5800;font-size:.67rem;font-weight:700;padding:.15rem .5rem;border-radius:3px;margin-top:.45rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:1.5rem 0}
+.team-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r20);padding:1.5rem;text-align:center}
+.team-av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--y),var(--yd));margin:0 auto .85rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;border:3px solid var(--white);box-shadow:var(--sh2)}
+.team-nm{font-size:.88rem;font-weight:800;margin-bottom:.15rem}
+.team-role{font-size:.72rem;color:var(--yd);font-weight:600;margin-bottom:.35rem}
+.team-bio{font-size:.75rem;color:var(--gray);line-height:1.5}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0}
+.val-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r16);padding:1.1rem;box-shadow:var(--sh1)}
+.val-ico{font-size:1.4rem;display:block;margin-bottom:.4rem}
+.val-nm{font-size:.85rem;font-weight:800;margin-bottom:.2rem}
+.val-ds{font-size:.75rem;color:var(--gray);line-height:1.5}
+.cookie-type{background:var(--white);border:1px solid var(--line);border-radius:var(--r16);padding:1.1rem;margin-bottom:.75rem;display:flex;align-items:flex-start;gap:.85rem;box-shadow:var(--sh1)}
+.ct-ico{font-size:1.2rem;flex-shrink:0;margin-top:.05rem}
+.ct-nm{font-size:.85rem;font-weight:800;margin-bottom:.2rem}
+.ct-ds{font-size:.78rem;color:var(--gray);line-height:1.5}
+.ct-badge{display:inline-flex;font-size:.62rem;font-weight:800;padding:.12rem .45rem;border-radius:4px;margin-left:.35rem;vertical-align:middle}
+.badge-req{background:rgba(239,68,68,.1);color:var(--red)}.badge-opt{background:var(--ybg);color:var(--yd)}
+.toc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r16);padding:1.1rem 1.3rem;margin-bottom:2rem}
+.toc-title{font-size:.78rem;font-weight:800;margin-bottom:.65rem;color:var(--black)}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:.35rem;padding:0}
+.toc-list li a{font-size:.78rem;color:var(--yd);font-weight:500}.toc-list li a:hover{text-decoration:underline}
+footer{background:var(--black);padding:3.5rem 6% 2rem}
+.ft-inner{max-width:1100px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:2.5rem;margin-bottom:2.5rem}
+.ft-logo-img{height:32px;width:auto;margin-bottom:.75rem;display:block}
+.ft-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:.85rem}
+.ft-ai{display:inline-flex;background:rgba(255,193,7,.12);color:var(--y);font-size:.65rem;font-weight:700;padding:.22rem .65rem;border-radius:50px;margin-bottom:.9rem}
+.ft-socs{display:flex;gap:.4rem}
+.ft-soc{width:30px;height:30px;border-radius:var(--r8);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer;transition:all .15s;text-decoration:none;border:1px solid rgba(255,255,255,.08)}
+.ft-soc:hover{background:var(--y)}
+.ft-ch{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.3);margin-bottom:.9rem}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.ft-links a{font-size:.78rem;color:rgba(255,255,255,.5);font-weight:500;transition:color .15s}
+.ft-links a:hover{color:var(--y)}
+.ft-ci{display:flex;align-items:flex-start;gap:.4rem;font-size:.76rem;color:rgba(255,255,255,.45);margin-bottom:.4rem;line-height:1.5}
+.ft-ci-i{color:var(--y);flex-shrink:0}
+.ft-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.35rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.ft-copy{font-size:.72rem;color:rgba(255,255,255,.25)}
+.ft-legal{display:flex;gap:1.25rem;flex-wrap:wrap}
+.ft-legal a{font-size:.72rem;color:rgba(255,255,255,.25);transition:color .15s}
+.ft-legal a:hover{color:var(--y)}
+.ft-aeli{border-top:1px solid rgba(255,255,255,.06);padding-top:.75rem;margin-top:.75rem;font-size:.66rem;color:rgba(255,255,255,.18);line-height:1.65}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--black);color:var(--white);padding:.65rem 1.05rem;border-radius:var(--r12);font-size:.74rem;font-weight:600;box-shadow:var(--sh3);border-left:3px solid var(--y);transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:768px){.ft-top{grid-template-columns:1fr 1fr}.ph-t{font-size:2rem}.contact-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.values-grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.ft-bot{flex-direction:column;text-align:center}}
+@media(max-width:480px){.ft-top{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}}
+</style>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — BOOST.ME">
+<meta property="og:description" content="Contacte l'équipe BOOST.ME. Réponse garantie sous 24h.">
+<meta property="og:site_name" content="BOOST.ME">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — BOOST.ME">
+<meta name="twitter:description" content="Contacte l'équipe BOOST.ME. Réponse garantie sous 24h.">
+
+<style>
+@media(max-width:768px){
+  .body-wrap{padding:2rem 1.25rem !important}
+  .contact-grid,.ct-grid,.about-grid,.two-col{grid-template-columns:1fr !important;gap:1.5rem !important}
+  .ph{padding:2rem 1.25rem 1.5rem !important}
+  .ph-t{font-size:1.6rem !important}
+  .info-box,.contact-card,.ct-card{padding:1.25rem !important}
+}
+</style>
+<style>*{max-width:100%;box-sizing:border-box}body{overflow-x:hidden!important}</style>
+</head>
+<body><nav class="nav" id="nav">
+  
+        <div class="ft-ci"><span class="ft-ci-i">📍</span><span>Paris &bull; Yaoundé, Cameroun</span></div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2025 BOOST.ME — Tous droits réservés</div>
+      <div class="ft-legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="cgu.html">CGU</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+    <div class="ft-aeli">© 2025 BOOST.ME est édité par <strong>AELI SERVICES</strong> — Paris &bull; Yaoundé. Voir les <a href="mentions-legales.html" style="color:inherit;opacity:.5;text-decoration:underline">mentions légales</a>.</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+<script>var _tt;function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove('show')},2500);}</script>
+
+<!-- ── COOKIE BANNER ── -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#111;border-top:2px solid #FFC107;padding:1rem 6%;box-shadow:0 -4px 20px rgba(0,0,0,.25)">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <div style="flex:1;min-width:240px">
+      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.25rem">🍪 Nous utilisons des cookies</div>
+      <div style="font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.55">Des cookies essentiels pour ton compte et des cookies analytiques anonymisés pour améliorer BOOST.ME. <a href="/boostme-pages/cookies.html" style="color:#FFC107;text-decoration:underline">En savoir plus</a></div>
+    </div>
+    <div style="display:flex;gap:.65rem;flex-shrink:0;flex-wrap:wrap">
+      <button onclick="acceptCookies('essential')" style="padding:.5rem 1.1rem;background:none;color:rgba(255,255,255,.55);font:600 .78rem/1 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.2);border-radius:8px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)'">Essentiels uniquement</button>
+      <button onclick="acceptCookies('all')" style="padding:.5rem 1.35rem;background:#FFC107;color:#111;font:700 .78rem/1 'Poppins',sans-serif;border:none;border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(255,193,7,.35);transition:all .15s" onmouseover="this.style.background='#E5AC00'" onmouseout="this.style.background='#FFC107'">Accepter tout</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var consent = localStorage.getItem('bm_cookies');
+  if(!consent) setTimeout(function(){document.getElementById('cookie-banner').style.display='block';},1200);
+})();
+function acceptCookies(type){
+  localStorage.setItem('bm_cookies', type);
+  localStorage.setItem('bm_cookies_date', new Date().toISOString());
+  document.getElementById('cookie-banner').style.display='none';
+  if(type==='all') console.log('Analytics cookies enabled');
+}
+</script>
+</body></html>

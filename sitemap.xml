@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://boostme.social/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://boostme.social/signup</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/login</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://boostme.social/tarifs</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/temoignages</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://boostme.social/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://boostme.social/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://boostme.social/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://boostme.social/challenge/cash-clarity</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/glow-up</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/mental-detox</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/morning-power</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/unshakeable-confidence</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/body-reset</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/build-your-brand</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/side-hustle-starter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/own-the-room</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/deep-work-mode</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/network-like-a-pro</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/read-and-lead</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/challenge/boostme-starter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://boostme.social/legal/mentions-legales</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://boostme.social/legal/cgu</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://boostme.social/legal/politique-confidentialite</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://boostme.social/legal/cookies</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
