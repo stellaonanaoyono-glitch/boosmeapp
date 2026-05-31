@@ -93,7 +93,7 @@ a{text-decoration:none;color:inherit}
     <button class="tn-home" onclick="history.back()">← Retour</button>
   </div>
   <div class="tn-right">
-    <button class="btn-ghost" onclick="window.location='dashboard.html'">Mon espace</button>
+    <button class="btn-ghost" onclick="window.location.href='/app/dashboard'">Mon espace</button>
     <button class="btn-cta" onclick="openModal('annual','Accès illimité annuel','€49 / an')">Passer à Premium</button>
   </div>
 </nav>
@@ -137,7 +137,7 @@ a{text-decoration:none;color:inherit}
         <li>BoostMe Starter 7 jours</li><li>6 piliers découverts</li>
         <li>Recommandation IA</li><li>Aucune carte bancaire</li>
       </ul>
-      <button class="btn-plan btn-plan-o" onclick="window.location='boostme-signup-v2.html'">Commencer gratuitement</button>
+      <button class="btn-plan btn-plan-o" onclick="window.location.href='/signup'">Commencer gratuitement</button>
     </div>
   </div>
 
@@ -197,7 +197,7 @@ function confirmPayment(){
   setTimeout(function(){
     closeModal();
     toast('🎉 Paiement confirmé ! Accès activé.');
-    setTimeout(function(){window.location='dashboard.html';},1500);
+    setTimeout(function(){window.location.href='/app/dashboard';},1500);
   },1800);
 }
 </script>

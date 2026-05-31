@@ -227,7 +227,7 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="aside-foot">
       Pas encore de compte ?
-      <a href="boostme-signup-v2.html">S'inscrire gratuitement →</a><br><br>
+      <a href="/signup">S'inscrire gratuitement →</a><br><br>
       <a href="/legal/mentions-legales">Mentions légales</a> ·
       <a href="/legal/politique-confidentialite">Confidentialité</a>
     </div>
@@ -293,7 +293,7 @@ a{text-decoration:none;color:inherit}
 
         <div class="form-foot">
           Pas encore de compte ?
-          <a href="boostme-signup-v2.html">S'inscrire — 7 jours gratuits</a>
+          <a href="/signup">S'inscrire — 7 jours gratuits</a>
         </div>
 
         <div class="sec-note">🔒 Connexion sécurisée · Tes données sont protégées</div>
@@ -425,13 +425,13 @@ function doLogin(){
       btn.textContent='✅ Connecté !';
       btn.style.background='var(--green)';
       toast('Bienvenue Sarah ! 👋');
-      setTimeout(function(){ window.location='boostme-app/dashboard.html'; }, 900);
+      setTimeout(function(){ window.location.href='/app/dashboard'; }, 900);
     } else {
       // Accept any email+pwd for demo
       btn.textContent='✅ Connecté !';
       btn.style.background='var(--green)';
       toast('Bienvenue ! 👋');
-      setTimeout(function(){ window.location='boostme-app/dashboard.html'; }, 900);
+      setTimeout(function(){ window.location.href='/app/dashboard'; }, 900);
     }
   }, 1100);
 }
