@@ -205,7 +205,7 @@ function renderContent(c){
     +'<button class="alt-btn" onclick="openAlt()">&#128260; Cette action ne m\'est pas possible aujourd\'hui &rarr; L\'IA adapte</button>'
     +'<div id="alt-result"></div></div>'
     +'<div class="booster-card"><div class="bl">&#128293; Le Booster</div>'
-    +'<p>\u201c'+c.booster+'\u201d</p></div>'
+    +'<p>\u201c'+(c.booster||c.mantra||'Continue. Tu es plus proche que tu ne le crois.')+' \u201d</p></div>'
     +'<div class="card"><div class="sec-label sl-q">&#127891; Question du soir</div>'
     +'<p style="font-style:italic;font-size:.9rem;color:#333;line-height:1.65">'+c.question+'</p></div>'
     +'<button class="bg2" onclick="regenContent()" style="width:100%;justify-content:center;margin-bottom:.5rem">&#8635; R\u00e9g\u00e9n\u00e9rer</button>';

@@ -159,7 +159,7 @@ async function submitEntry(){
   // Build prompt for AI
   var tagsCtx=_tags.length?"Thèmes mentionnés: "+_tags.join(", ")+". ":"";
   var moodCtx=_mood?"Humeur: "+_mood+". ":"";
-  var prompt='Tu es un coach bienveillant et direct. Utilisateur BOOST.ME: '+(_p.prenom||"Membre")+'. '+moodCtx+tagsCtx+'Entrée journal: "'+txt.substring(0,800)+'". Donne: (1) un insight personnel percutant en 2-3 phrases (tutoie), (2) une action concrète pour aujourd'hui, (3) 2 challenges BOOST.ME adaptés à cette situation parmi: Glow Up, Cash Clarity, Mental Detox, Morning Power, Unshakeable Confidence, Body Reset, Build Your Brand, Side Hustle Starter, Own The Room, Deep Work Mode, Network Like a Pro, Read & Lead. JSON UNIQUEMENT: {"insight":"...","action":"...","challenges":["...","..."]}';
+  var prompt="Tu es un coach bienveillant et direct. Utilisateur BOOST.ME: "+(_p.prenom||"Membre")+". "+moodCtx+tagsCtx+'+"Entree journal: "+JSON.stringify(txt.substring(0,800))+". Donne: (1) un insight percutant 2-3 phrases (tutoie), (2) une action concrete pour aujourd hui, (3) 2 challenges BOOST.ME adaptes parmi: Glow Up, Cash Clarity, Mental Detox, Morning Power, Unshakeable Confidence, Body Reset, Build Your Brand, Side Hustle Starter, Own The Room, Deep Work Mode, Network Like a Pro, Read & Lead. JSON UNIQUEMENT sans markdown: {\"insight\":\"...\"  ,\"action\":\"...\",\"challenges\":[\"...\",\"...\"]}";
 
   try{
     var resp=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",

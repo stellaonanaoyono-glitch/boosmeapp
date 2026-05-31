@@ -52,3 +52,14 @@ CREATE POLICY "avatars_user_update" ON storage.objects FOR UPDATE USING (bucket_
 
 -- 6. Email reminders opt-out: allow users to update their own preference
 CREATE POLICY "profiles_update_own" ON profiles FOR UPDATE USING (auth.uid() = id);
+
+-- Fix: Allow users to update their own profile (needed for avatar_url save)
+DROP POLICY IF EXISTS "profiles_update_own" ON profiles;
+CREATE POLICY "profiles_update_own" ON profiles
+  FOR UPDATE USING (auth.uid() = id)
+  WITH CHECK (auth.uid() = id);
+
+-- Allow users to select their own profile
+DROP POLICY IF EXISTS "profiles_select_own" ON profiles;
+CREATE POLICY "profiles_select_own" ON profiles
+  FOR SELECT USING (auth.uid() = id);
