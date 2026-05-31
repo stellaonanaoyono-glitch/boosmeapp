@@ -92,7 +92,7 @@ var STRIPE_PK="pk_live_51TXUY2DHkPqETJlay8lByczxwkXBzjLs4aUHIWZtcvthNKyiL2f20rh1
 var NP_PK="pk.Cei0CJa69pzjoSQIlkjBQETH68jQEtHTSuljcsWj4IXXH51wkDKHdHu7d067DPHva3FeEgE0K8ELG4fGfcBgw3IL2ZsUdayqE7x0NqIoaVDt8fN1aDSo7X9mtU9jY";
 var PRICES={annual:{price:49,label:'Acc\u00e8s Annuel Illimit\u00e9',desc:'13 challenges \u00b7 Toute l\'ann\u00e9e \u00b7 Sans limite'},unit:{price:3.99,label:'Challenge unitaire',desc:'1 challenge \u00b7 Acc\u00e8s \u00e0 vie'}};
 var PROMOS={LAUNCH30:{type:'percent',val:30,label:'-30%'},BIENVENUE:{type:'percent',val:20,label:'-20%'},AFRICA25:{type:'percent',val:25,label:'-25%'},MINUS10:{type:'fixed',val:10,label:'-\u20ac10'},MOITIE50:{type:'percent',val:50,label:'-50%'}};
-var _plan='annual',_pm='card',_disc=0,_discLabel='',_promoOpen=false;
+var _urlParams=new URLSearchParams(window.location.search);var _plan=_urlParams.get('plan')||'annual';var _chId=_urlParams.get('ch')||'';var _chName='';var _pm='card',_disc=0,_discLabel='',_promoOpen=false;
 
 async function run(){
   var u=await initUser();if(!u)return;
@@ -217,7 +217,7 @@ async function processPayment(){
       var resp=await fetch('/api/create-checkout',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({plan:_plan,amount:fin,userId:_u.id,email:_u.email,paymentId:pr.data?pr.data.id:null})
+        body:JSON.stringify({plan:_plan,amount:fin,userId:_u.id,email:_u.email,paymentId:pr.data?pr.data.id:null,challengeId:_chId||"",challengeName:_chName||""})
       });
       var data=await resp.json();
       if(data.url){window.location.href=data.url;return;}
@@ -233,7 +233,7 @@ async function processPayment(){
       var resp=await fetch('/api/create-notchpay',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({plan:_plan,amount:fin,userId:_u.id,email:_u.email,phone:phone,provider:_pm,paymentId:pr.data?pr.data.id:null})
+        body:JSON.stringify({plan:_plan,amount:fin,userId:_u.id,email:_u.email,phone:phone,provider:_pm,paymentId:pr.data?pr.data.id:null,challengeId:_chId||"",challengeName:_chName||""})
       });
       var data=await resp.json();
       if(data.authorization_url){window.location.href=data.authorization_url;return;}
