@@ -93,25 +93,25 @@ sb3.auth.getSession().then(function(r){if(r.data.session)window.location.href='/
 var plan='free';
 function showErr(m){var e=document.getElementById('err');e.textContent=m;e.style.display='block';window.scrollTo(0,0);}
 function hideErr(){document.getElementById('err').style.display='none';}
-function setPlan(p){plan=p;['free','annual'].forEach(function(x){document.getElementById('pl-'+x).classList.remove('on');});document.getElementById('pl-'+p).classList.add('on');document.getElementById('btn2').textContent=p==='free'?'&#128640; Activer mon compte':'Proc&#233;der au paiement &#8594;';}
+function setPlan(p){plan=p;['free','annual'].forEach(function(x){document.getElementById('pl-'+x).classList.remove('on');});document.getElementById('pl-'+p).classList.add('on');document.getElementById('btn2').textContent=p==='free'?'\u1F680 Activer mon compte':'Proc\u00E9der au paiement \u2192';}
 function next1(){
   hideErr();
   var prenom=document.getElementById('prenom').value.trim();
   var email=document.getElementById('email').value.trim();
   var pwd=document.getElementById('pwd').value;
-  if(!prenom){showErr('Entre ton pr&#233;nom.');return;}
+  if(!prenom){showErr('Entre ton pr\u00E9nom.');return;}
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('Email invalide.');return;}
-  if(pwd.length<8){showErr('Mot de passe trop court (8 caract&#232;res minimum).');return;}
+  if(pwd.length<8){showErr('Mot de passe trop court (8 caract\u00E8res minimum).');return;}
   document.getElementById('p1').classList.remove('on');document.getElementById('p2').classList.add('on');
   document.getElementById('st2').classList.add('on');
-  document.getElementById('sp-sub').textContent='&#201;tape 2 sur 2 — Ton plan';
-  document.getElementById('sp-title').textContent='Presque l&#224; !';
+  document.getElementById('sp-sub').textContent='\u00C9tape 2 sur 2 — Ton plan';
+  document.getElementById('sp-title').textContent='Presque l\u00E0 !';
 }
 function back1(){
   document.getElementById('p2').classList.remove('on');document.getElementById('p1').classList.add('on');
   document.getElementById('st2').classList.remove('on');
-  document.getElementById('sp-sub').textContent='&#201;tape 1 sur 2 — Tes informations';
-  document.getElementById('sp-title').textContent='Cr&#233;er mon compte';
+  document.getElementById('sp-sub').textContent='\u00C9tape 1 sur 2 — Tes informations';
+  document.getElementById('sp-title').textContent='Cr\u00E9er mon compte';
 }
 async function signup(){
   hideErr();
@@ -120,11 +120,11 @@ async function signup(){
   var pwd=document.getElementById('pwd').value;
   var pays=document.getElementById('pays').value;
   var btn=document.getElementById('btn2');
-  btn.textContent='&#9203;';btn.disabled=true;
+  btn.textContent='\u23F3';btn.disabled=true;
   var r=await sb3.auth.signUp({email:email,password:pwd,options:{data:{prenom:prenom,pays:pays},emailRedirectTo:'https://boostme.social/login'}});
   if(r.error){
-    btn.disabled=false;btn.textContent=plan==='free'?'&#128640; Activer mon compte':'Proc&#233;der au paiement &#8594;';
-    if(r.error.message.includes('already'))showErr('Un compte existe d&#233;j&#224; avec cet email. <a href="/login">Se connecter</a>');
+    btn.disabled=false;btn.textContent=plan==='free'?'\u1F680 Activer mon compte':'Proc\u00E9der au paiement \u2192';
+    if(r.error.message.includes('already'))showErr('Un compte existe d\u00E9j\u00E0 avec cet email. <a href="/login">Se connecter</a>');
     else showErr(r.error.message);
     return;
   }
@@ -132,9 +132,9 @@ async function signup(){
   await sb3.from('profiles').upsert({id:uid,prenom:prenom,pays:pays||'other',plan:plan==='free'?'free':'pending'});
   if(plan==='free'){
     await sb3.from('user_challenges').upsert({user_id:uid,challenge_id:'boostme-starter',current_day:1,status:'active',streak:0});
-    document.getElementById('suc-msg').textContent='Ton acc&#232;s gratuit est activ&#233;. Le BoostMe Starter t&#8217;attend !';
+    document.getElementById('suc-msg').textContent='Ton acc\u00E8s gratuit est activ\u00E9. Le BoostMe Starter t\u2019attend !';
   } else {
-    document.getElementById('suc-msg').textContent='Compte cr&#233;&#233; ! Tu seras redirig&#233;(e) vers le paiement tr&#232;s bient&#244;t.';
+    document.getElementById('suc-msg').textContent='Compte cr\u00E9\u00E9 ! Tu seras redirig\u00E9(e) vers le paiement tr\u00E8s bient\u00F4t.';
   }
   document.getElementById('p2').classList.remove('on');document.getElementById('p-suc').classList.add('on');
   document.getElementById('sp-title').textContent='';document.getElementById('sp-sub').textContent='';
