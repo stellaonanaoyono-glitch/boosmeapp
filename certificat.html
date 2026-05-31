@@ -115,7 +115,7 @@ async function run(){
 }
 
 function renderCert(cert,p,email){
-  var fn=((p.prenom||'')+(p.nom?' '+p.nom:'')).trim()||email||'Membre BOOST.ME';
+  var fn=((p.prenom||'')+(p.nom?' '+p.nom:'')).trim();if(!fn){fn=p.prenom||p.nom||'';}if(!fn){fn='Membre BOOST.ME';}
   var dt=new Date(cert.completed_at);
   var ds=dt.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   var chId=cert.challenge_id||'';
@@ -146,7 +146,7 @@ function renderCert(cert,p,email){
     '<div class="cert-skills">'+sh+'</div>'+
     '<div class="cert-divider"></div>'+
     '<div class="cert-footer">'+
-    '<div class="cert-sig-block"><div class="cert-sig">Ga\u00eblle Stella Onana</div><div class="cert-sig-name">Ga\u00eblle Stella Onana Oyono</div><div class="cert-sig-role">Fondatrice &mdash; BOOST.ME &middot; AELI SERVICES</div></div>'+
+    '<div class="cert-sig-block"><div style="font-size:1.4rem;font-weight:900;color:#FFC107;letter-spacing:2px;font-family:Poppins,sans-serif;margin-bottom:.3rem">BOOST.ME</div><div style="font-size:.65rem;font-weight:700;color:#aaa;letter-spacing:1px;text-transform:uppercase">Plateforme certifiée</div><div style="margin-top:.45rem;width:80px;height:2px;background:linear-gradient(90deg,#FFC107,#E5AC00);border-radius:1px"></div></div>'+
     '<div class="cert-seal"><span class="cert-seal-ico">&#11088;</span><div class="cert-seal-txt">BOOST.ME<br>CERTIFIED</div></div>'+
     '<div class="cert-meta"><div class="cert-num">'+cn+'</div><div class="cert-date-lbl">\u00c9mis le</div><div class="cert-date-val">'+ds+'</div></div>'+
     '</div></div>'+
