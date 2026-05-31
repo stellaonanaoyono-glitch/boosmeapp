@@ -425,13 +425,13 @@ function doLogin(){
       btn.textContent='✅ Connecté !';
       btn.style.background='var(--green)';
       toast('Bienvenue Sarah ! 👋');
-      setTimeout(function(){ window.location.href='/app/dashboard'; }, 900);
+      setTimeout(function(){ window.location.href='/dashboard'; }, 900);
     } else {
       // Accept any email+pwd for demo
       btn.textContent='✅ Connecté !';
       btn.style.background='var(--green)';
       toast('Bienvenue ! 👋');
-      setTimeout(function(){ window.location.href='/app/dashboard'; }, 900);
+      setTimeout(function(){ window.location.href='/dashboard'; }, 900);
     }
   }, 1100);
 }
@@ -501,15 +501,14 @@ function acceptCookies(type){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ── BOOST.ME Login — Supabase Auth ──
-const _SB = window.supabase.createClient(
-  'https://hddxbjmdtbxvxwmmdxmj.supabase.co',
+const _SB = window.supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ'
 );
 
 // Redirect if already logged in
 (async function() {
   const { data: { session } } = await _SB.auth.getSession();
-  if (session) window.location.href = '/boostme-app/dashboard.html';
+  if (session) window.location.href='/dashboard';
 })();
 
 async function doLogin() {
@@ -540,7 +539,7 @@ async function doLogin() {
 
   // Success
   toast('✅ Connexion réussie !');
-  setTimeout(() => { window.location.href = '/boostme-app/dashboard.html'; }, 800);
+  setTimeout(() => { window.location.href='/dashboard'; }, 800);
 }
 
 async function doGoogleLogin() {
