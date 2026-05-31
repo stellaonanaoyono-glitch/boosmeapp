@@ -1,46 +1,57 @@
-# Root pages
-/login                    /boostme-login.html                    200
-/signup                   /boostme-signup-v2.html                200
-/challenge                /boostme-challenge-fiche.html          200
+# ── Fichiers HTML directs (chemins exacts) ──────────────────
+/boostme-login.html                    /boostme-login.html                    200
+/boostme-signup-v2.html                /boostme-signup-v2.html                200
+/boostme-challenge-fiche.html          /boostme-challenge-fiche.html          200
 
-# App pages
-/app/dashboard            /boostme-app/dashboard.html            200
-/app/challenges           /boostme-app/challenges.html           200
-/app/challenge-day        /boostme-app/challenge-day.html        200
-/app/progression          /boostme-app/progression.html          200
-/app/certificats          /boostme-app/certificats.html          200
-/app/communaute           /boostme-app/communaute.html           200
-/app/notifications        /boostme-app/notifications.html        200
-/app/profil               /boostme-app/profil.html               200
-/app/tarifs               /boostme-app/tarifs.html               200
+/boostme-app/dashboard.html            /boostme-app/dashboard.html            200
+/boostme-app/challenges.html           /boostme-app/challenges.html           200
+/boostme-app/challenge-day.html        /boostme-app/challenge-day.html        200
+/boostme-app/progression.html          /boostme-app/progression.html          200
+/boostme-app/certificats.html          /boostme-app/certificats.html          200
+/boostme-app/communaute.html           /boostme-app/communaute.html           200
+/boostme-app/notifications.html        /boostme-app/notifications.html        200
+/boostme-app/profil.html               /boostme-app/profil.html               200
+/boostme-app/tarifs.html               /boostme-app/tarifs.html               200
 
-# Public pages
-/about                    /boostme-pages/about.html              200
-/faq                      /boostme-pages/faq.html                200
-/contact                  /boostme-pages/contact.html            200
-/temoignages              /boostme-pages/temoignages.html        200
-/mentions-legales         /boostme-pages/mentions-legales.html   200
-/cgu                      /boostme-pages/cgu.html                200
-/confidentialite          /boostme-pages/confidentialite.html    200
-/cookies                  /boostme-pages/cookies.html            200
+/boostme-pages/about.html              /boostme-pages/about.html              200
+/boostme-pages/faq.html                /boostme-pages/faq.html                200
+/boostme-pages/contact.html            /boostme-pages/contact.html            200
+/boostme-pages/temoignages.html        /boostme-pages/temoignages.html        200
+/boostme-pages/mentions-legales.html   /boostme-pages/mentions-legales.html   200
+/boostme-pages/cgu.html                /boostme-pages/cgu.html                200
+/boostme-pages/confidentialite.html    /boostme-pages/confidentialite.html    200
+/boostme-pages/cookies.html            /boostme-pages/cookies.html            200
 
-# Challenges
-/challenge/cash-clarity          /boostme-challenge-fiche.html              200
-/challenge/glow-up               /boostme-challenges-pages/glow-up.html     200
-/challenge/mental-detox          /boostme-challenges-pages/mental-detox.html 200
-/challenge/morning-power         /boostme-challenges-pages/morning-power.html 200
-/challenge/unshakeable-confidence /boostme-challenges-pages/unshakeable-confidence.html 200
-/challenge/body-reset            /boostme-challenges-pages/body-reset.html  200
-/challenge/build-your-brand      /boostme-challenges-pages/build-your-brand.html 200
-/challenge/side-hustle-starter   /boostme-challenges-pages/side-hustle-starter.html 200
-/challenge/own-the-room          /boostme-challenges-pages/own-the-room.html 200
-/challenge/deep-work-mode        /boostme-challenges-pages/deep-work-mode.html 200
-/challenge/network-like-a-pro    /boostme-challenges-pages/network-like-a-pro.html 200
-/challenge/read-and-lead         /boostme-challenges-pages/read-and-lead.html 200
-/challenge/boostme-starter       /boostme-challenges-pages/boostme-starter.html 200
+/boostme-challenges-pages/glow-up.html              /boostme-challenges-pages/glow-up.html              200
+/boostme-challenges-pages/mental-detox.html         /boostme-challenges-pages/mental-detox.html         200
+/boostme-challenges-pages/morning-power.html        /boostme-challenges-pages/morning-power.html        200
+/boostme-challenges-pages/unshakeable-confidence.html /boostme-challenges-pages/unshakeable-confidence.html 200
+/boostme-challenges-pages/body-reset.html           /boostme-challenges-pages/body-reset.html           200
+/boostme-challenges-pages/build-your-brand.html     /boostme-challenges-pages/build-your-brand.html     200
+/boostme-challenges-pages/side-hustle-starter.html  /boostme-challenges-pages/side-hustle-starter.html  200
+/boostme-challenges-pages/own-the-room.html         /boostme-challenges-pages/own-the-room.html         200
+/boostme-challenges-pages/deep-work-mode.html       /boostme-challenges-pages/deep-work-mode.html       200
+/boostme-challenges-pages/network-like-a-pro.html   /boostme-challenges-pages/network-like-a-pro.html   200
+/boostme-challenges-pages/read-and-lead.html        /boostme-challenges-pages/read-and-lead.html        200
+/boostme-challenges-pages/boostme-starter.html      /boostme-challenges-pages/boostme-starter.html      200
 
-# API functions
-/api/*                    /.netlify/functions/:splat             200
+# ── URLs propres (alias) ────────────────────────────────────
+/login          /boostme-login.html          200
+/signup         /boostme-signup-v2.html      200
+/app/dashboard  /boostme-app/dashboard.html  200
+/app/challenges /boostme-app/challenges.html 200
+/app/profil     /boostme-app/profil.html     200
+/app/tarifs     /boostme-app/tarifs.html     200
+/faq            /boostme-pages/faq.html      200
+/contact        /boostme-pages/contact.html  200
+/about          /boostme-pages/about.html    200
+/temoignages    /boostme-pages/temoignages.html 200
+/mentions-legales /boostme-pages/mentions-legales.html 200
+/cgu            /boostme-pages/cgu.html      200
+/confidentialite /boostme-pages/confidentialite.html 200
 
-# 404 fallback
-/*                        /404.html                              404
+# ── API ────────────────────────────────────────────────────
+/api/*  /.netlify/functions/:splat  200
+
+# ── 404 ────────────────────────────────────────────────────
+/*  /404.html  404
