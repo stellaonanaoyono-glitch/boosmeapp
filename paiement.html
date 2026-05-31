@@ -96,11 +96,38 @@ var _plan='annual',_pm='card',_disc=0,_discLabel='',_promoOpen=false;
 
 async function run(){
   var u=await initUser();if(!u)return;
-  // Read plan from URL param
   var params=new URLSearchParams(window.location.search);
   _plan=params.get('plan')||'annual';
-  var ch=params.get('ch');
-  if(_plan==='unit'&&ch){PRICES.unit.desc='Challenge\u00a0: '+ch+' \u00b7 Acc\u00e8s \u00e0 vie';}
+  var chId=params.get('ch');
+  
+  if(_plan==='unit'){
+    if(chId){
+      // Find challenge name from ID
+      var CH_NAMES={
+        'cash-clarity':'Cash Clarity',
+        'glow-up':'Glow Up',
+        'mental-detox':'Mental Detox',
+        'morning-power':'Morning Power',
+        'unshakeable-confidence':'Unshakeable Confidence',
+        'body-reset':'Body Reset',
+        'build-your-brand':'Build Your Brand',
+        'side-hustle-starter':'Side Hustle Starter',
+        'own-the-room':'Own The Room',
+        'deep-work-mode':'Deep Work Mode',
+        'network-like-a-pro':'Network Like a Pro',
+        'read-and-lead':'Read & Lead',
+        'boostme-starter':'BoostMe Starter'
+      };
+      var chName=CH_NAMES[chId]||chId;
+      PRICES.unit.label=chName;
+      PRICES.unit.desc=chName+' \u00b7 30 jours \u00b7 Acc\u00e8s \u00e0 vie';
+      // Store challenge ID for checkout
+      PRICES.unit.challengeId=chId;
+    }
+    // Update page title
+    document.querySelector('.pay-title').textContent='Acheter ce challenge';
+  }
+  
   updateOrder();
 }
 
