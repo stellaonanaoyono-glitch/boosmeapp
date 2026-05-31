@@ -89,7 +89,13 @@ async function showSuccess(plan,chId,uid){
     document.getElementById('sub-txt').textContent='Ton challenge est activ\u00e9 et pr\u00eat \u00e0 d\u00e9marrer.';
     // Point dashboard link directly to challenge-day
     document.querySelector('.by').href='/challenge-day';
-    document.querySelector('.by').textContent='Commencer le challenge \u2192';
+    document.querySelector('.by').textContent='Commencer le challenge →';
+    // Activate challenge client-side as fallback
+    if(uid){try{
+      await _sb.from('user_challenges').update({status:'paused'}).eq('user_id',uid).eq('status','active').neq('challenge_id',chId);
+      await _sb.from('user_challenges').upsert({user_id:uid,challenge_id:chId,current_day:1,status:'active',streak:0,last_active:new Date().toISOString()},{onConflict:'user_id,challenge_id'});
+      console.log('[success] activated:',chId);
+    }catch(e){console.warn(e);}}
   }else if(plan==='annual'){
     document.getElementById('annual-box').style.display='block';
     document.getElementById('sub-txt').textContent='Ton acc\u00e8s annuel illimit\u00e9 est activ\u00e9.';

@@ -84,7 +84,7 @@ async function run(){
   var u=await initUser();if(!u)return;
   document.getElementById('uname').textContent=_p.prenom||'Membre';
   
-  var r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').limit(1).maybeSingle();
+  var r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
   
   if(r.error||!r.data){
     // Auto-start Starter for new users
