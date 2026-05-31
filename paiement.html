@@ -228,19 +228,27 @@ async function processPayment(){
       return;
     }
   }else{
-    // NotchPay (MTN/Orange/Wave) — redirect to Netlify function
+    // NotchPay — lien de paiement direct
     try{
-      var resp=await fetch('/api/create-notchpay',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({plan:_plan,amount:fin,userId:_u.id,email:_u.email,phone:phone,provider:_pm,paymentId:pr.data?pr.data.id:null,challengeId:_chId||"",challengeName:_chName||""})
-      });
-      var data=await resp.json();
-      if(data.authorization_url){window.location.href=data.authorization_url;return;}
-      throw new Error(data.error||'Erreur');
+      // Save pending activation before redirect
+      await _sb.from('pending_payments').upsert({
+        user_id:_u.id,
+        plan:_plan,
+        challenge_id:_chId||null,
+        created_at:new Date().toISOString()
+      },{onConflict:'user_id'});
+      // NotchPay payment links per plan
+      var NP_LINKS={
+        annual:'https://notchpay.me/boostmesocial',
+        unit:'https://notchpay.me/boostmesocial'
+      };
+      var npUrl=NP_LINKS[_plan]||'https://notchpay.me/oTe2QDDSb';
+      // Append redirect back to our success page
+      window.location.href=npUrl;
+      return;
     }catch(e){
       btn.textContent='R\u00e9essayer';btn.disabled=false;
-      toast('Erreur paiement\u00a0: '+e.message);
+      toast('Erreur: '+e.message);
       return;
     }
   }
