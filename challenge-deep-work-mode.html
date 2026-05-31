@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Work Mode — BOOST.ME</title>
+<meta name="description" content="Deep Work Mode · Tu produis 3× plus en moins de temps. · BOOST.ME">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--white:#FFFFFF;--bg:#F2F2F2;--bg2:#F7F7F7;--black:#111111;--ch:#333333;--gray:#666666;--muted:#999999;--line:#E2E2E2;--line2:#CCCCCC;--y:#FFC107;--yd:#E5AC00;--ylt:#FFF8E1;--ybg:#FFFAEC;--green:#22C55E;--red:#EF4444;--accent:#22C55E;--r8:8px;--r12:12px;--r16:16px;--r20:20px;--sh1:0 1px 4px rgba(0,0,0,.06);--sh2:0 4px 16px rgba(0,0,0,.09);--sh3:0 12px 36px rgba(0,0,0,.11);--nav-h:72px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased;overflow-y:scroll}a{text-decoration:none;color:inherit}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 6%;justify-content:space-between;transition:box-shadow .25s}
+.nav.stuck{box-shadow:var(--sh2)}.nav-logo a{display:flex;height:40px}.nav-logo img{height:40px;width:auto}
+.nav-r{display:flex;align-items:center;gap:.75rem}
+.btn-g{padding:.48rem 1.15rem;border-radius:var(--r8);border:1.5px solid var(--line2);background:none;font:600 .82rem/1 'Poppins',sans-serif;color:var(--ch);cursor:pointer;transition:all .15s}
+.btn-g:hover{border-color:var(--black)}
+.btn-y{padding:.48rem 1.25rem;border-radius:var(--r8);background:var(--y);border:none;font:700 .82rem/1 'Poppins',sans-serif;color:var(--black);cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(255,193,7,.3)}
+.btn-y:hover{background:var(--yd);transform:translateY(-1px)}
+.hero{margin-top:var(--nav-h);background:var(--black);padding:4.5rem 6% 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,193,7,.08),transparent 65%);pointer-events:none}
+.hi{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:3.5rem;align-items:start;position:relative;z-index:1}
+.hcat{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,193,7,.15);color:var(--y);font-size:.63rem;font-weight:800;padding:.2rem .62rem;border-radius:4px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.85rem}
+.htitle{font-size:2.8rem;font-weight:900;line-height:1.06;letter-spacing:-1px;color:var(--white);margin-bottom:.7rem}
+.htitle em{font-style:normal;color:var(--y)}
+.htagline{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.35rem;max-width:500px}
+.hmeta{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1.35rem}
+.hpill{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:.28rem .8rem;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)}
+.hprom{background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.2);border-radius:var(--r16);padding:.95rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.65}
+.hprom strong{color:var(--y);font-weight:700}
+.cta-card{background:var(--white);border-radius:var(--r20);padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.3);position:sticky;top:calc(var(--nav-h)+1rem)}
+.cp-row{display:flex;align-items:flex-end;gap:.3rem;margin-bottom:.18rem}
+.cp-n{font-size:2.4rem;font-weight:900;line-height:1}
+.cp-u{font-size:.78rem;color:var(--muted);padding-bottom:.28rem}
+.cp-tag{font-size:.7rem;color:var(--gray);margin-bottom:1rem}
+.cf{list-style:none;margin-bottom:1rem}
+.cf li{font-size:.77rem;color:var(--ch);padding:.35rem 0;display:flex;align-items:center;gap:.45rem;border-bottom:1px solid var(--line)}
+.cf li:last-child{border:none}.cf li::before{content:'✓';color:var(--y);font-weight:900;flex-shrink:0}
+.btn-start{width:100%;padding:.95rem;background:var(--y);color:var(--black);font:700 .9rem/1 'Poppins',sans-serif;border:none;border-radius:var(--r12);cursor:pointer;box-shadow:0 4px 14px rgba(255,193,7,.35);transition:all .2s;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-start:hover{background:var(--yd);transform:translateY(-1px)}
+.btn-free{width:100%;padding:.78rem;background:none;color:var(--ch);font:600 .8rem/1 'Poppins',sans-serif;border:1.5px solid var(--line2);border-radius:var(--r12);cursor:pointer;transition:all .15s}
+.btn-free:hover{border-color:var(--y);color:var(--black)}
+.cta-note{text-align:center;font-size:.66rem;color:var(--muted);margin-top:.6rem}
+.pay-row{display:flex;justify-content:center;gap:.4rem;margin-top:.55rem;flex-wrap:wrap}
+.pay-chip{font-size:.6rem;font-weight:600;color:var(--muted);background:var(--bg2);border:1px solid var(--line);padding:.13rem .45rem;border-radius:3px}
+.content{max-width:1100px;margin:0 auto;padding:4rem 6%;display:grid;grid-template-columns:1fr 320px;gap:3.5rem;align-items:start}
+h2{font-size:1.35rem;font-weight:800;letter-spacing:-.2px;margin:0 0 .65rem;color:var(--black)}
+h2 em{font-style:normal;color:var(--yd)}
+.sec{margin-bottom:2.75rem}
+.ey{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--yd);margin-bottom:.5rem}
+p{font-size:.86rem;color:var(--ch);line-height:1.82;margin-bottom:.85rem}
+.bag{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.ba{border-radius:var(--r16);padding:1.05rem}
+.bab{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)}
+.baa{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.18)}
+.balbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem}
+.bab .balbl{color:var(--red)}.baa .balbl{color:var(--green)}
+.bal{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.bal li{font-size:.77rem;line-height:1.5;display:flex;align-items:flex-start;gap:.4rem;color:var(--ch)}
+.bab .bal li::before{content:'✗';color:var(--red);font-weight:900;flex-shrink:0;margin-top:.05rem}
+.baa .bal li::before{content:'✓';color:var(--green);font-weight:900;flex-shrink:0;margin-top:.05rem}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r16);padding:.95rem;display:flex;align-items:flex-start;gap:.7rem}
+.fi{font-size:1.15rem;flex-shrink:0;margin-top:.05rem}
+.fn{font-size:.8rem;font-weight:700;margin-bottom:.1rem}
+.fd{font-size:.71rem;color:var(--gray);line-height:1.5}
+.wk{background:var(--white);border:1px solid var(--line);border-radius:var(--r16);overflow:hidden;box-shadow:var(--sh1);margin-bottom:.65rem;transition:all .2s}
+.wk:hover{border-color:rgba(255,193,7,.3)}
+.wh{padding:.82rem 1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background .15s}
+.wh:hover{background:var(--bg2)}
+.wl{display:flex;align-items:center;gap:.7rem}
+.wn{width:32px;height:32px;border-radius:50%;background:var(--y);color:var(--black);font-size:.78rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(255,193,7,.3)}
+.wt{font-size:.83rem;font-weight:700}.ws{font-size:.65rem;color:var(--muted)}
+.wtg{font-size:.92rem;color:var(--y);transition:transform .2s;flex-shrink:0}
+.wk.open .wtg{transform:rotate(45deg)}
+.wb{display:none;padding:0 1rem 1rem;border-top:1px solid var(--line)}
+.wk.open .wb{display:block}
+.wdays{display:flex;flex-direction:column;gap:.35rem;padding-top:.75rem}
+.dr{display:flex;align-items:center;gap:.6rem;font-size:.77rem;color:var(--ch)}
+.dn{width:20px;height:20px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:var(--muted);flex-shrink:0}
+.sd{background:var(--black);border-radius:var(--r20);padding:1.4rem;position:relative;overflow:hidden}
+.sd::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,193,7,.1),transparent 65%)}
+.sdlbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,193,7,.6);margin-bottom:.8rem}
+.sdi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:var(--r12);padding:.7rem .85rem;display:flex;align-items:flex-start;gap:.65rem;margin-bottom:.5rem}
+.sdi:last-child{margin-bottom:0}
+.sdico{font-size:.9rem;flex-shrink:0;margin-top:.05rem}
+.sdtp{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.1rem}
+.l .sdtp{color:var(--y)}.a .sdtp{color:var(--green)}.q .sdtp{color:#818CF8}
+.sdtxt{font-size:.73rem;color:rgba(255,255,255,.55);line-height:1.45}
+.tg{display:grid;grid-template-columns:1fr;gap:.8rem}
+.tc{background:var(--white);border:1px solid var(--line);border-radius:var(--r20);padding:1.35rem;box-shadow:var(--sh1)}
+.tcq{font-size:2rem;color:var(--y);opacity:.35;line-height:.5;margin-bottom:.8rem;font-family:Georgia,serif}
+.tcs{color:var(--y);font-size:.75rem;letter-spacing:2px;margin-bottom:.6rem}
+.tct{font-size:.8rem;color:var(--ch);line-height:1.75;margin-bottom:1rem}
+.tca{display:flex;align-items:center;gap:.55rem}
+.tcav{width:32px;height:32px;border-radius:50%;background:var(--ylt);border:2px solid var(--y);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.tcn{font-size:.77rem;font-weight:700}.tcl{font-size:.64rem;color:var(--muted)}
+.rsp{position:sticky;top:calc(var(--nav-h)+1rem)}
+.ic{background:var(--white);border:1px solid var(--line);border-radius:var(--r20);padding:1.25rem;box-shadow:var(--sh1);margin-bottom:.85rem}
+.ict{font-size:.8rem;font-weight:800;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+.ir{display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.77rem}
+.ir:last-child{border:none}.il{color:var(--gray)}.iv{font-weight:700;color:var(--black)}
+.rc{display:flex;align-items:center;gap:.8rem;background:var(--white);border:1px solid var(--line);border-radius:var(--r16);padding:.82rem .9rem;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:.55rem}
+.rc:hover{border-color:var(--y);box-shadow:var(--sh2);transform:translateX(3px)}
+.ri{font-size:1.4rem;flex-shrink:0}.rn{font-size:.77rem;font-weight:700;margin-bottom:.05rem}.rp{font-size:.85rem;color:var(--y);margin-left:auto;flex-shrink:0}
+.mob-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--white);border-top:1px solid var(--line);padding:.82rem 1.25rem;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.mb-row{display:flex;align-items:center;gap:.75rem}
+.mb-p{font-size:1.2rem;font-weight:900;flex-shrink:0}
+.mb-btn{flex:1;padding:.88rem;background:var(--y);color:var(--black);font:700 .86rem/1 'Poppins',sans-serif;border:none;border-radius:var(--r12);cursor:pointer;transition:all .15s}
+.mb-btn:hover{background:var(--yd)}
+footer{background:var(--black);padding:3rem 6% 2rem;margin-top:4rem}
+.ftin{max-width:1100px;margin:0 auto}
+.ftg{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:2rem;margin-bottom:2rem}
+.ftli{height:30px;width:auto;margin-bottom:.7rem;display:block}
+.ftd{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.7;margin-bottom:.75rem}
+.ftai{display:inline-flex;background:rgba(255,193,7,.12);color:var(--y);font-size:.63rem;font-weight:700;padding:.2rem .6rem;border-radius:50px}
+.ftch{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.28);margin-bottom:.8rem}
+.ftls{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.ftls a{font-size:.76rem;color:rgba(255,255,255,.48);transition:color .15s}.ftls a:hover{color:var(--y)}
+.ftci{display:flex;align-items:flex-start;gap:.38rem;font-size:.74rem;color:rgba(255,255,255,.42);margin-bottom:.38rem;line-height:1.5}
+.ftbot{border-top:1px solid rgba(255,255,255,.07);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.65rem}
+.ftcp{font-size:.7rem;color:rgba(255,255,255,.22)}
+.ftleg{display:flex;gap:1.1rem;flex-wrap:wrap}
+.ftleg a{font-size:.7rem;color:rgba(255,255,255,.22);transition:color .15s}.ftleg a:hover{color:var(--y)}
+.ftae{border-top:1px solid rgba(255,255,255,.05);padding-top:.7rem;margin-top:.7rem;font-size:.63rem;color:rgba(255,255,255,.16);line-height:1.6}
+.toast{position:fixed;bottom:5rem;right:1.25rem;z-index:999;background:var(--black);color:var(--white);padding:.65rem 1.05rem;border-radius:var(--r12);font-size:.73rem;font-weight:600;box-shadow:var(--sh3);border-left:3px solid var(--y);transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:1000px){.hi,.content{grid-template-columns:1fr;gap:2rem}.cta-card,.rsp{position:static;max-width:480px}.mob-bar{display:block}body{padding-bottom:80px}}
+@media(max-width:600px){.hero{padding:3rem 5% 2.5rem}.htitle{font-size:2.1rem}.content{padding:2.5rem 5%}.bag,.fg{grid-template-columns:1fr}.ftg{grid-template-columns:1fr 1fr}.ftbot{flex-direction:column;text-align:center}}
+@media(max-width:400px){.ftg{grid-template-columns:1fr}}
+</style>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deep Work Mode — BOOST.ME">
+<meta property="og:description" content="Tu produis 3× plus en moins de temps. 30 jours.">
+<meta property="og:site_name" content="BOOST.ME">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deep Work Mode — BOOST.ME">
+<meta name="twitter:description" content="Tu produis 3× plus en moins de temps. 30 jours.">
+<style>*{max-width:100%;box-sizing:border-box}body{overflow-x:hidden!important}</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-logo"><a href="/"><img src="data:image/png;base64,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" alt="BOOST.ME"></a></div>
+  <div class="nav-r">
+    <button class="btn-g" onclick="history.back()">← Retour</button>
+    <button class="btn-y" onclick="go()">✨ Commencer — €3,99</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hi">
+    <div>
+      <div class="hcat">🎯 Performance</div>
+      <h1 class="htitle">Deep<br><em>Work Mode</h1>
+      <p class="htagline">Tu produis 3× plus en moins de temps.</p>
+      <div class="hmeta">
+        <span class="hpill">📅 30 jours</span>
+        <span class="hpill">⏱ 15 à 45 min/jour</span>
+        <span class="hpill">📈 Intensité progressive</span>
+        <span class="hpill">🤖 Contenu IA adaptatif</span>
+        <span class="hpill">🏆 Certificat à J30</span>
+      </div>
+      <div class="hprom">
+        <strong>Avant :</strong> tu travailles longtemps sans avancer · distractions constantes — notifications<br>
+        <strong>Après :</strong> 4h de travail profond > 8h dispersées · tu contrôles tes distractions
+      </div>
+    </div>
+    <div class="cta-card">
+      <div class="cp-row"><span class="cp-n">€3,99</span><span class="cp-u">accès à vie</span></div>
+      <div class="cp-tag">Ou inclus dans l'abonnement annuel à €49</div>
+      <ul class="cf">
+        <li>30 jours de contenu expert</li>
+        <li>Adaptations IA illimitées</li>
+        <li>Suivi de progression</li>
+        <li>Certificat personnalisé à J30</li>
+        <li>Accès à vie à ce challenge</li>
+      </ul>
+      <button class="btn-start" onclick="go()">✨ Commencer — €3,99</button>
+      <button class="btn-free" onclick="window.location.href='/signup'">Essayer 7 jours gratuits d'abord</button>
+      <div class="cta-note">Sans engagement · Résiliation en 1 clic</div>
+      <div class="pay-row"><span class="pay-chip">💳 Visa/Mastercard</span><span class="pay-chip">📱 MTN MoMo</span><span class="pay-chip">🟠 Orange Money</span><span class="pay-chip">🌊 Wave</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="content">
+  <div>
+    <div class="sec">
+      <div class="ey">Pour qui ?</div>
+      <h2>Ce challenge est fait <em>pour toi</em> si…</h2>
+      <div class="fg">
+        <div class="fc"><span class="fi">😟</span><div><div class="fn">Tu travailles longtemps sans avancer</div><div class="fd">Tu te reconnais dans cette description.</div></div></div><div class="fc"><span class="fi">💡</span><div><div class="fn">Distractions constantes — notifications</div><div class="fd">Et tu veux changer ça définitivement.</div></div></div><div class="fc"><span class="fi">🎯</span><div><div class="fn">Toujours occupé mais peu productif</div><div class="fd">C'est exactement ce que ce challenge résout.</div></div></div><div class="fc"><span class="fi">🌍</span><div><div class="fn">Tu ne termines jamais ce que tu commences</div><div class="fd">Ce challenge est fait pour toi.</div></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="ey">Transformation</div>
+      <h2>30 jours. Une <em>vraie différence</em>.</h2>
+      <div class="bag">
+        <div class="ba bab"><div class="balbl">Avant Deep Work Mode</div><ul class="bal"><li>Tu travailles longtemps sans avancer</li><li>Distractions constantes — notifications</li><li>Toujours occupé mais peu productif</li><li>Tu ne termines jamais ce que tu commences</li><li>La procrastination te sabote</li></ul></div>
+        <div class="ba baa"><div class="balbl">Après Deep Work Mode</div><ul class="bal"><li>4h de travail profond > 8h dispersées</li><li>Tu contrôles tes distractions</li><li>Tes projets importants avancent chaque jour</li><li>Tu termines ce que tu commences</li><li>La procrastination cède devant ta méthode</li></ul></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="ey">Programme</div>
+      <h2>Les 4 semaines du challenge</h2>
+      <p>Chaque semaine monte en intensité. Semaine 1 douce pour créer l'élan, semaine 4 exigeante parce que tu es prêt(e).</p>
+      <div class="wk open" id="w0">
+  <div class="wh" onclick="tw('w0')">
+    <div class="wl"><div class="wn">1</div><div><div class="wt">DIAGNOSTIQUE</div><div class="ws">Jours 1–7 · Cartographie ta productivité réelle</div></div></div>
+    <span class="wtg">+</span>
+  </div>
+  <div class="wb"><div class="wdays"><div class="dr"><div class="dn">1</div><span>Audit de tes heures — où va le temps</span></div><div class="dr"><div class="dn">2</div><span>Tes 3 sources de distraction</span></div><div class="dr"><div class="dn">3</div><span>Le coût de la dispersion calculé</span></div><div class="dr"><div class="dn">4</div><span>Ton rythme biologique peak</span></div><div class="dr"><div class="dn">5</div><span>Première session deep work 25 min</span></div><div class="dr"><div class="dn">6</div><span>Ton environnement de travail</span></div><div class="dr"><div class="dn">7</div><span>Bilan semaine 1</span></div></div></div>
+</div><div class="wk " id="w1">
+  <div class="wh" onclick="tw('w1')">
+    <div class="wl"><div class="wn">2</div><div><div class="wt">NETTOIE</div><div class="ws">Jours 8–14 · Élimine les tueurs de concentration</div></div></div>
+    <span class="wtg">+</span>
+  </div>
+  <div class="wb"><div class="wdays"><div class="dr"><div class="dn">1</div><span>Détox notifications 7 jours</span></div><div class="dr"><div class="dn">2</div><span>Un seul onglet à la fois — défi</span></div><div class="dr"><div class="dn">3</div><span>Réunions inutiles — comment réduire</span></div><div class="dr"><div class="dn">4</div><span>Email en batch 2x/jour seulement</span></div><div class="dr"><div class="dn">5</div><span>Ton espace de travail optimisé</span></div><div class="dr"><div class="dn">6</div><span>La liste des non-à-faire</span></div><div class="dr"><div class="dn">7</div><span>Bilan semaine 2</span></div></div></div>
+</div><div class="wk " id="w2">
+  <div class="wh" onclick="tw('w2')">
+    <div class="wl"><div class="wn">3</div><div><div class="wt">CONSTRUIT</div><div class="ws">Jours 15–21 · Installe ta méthode de travail profond</div></div></div>
+    <span class="wtg">+</span>
+  </div>
+  <div class="wb"><div class="wdays"><div class="dr"><div class="dn">1</div><span>Méthode Pomodoro avancée</span></div><div class="dr"><div class="dn">2</div><span>Time blocking — ta semaine planifiée</span></div><div class="dr"><div class="dn">3</div><span>Ta tâche la plus importante d'abord</span></div><div class="dr"><div class="dn">4</div><span>Énergie vs temps — la bonne métrique</span></div><div class="dr"><div class="dn">5</div><span>Rituels de début et fin de session</span></div><div class="dr"><div class="dn">6</div><span>Travail sans wifi — résultats</span></div><div class="dr"><div class="dn">7</div><span>Bilan semaine 3</span></div></div></div>
+</div><div class="wk " id="w3">
+  <div class="wh" onclick="tw('w3')">
+    <div class="wl"><div class="wn">4</div><div><div class="wt">MAÎTRISE</div><div class="ws">Jours 22–30 · Deviens un producteur haute valeur</div></div></div>
+    <span class="wtg">+</span>
+  </div>
+  <div class="wb"><div class="wdays"><div class="dr"><div class="dn">1</div><span>4h de deep work/jour — système</span></div><div class="dr"><div class="dn">2</div><span>Délégation intelligente</span></div><div class="dr"><div class="dn">3</div><span>Ton portefeuille de projets prioritaires</span></div><div class="dr"><div class="dn">4</div><span>Mesure ta productivité réelle</span></div><div class="dr"><div class="dn">5</div><span>Récupération et performance durable</span></div><div class="dr"><div class="dn">6</div><span>Ton environnement de flow</span></div><div class="dr"><div class="dn">7</div><span>Enseigne ta méthode</span></div><div class="dr"><div class="dn">8</div><span>Ton système documenté</span></div><div class="dr"><div class="dn">9</div><span>🏆 Certificat Deep Work Mode</span></div></div></div>
+</div>
+    </div>
+
+    <div class="sec">
+      <div class="ey">Exemple</div>
+      <h2>À quoi ressemble <em>un jour</em> ?</h2>
+      <p>Chaque jour, 3 éléments. L'IA adapte si tu as une contrainte de temps.</p>
+      <div class="sd">
+        <div class="sdlbl">Jour 14 — Email en batch 2x/jour</div>
+        <div class="sdi l"><span class="sdico">📖</span><div><div class="sdtp">La leçon du jour</div><div class="sdtxt">Chaque notification email interrompt un fil de pensée qui prend 23 minutes à retrouver (études UC Irvine). L'email en temps réel est l'ennemi de la concentration.</div></div></div>
+        <div class="sdi a"><span class="sdico">⚡</span><div><div class="sdtp">L'action du jour</div><div class="sdtxt">Aujourd'hui : désactive les notifications email. Ouvre ta boîte à 10h et 17h seulement. Traite tout d'un coup. Mesure les heures de travail profond récupérées.</div></div></div>
+        <div class="sdi q"><span class="sdico">💭</span><div><div class="sdtp">La question du soir</div><div class="sdtxt">Combien de fois vérifies-tu tes emails par jour ? × 23 min = combien d'heures de concentration perdues ?</div></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="ey">Témoignages</div>
+      <h2>Résultats <em>réels</em>.</h2>
+      <div class="tg"><div class="tc"><div class="tcq">"</div><div class="tcs">★★★★★</div><div class="tct">Je travaillais 10h par jour et me sentais épuisé. Maintenant 5h avec 3 sessions deep work et je produis bien plus.</div><div class="tca"><div class="tcav">👨🏾</div><div><div class="tcn">David N.</div><div class="tcl">Abidjan, Côte d'Ivoire</div></div></div></div><div class="tc"><div class="tcq">"</div><div class="tcs">★★★★★</div><div class="tct">Semaine 2 sur la détox notifications — la plus dure et la plus transformatrice.</div><div class="tca"><div class="tcav">👩🏽</div><div><div class="tcn">Alice M.</div><div class="tcl">Paris, France</div></div></div></div></div>
+    </div>
+  </div>
+
+  <div class="rsp">
+    <div class="ic">
+      <div class="ict">📋 Informations</div>
+      <div class="ir"><span class="il">Durée</span><span class="iv">30 jours</span></div>
+      <div class="ir"><span class="il">Intensité</span><span class="iv">Progressive</span></div>
+      <div class="ir"><span class="il">Temps/jour</span><span class="iv">15 à 45 min</span></div>
+      <div class="ir"><span class="il">Pilier</span><span class="iv">🎯 Performance</span></div>
+      <div class="ir"><span class="il">Niveau</span><span class="iv">Tous niveaux</span></div>
+      <div class="ir"><span class="il">Langue</span><span class="iv">Français</span></div>
+      <div class="ir"><span class="il">Certificat</span><span class="iv">✓ Inclus</span></div>
+      <div class="ir"><span class="il">Accès</span><span class="iv">À vie</span></div>
+    </div>
+    <div class="ic" style="background:var(--black)">
+      <div style="font-size:.83rem;font-weight:800;color:var(--white);margin-bottom:.18rem">Prêt(e) à commencer ?</div>
+      <div style="font-size:.7rem;color:rgba(255,255,255,.38);margin-bottom:.9rem">€3,99 · Accès à vie · Certificat inclus</div>
+      <button class="btn-start" onclick="go()">✨ Commencer — €3,99</button>
+      <div style="text-align:center;font-size:.65rem;color:rgba(255,255,255,.28);margin-top:.5rem">Sans engagement · Résiliation en 1 clic</div>
+    </div>
+    <div class="ic">
+      <div class="ict">🤖 Challenges complémentaires</div>
+      <a class="rc" href="/challenge/morning-power"><span class="ri">🌅</span><div><div class="rn">Morning Power</div></div><span class="rp">→</span></a><a class="rc" href="/challenge/mental-detox"><span class="ri">🧠</span><div><div class="rn">Mental Detox</div></div><span class="rp">→</span></a><a class="rc" href="/challenge/body-reset"><span class="ri">💪</span><div><div class="rn">Body Reset</div></div><span class="rp">→</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="mob-bar">
+  <div class="mb-row">
+    <div class="mb-p">€3,99</div>
+    <button class="mb-btn" onclick="go()">✨ Commencer — €3,99</button>
+  </div>
+</div>
+
+<footer>
+  <div class="ftin">
+    <div class="ftg">
+      <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABQCAIAAACoK28rAAAdCUlEQVR42uVdeZgV1ZU/51a93vs9dpAdkW4CLaAEGFAYlwiKbIri9uUziRJNlKjx+7J8MWJ0XCaaWb6JMWpGk8wkruxgMlFJHHVoRaKydCv0YiNbmNBt769fVd0zf9R79erVq6p3a2vazPs++dr3qu49995zz/md5Z6LnHNw+CAiEUG0HwQgX68hQdS0+RmImbBcIn2O9PP1MQ05Z7zu6yWympln3KcRmUsTBjcjIAJm18XUR+AZoByWcOEW5/EjIiLmj9+JvDDIFtqWlGbxvJFGSA+eFia2DDl/vO78Srms7/oMuc4eMTGmo2yX5MCOwReJnN8lcJsdgnxNkkMzgPjkig8Esz+SS+NUiNEE6dE7KzSx5IF4H7yLWLDTUAS8QZ6ZToe+yUwV5kOO/tbmiEA08CBEBDhJoAWRlq0KyvsrZl4JZdqjhlMFEIsJGzMfAsNxc6Pg2K3IJuC0YjR61qXZ4ItHgVp205Lis+GixLxOMkUMdWzp1FElAhKRQR7zMR7HWbDDDJaJwPC401A0TvQ46Mc0GS6/QmDRFcoec0aTntdeZCwI6DInVLBbZ9GF+To5JC439mTWEHfychhiPETFFIXSCVVvOum1/nNQhAW98tvxN4bQoaAtGXkgyn+nrKCLw0UxeZCmgSWWi4XndfBOSsNijojJRAyytNFxj61t6mMVgtNjUddktwQh7hnmmw9cOSDkeQkXJZMrBnUkFW1NbwpARiDrBb3vMGO9bOfT9ySj96UX8eL5oAcRWfDNaoojhM+gARFFmDuBIOPYh4A6wTedIlNNAo0IMpkwVeK2I3kxFcgHMSxUVCDajvjAgiojDJm/UfgR9DIKr65xgsze6i/fgtctJ757C8pjQ6ihJ4aODr2JO088MZzQzjEFO8FjCMPf6IJgEbHQSTYAGa6hiuEtq4Ovw90rRQW7poL+LspECvMn0Qlm5X2PQcQeuQZIBfWXV50QLoIMtp9t3nU2wd3WPywF6x0siTZbCDcHoNwUJ0aX5KQAfhgBNxBa8jgi98pF7ZDy2ksY4UZzIlSEgwl3rjCA+ipIBgO/TfvbWg45IY5dFPTKuWEvzIPQvkxp8WecHEGhy6T81SXvLRiaWhDk5E+ISPqX3Zz48Q0I+meZExwpiOLdl9wrGvYtANw4Jj+JyZenTAQIuaOFSM01r2LI2AzmUIMIm9qBWgq0QMIWpPh4mQsc8TS/FngdEOD2f2DSyTsblscQCxsbgZB9cC7Mf8A3Lvc5aRhCUyws+vI1gj/W9OrrCFHmCZKaXW9EQX+IuwrOfEMFGwnifhGEO0JJO86bNhD3UlCpYWVoFDZdvS28x/aCS4iAkyIKk4jMpLowXH4aTS7f+BF7gSYHPQgv8Uxu8pIfH5EKFvJyOGDcv6kzRa7uiOj9Ia5hEhcXUBi5FgDB2gmJjGxqfyBiCjL0wEm995GTFS7xXOOcOIoJRzfs5PwbIjJktr99vs5AiGwk8rV1bf/OJocaDI2IerqC8zHPv/FPwcEi9hO4V1XVhbODoAw6HfNWUAWFSYpZQiMiASGhfk4roiPfTseB+mfn+FPfRIAIr+/c+frrO5VUihMZ/E2Wv/VHbQ45UnpN9YklQAaIjIgkSUrE4yNHjhwzdsykSZPOnHRmSUmx/gbnnDFmyLPoTzp5a9/3qukvCsIMp5i57euikcKCfBAQg4pzua1jmHxZyIIvcc4lSdq7d++C8xf19vQwJlmO9KUlXybjmBz6MctIPQxDppgpAjCJlZWVTRg/YdHC81etWnXRRRcCgKZpjEkgFhEMUS44TL55LOEIpiDBVBtm8BD6/n9RWMIGZmiaJknS22//z+XLl5eVlnHOHfWnSZBSoSRPM3NQRoZzrvX1pZLJZEyW58+ff9/6excuPF/TNF1O/w1guQhyqnItq4AS+nRhgP7Ef7qErq19Z8lllxXFiigNQTJyigCQTLxsAowE2eooOQ8YLZiFdqZFRMYYAHV0dDLExx//t6/ceOPnnaf7TTYyzLV40MF3GHpKe7ZlPG3c7Glc2eIfWV6kLJLICFmTu5kATYkrxvc6QmNMYhJjzMTklPmPNE3TVC0RjxcVF992+7o9e/ZIkhQ4jczz0oRlxvWDEzp76ju7OESWnijQ+SISf9T99eAHxcMP0JAZEhMQZLPP0TQAMp2EZ8gkSZIkiUlA1JdMtra1tn/WDoi5IlxnfAIEVVVLiotTqdRvn3teVxTgnS8ycspRNiEIlWvwHX7yzUgovIJm550Mwjnvgn7vsLSJ0VFw694UrAavnhtTSpqRvGNX3MsgMYOLGSIiQwTipKqq0qf0pVKaqkqSFI/HJ0ycOOPsmoqKig0bN2Y9SzY6gYigry8JADaQQ8QdXqjsCfmUUIXWhAAQgliNZOrIzY9sxnFAsiB94glW5IVZBWdQsBJFwWZ9+CGzKWlE6dwNTmm2zsJoAiBkiMgYIieuqloq1Zfq61M1LSbHEon4uHFjq6qqZ82aWVMz/azJk6urq9vb26+97gZFUYuKYsQpzzFHsiRrmiYxvGbNGhPAOZ2RATN5/uCKp9I2ZNJxmHvGj8wMb2pdDgXVeHVaU67Ozt9S/nzVlqgQhFu1w9DdLONuS8tgBCJVVZMZDpZledCgxMQJU6qrq2pqamqmT6+pmT527Nji4mKjtU+PHLn88mUH6uqHDR2qcS3r6cj47xCwq7s7mUw+/NCDCxcu5BpnEvPGEH4jCS7zTH51sHPpM8eFttUJBY/3ypbuzPVlxP3KfpNO81UHuiQWCyb9mckLMYIzctSoynhlMtknMYmIVE3r60v19fXpTr1BiUR1VVV1ddXZNTUzZ86oqqoaM2ZMaWlpjrdE44qiFJcUNzU1X3HllY2NTSOGD1cUxZh+zNib3V3diqrMOHvG+nt/uHz5Mk3TnIKULjvWZVEKRJG8F0nyZSgVZlD3pbQdi2zpzpL07TRlEbldQvHJ+65D7OhARASAmCynUkpbWxsQSbKUiCcmn3nmtGlfmHH22TU1NVOnVo8fP76oqMjy7tGjR996++1xY8fOmzePc15cUtzc/MnKK65obGhMJBKKogCiqTQcMkBO/OKLL1q37vZLvvQlAEilUrFYLCtu9UhkMMM9lJQmCr7aYdBJuaar7MNKLXjquN+yQcj3ATAnZYfpyn/5P3GiMydN+vtFi2bNmjlzxtnVU6eOy0URnPNUKmXw9K7a2mef/WVra+vX166dM2cOEY/FYk1NTcuWr/jkk5Z4PK4oqQxrouENJABEbGxsfPLJp+rq6lavXj12zJi0bZimkPVPVmABlvXI0RhSQl8B1qJA6aOhPRZktNZ3w9YdhmhUFZUTN3MwAGiapmkaERnft7S0bN++41e//o/6j+pvveXr6+9dX1FRrqqqLMuNTU0rV13R1NQUr4wrqoKGwy77b5p6JaUk+5KKoowfN/7uu++6/bbb9KSOfrlTIUzf8Gk4eWTD0EI8IfjQwErWC5IXpQMPVVXT7g4APa9I96Z1dXXt3Llz0+Ytr7762tEjh2d/cc5TTz157jnn6JihqKjo4KFDy1esPPLpkcp4paqoFg8iIuZ6D5AxZIyl+lJtrX+96ea1Tz35c8hN94t6bn3kUQyIJSbOI02wco9sW7KuIgXoQdeD0sXiOedEJMtptPbBhx++/PKGzVu2NDY0JHt7EoOG3HffvXd861uIqCgKAMRisebm5hUrVzU2NsXjcUVVTYFwzPEp5n5JQAxQluUTJ048/fSTN990k6qqkiT50PxRMJ9Amz78/kGHFnmCf9T5XxEtWH6DFj4+fvz49h07Xnrp5Xd3v9fb21NUVKQo6kUXXvDQQw/OmjlTfxgAJElqbm5eevmylsOfxuNxRVEQbYvEGBvbSA5JM7UkS50dnQsWzH/t1T9wTl5Tsk9XqozZ+nI/8RQuJbJXw0vE4BPxtohjfxET0PMRUfTwsMY1xpguGpPJ5BtvvPHiSy+/vnPn0aNHi2JFlZWVqb6+kuKSH933vbvuvAMRdTnKOZdluam5ecWKVYcPfxqvrLRys7mOL1LmX2tlU+KEDHWk7uMMcSgXzQgygBniF6ym4s4h5jCKMWYSiObI7vLdrqAJRTdZhbeBAC8WtpxQlBI9z05mMgDs27d/w8YNW7dtr6+rVzWtvLx8xPARyb6+U6dOLV162UMPPjh9+jTOuca5JEmapsmyfPTYsdWrr25sbEwkEmmkYZ8ZDdl0DiTLRWOxWKynq3Px4kuMRNbTC1JdGMBp2sm2dLAY2ChYHi2XAjz96aOQd34hRALEjyHmCxude3p7ezds2PDc8y/s2lXb3t5eVlZWWlbKmAREra2tQ4YOue/ee2+99RbdXpQkCRFVTZMl6dixY8tXrKyrq08kElmfhqm/LLJAtFl6REliAHDyxIlLFi/etHGDHqYpeAws3GmMwq8S5MIkX14O54GJdyl+bREEOIXhYlkGlUNEjLHNW7auX7++rq5eluWy8nJZlrjGmST19SW7u7pXrlzxyCMPnzV5so6Ydbeavg1Onjy5fMXKDz78cPCgwYqqogVFZHkYLdOiB9MJQFFSXZ1dyNj11137L//8T4lEgnMe3aHG/jy8Ea4PwPI6cs7dOEYgEh61jViAX00qOizhpCONJ596+rbbby8rLSsrK+PE9YkCxLbW1jNGn/HA/T/6yo03GoI58yJJEvvss89WrLrinXfeHTx4sJqRzfmyGHJPBHDOVVVVFUVRFAIYPnzY+eedd+stt1x88UUAwDXOGA5MF7RAAmZhPenu78qD1I5pP3IBY4u8RdIL/upjVxQoG4eijXvt+v33P9BzmLt7eljG8cw5v+666/7hgfsnTBivaRoCypKcppAIEY4dO7b6qqtrd9UOGTasp7s7PYdG6YPsyhj2Iem9lJaUJAYlRo0aVT2lau68ORdccMGkiRMBQNM0RMYklpevHtwKzmeYoKha5AGX/A2LuZl/K62RUQwOOUzBy+l6CxCKmKvhhhKDfPbv39/b2ytJsq6pONdisaJZs2ZaBLOZzuMnThw6dDDjb7aesjL/nYnOcCZJJcXFlZWVgwcPrqioMFrTPRv9bAUKxFN8VDqNqnxC/g7BsA72+CfL2ewIK4jjz9ZxAqxc4wCADO21ZDCYyznnGicAxhhjCJ/nT1iFgcQhCgyEQ7LgK2hnBCNMeDQTmND1AAq148aLBJx47sFWAgDGmFnbWDoiIkv4Q6/CYbqSOrefTHEfvWJzlhL9xAeR6w4hoRL6lH/XJeVenoHe/fP9akd58BPkFJoRq87kNWs+8qCU3ZJzzvU0YkNlm8nQVA0QdC+b5RXGmOWwk85tmqbpxqLlV1VVAcAWGOggW5Ily5dgOk9VcO+5pTUjEgEANzkC81mZ2Rz60F/UE1eN8HSaq6NM0aEwD97a5N9h9H7ogj614LmmesKQvha6mjYCezqbWrhW96/p/9vZ2dnT0yPLUiIxyAhrm2sG6CTpgRL9m1Sqr7Ozi3MqKS2pzEJe4pwYY0RWkc857+joSKVSxcXFiUTCzKZG4xn6yfyiLp6NfvNhEnEFEYAV6f+DyExWPAcmIQBxBZDlXncGRHqKFQMEIJ4unkoEyAAkiMCAETyKig4HNSPwQ5+O7BZ3Xtfl5ZtvvnnLN75ZVlampFIAgMiQoZJSKisrzpl1zg03XH/eeQv0MabPUCFyzrdt27Zh46a9e/f19PRwrhGBLEvDhg277NJL16y5uqqqSt8Gem004sQYa2hoeOHFl373u98dO3ZcZzJFUUpLS+fOmXPVVasvvXSJLMvG5tHd0lu2bP3P3/zmgw/3MoZAwLlWXFwyZszou+68Y8mSJaqqxmKxHa+8cued347H46qqMsaYxICAc67DlGSy99lnnpk//+9UVZWYlBWiyIAntbq1mGzGypk45RGQKoGroJ96Jg2ZzNUOfuj72L2XyqZIU38OWASkApP58V/DkZ+CPBRIAa4C14DFkMVIbcMRK3HiD4BrgOZaTZEqWPuMDgQkTJ8d9m6FBPsQJ+PfsD4iramKSkQ7XnmFSbHSsorNm7e0tLQ0NDQ0NTXV19d/45u3AYAcK967dx8RqaqqC/JDhw596ZLFAHD2zFk//enj77zzTkNDw4EDB3bs2PHN226PFZWUllc89PAjRKRjDP3fHz/62KAhw+SikrVrb9m2ffuBA3UHDx6sra392RNPzDpnNgAsXHRBY1OT/ryiKET09NO/AIDBQ4e//PKGU6dOnTp1qqmpafv2Hd/93vcPHKjTSeKcnzx5cteuXe++u3vPnj8/+uhjwOTyivhzzz//3p497+7evau2tq2tzSAjMzmcc9KUbvXdheqfxmuvD1Xfu0TrPcqJuKYQVziR1tOivHehunOI+qfxynuLuNrLOXEtxYm0T59QdyaU2vla50e8u4V3N/PuZt7TwrsaeE8L58S5pa+oPlE0LoclRAVjdS6Wr9cDZPofDFlpaWl5RcXx48crKit08dbV1dXe3j502Ijly5eNGz/OEJyKotx517dfe/UPq65c/eLzz8ViMaPladOmLV26dMWK5dff8OV77rlnylmTr7rqqr6+vuLi4k2bNn3nO99JDBq8fdvWJYsvMdMzb968r331q9ff8OWNG15at27dpo0bZVnWCRw8ZHBlYlCyt3fbtm2tra2TJk6cMHHCkiWLL798qU68JElENHz48OHDh+utHT9xvCgmx+Px8xYsGDdunBlGpyO1mMkHQUBkJJUAAA1dil17YN8V8IVnoGI6AVDnB3z/TcRTOGwFtP4RoCi3yAUDqRylMkgd5ViEpAFwAAKpEuJzLEicotTDIdcEQwQj286pV4/FBqigNeDiYxdB0vkczxjjRJqmPvvLXyYSCWQMCJLJ5NGjR8vKy4YOHdrZ0RmvrNQduh0dHR8fPCjHiubMnh2LxZLJZBorExBQcXHxooULhw8b1vrXk3V19QBAnABg3/79QPyMUSMXnX8+AGTfAtDPqsyaOWPr5o319R/19vYmEgkd1ay+8sovzp69afPmXbtq//2ZZ9vaWtvb2wFw2rQvrF178zVr1nDiksT0YI2O0VN9KT3o3dHRabFQiROTWGZnZtLzUAbeDUMvgEl3096raN+VOO1XwDW+90aSS9iM32JPPbW9AiibatkAkAZA0NdKhx8HkIjUNEopOYNVTCOpHL0ces5DveL1WzCs0/hZCwTDgBxhYQlxBaQzga7Zf//7/6qMDxoybPiRI0co97Ni5SoAuPCiizknVU0jgfsfeAAARo4avX3HDsvzf/nLya9+7SYAmDBp8scfH9TPCHLOP/r440lnngUAX7vp5lOnTlne2rx5y/CRZwDAgw8+rAMJHR709PQ0NzfnPssf+8lPAABQqq+vN1AHEem0bdq0ubSsfNQZo+vrPyIiTdVMIzY3w4mIa73q+8vUP47SWv6VE2m9Leru85U/DlZeH6S8c7HW+ykRacd+ob45Wv3zkgzkUDiRdvRZ9Y1x6vvLOJFGZLTN021Hix+cGMDSs1c6jNdliPJj2q9GXSFHT7v4bjVcBLqLo7PjMylWfOe37x45YoSiqLFYjHOtubn5rbffHnXG6GuuWaOX2GKMcc5/eM89Y0aPefSxnyy7fHnNjBmzzz132LChyWSysbFRT9W/es01D9x/f1XVFD2hmYiqq6pe2bF9/X33vfDCi1u2bJ07d+6UKWcVFRWdPHlyz54/H6irq5k+7cf/+PBXbryRa1z3iDGGj//siR/c88OpU6dOra4eN25saWlpW1vbf7/5Zll55fXXXzdmzBij9rMhD1VV6e3pVhRVVRWzl5yIr7vjzk0bNy5evPjpp56MxWJEhMRRaSX1f0FLcuBYMp7N3MqbHwGU2MTvQixBwIErpPwV1DYCnqkeCaS2gXoCeyro0HeJiHMVWAxRAq2LSqdI49cBcEHvGmZrURJ5RJhWMU+iaMQ+V57yvBxOAef+DzsLqi0dUzY2Nm3YuKGkpLS9vV1JpVjGT1xRXj51avXs2bNHjRpl9tzp/odUX+qDDz/Y/d6ehoaGzs4OWYqNHDmipqZm3ry548ePTzv7GBplbvU2Dx8+vKu2dt++/a2trZqmlZeVnTVlyty5c2bOmKEzWZZ+os6uzpZPWt7dvbuxqam9vUNVlYqKyilnTV6wYP6MGTPSeAbNY2EHD368ZcvWsvLy66+7dsiQIWbv4aZNm996663ZX5x97TXXMIYACKTRX14G5QQOWgSV5+oejOwckkogUedean0NisewUVcDSsA1QEbt70H7W8AqQf0sQwQiY6D1QulEHH1DLnO5uc7seOY0HzNE4tbCYYU9x+HlyIYQNCoUas4vRKv7+1yeR0AmZTzKCEDAOQG4pVXkuNUKEZafCJofdMz3Z+f9ZE4VyZTs0IMsyDIlyTPHF83rZe06VyIS+U7GQPHYTGRBdUukMJybiPrTpa3712yGgKj7QNA2I8KEHbMpsroTm7kwIhFxyHI6oJ7UgWjDvgQ804k5Jo8MnSo9G2MxginmbaaTmrOpdPMuN25iITkTN5FsvrTPKJAG1Pp6NQ3t86Ej4mxjXQe42hoIn4FcASLqW3KC3G9mX/9P5DZvT/SZmiWwFoyk6NyTYVSGxuANoveH/TAH9dPu8l15UHgcZJk3FO6OCTadf/9pMM72w4U+eg9jlnN2oN8GPewK8j12DG1T2U6jwHXlDqRigKn3slURkblThjbpW57H47WkgdMt2U4en5CEb3jNehtgP+3MMHY2uURwnS5fAwAk9Lgs/i+rZv4GELFQzI5KINoUYF5I6Bf3XgLOCTnsJQwTNYWKPuy2ojurkMel8Xe8PwdyYGSbxknYF+wiJ8k1Zx5Fi8laKgKHzo7ofcZE0FTOzRaYX78dvQ0HC8yAx8nxEwhDAcMJfdGG2Wom6R2FnMir37Af6m4NEJdC/5x1HyAOjYDFJCL1U4lPERPnZvNuCNf/0D/3EXo1etwKJ5hmI7gOFXFRReFO8QSyPdVho8JmcVCaLfNv9XKkf8bCqxIW85Hw7VsRGRO2xqtQ8mAmbdB3CT+vGMDLZYoDDXPbs6zlSKMnU8r8TX78hOUwK9Fp4a2w7AMX0Ozua7c97hqF7eJP4IH7bYJ5r3tFzFZphxicd9GBfU3Fgn1OlPvUMd/AwMlQCx1F2K8Buul6n1dVkIdFC8slL9gOWW7BDNXRZJV2YeRikBNJFG0NX+ZjakSxpseVc3rA6YqnEK9s88YZFAiuYggbnjDAiNDv9kNHAZ8rjBH9iaqAnjQhCe00KWa4SQFu7MzXAOFgFfQ2TT5cbM7FcTyLLhddh44cjU4qy4fViGIinxz2A+XJGn/yQtCX594I870bhJ5Hz8rR023y6HxfqUFCwdCMp+NnTnk59ngxsE5wSQYHL2xkTjogYYjiAOcCrXgQ3CLSNPPEwZ7BGYVQz0F8+e1UWOEzkU6RdtM36GRK2sEez2FFdwJ8ydxwZJOvBKlgzit0B58C+jOiO1bCvQkuCutB3G8Y7IoZM+QecBmhhbj285HJq1efShdqi2SbCgcLLLjZKVoReqFvT8AmiMyjHDeF6OVxBW2vsCYhiluQo6bcPoCQ0QzMHQO5GEaenJ3ufj2L4ZhvR+aW+/981+R0X+D0iXx7TB/VyNHbTz6SeL0SU/hicycOZO6o18fFU4IXWFlSjsRdDTb94mlkTde0yZDlHlrOEnq20QWwqcBPJL43DJUrTqpLRMAiBG2ZivlTExYzSDAxI+cxonyvTUH2tV9L8iaIQpTxXtMmg6lXEvfz2CrJMB2jYkM2VK5I5qOPn6xOC5d8aE/lmvPdk7bHFgqa816hrdcr+6Jby4haJhuPsw1as3vG8a2IDFNBf7+/yyZ1BhM5iMV8Eu/DliJx49rREAx4Y0vw/Cr0ZTsGOhkjENoj8goMBrIdgk7mNQlM3P8BtMTOHpBvFVMAAAAASUVORK5CYII=" alt="BOOST.ME" class="ftli"><div class="ftd">Des challenges. De vrais résultats.</div><div class="ftai">🤖 Contenu partiellement généré par IA</div></div>
+      <div><div class="ftch">Navigation</div><ul class="ftls"><li><a href="/">Accueil</a></li><li><a href="/app/challenges">Challenges</a></li><li><a href="/app/tarifs">Tarifs</a></li><li><a href="/about">À propos</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div><div class="ftch">Légal</div><ul class="ftls"><li><a href="/mentions-legales">Mentions légales</a></li><li><a href="/cgu">CGU</a></li><li><a href="/confidentialite">Confidentialité</a></li><li><a href="/faq">FAQ</a></li></ul></div>
+      <div><div class="ftch">Contact</div><div class="ftci">📧 boostmeapp@gmail.com</div><div class="ftci">📱 +237 6 98 49 31 59</div><div class="ftci">📍 Paris &bull; Yaoundé</div></div>
+    </div>
+    <div class="ftbot"><div class="ftcp">© 2025 BOOST.ME — Tous droits réservés</div><div class="ftleg"><a href="/mentions-legales">Mentions légales</a><a href="/cgu">CGU</a><a href="/confidentialite">Confidentialité</a></div></div>
+    <div class="ftae">© 2025 BOOST.ME est édité par <strong>AELI SERVICES</strong> — Paris &bull; Yaoundé.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script>
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('stuck',scrollY>60);});
+function tw(id){document.getElementById(id).classList.toggle('open');}
+function go(){window.location='../boostme-signup-v2.html?challenge=deep-work-mode';}
+var _tt;function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove('show')},2500);}
+</script>
+
+<!-- ── COOKIE BANNER ── -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#111;border-top:2px solid #FFC107;padding:1rem 6%;box-shadow:0 -4px 20px rgba(0,0,0,.25)">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <div style="flex:1;min-width:240px">
+      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.25rem">🍪 Nous utilisons des cookies</div>
+      <div style="font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.55">Des cookies essentiels pour ton compte et des cookies analytiques anonymisés pour améliorer BOOST.ME. <a href="/boostme-pages/cookies.html" style="color:#FFC107;text-decoration:underline">En savoir plus</a></div>
+    </div>
+    <div style="display:flex;gap:.65rem;flex-shrink:0;flex-wrap:wrap">
+      <button onclick="acceptCookies('essential')" style="padding:.5rem 1.1rem;background:none;color:rgba(255,255,255,.55);font:600 .78rem/1 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.2);border-radius:8px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)'">Essentiels uniquement</button>
+      <button onclick="acceptCookies('all')" style="padding:.5rem 1.35rem;background:#FFC107;color:#111;font:700 .78rem/1 'Poppins',sans-serif;border:none;border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(255,193,7,.35);transition:all .15s" onmouseover="this.style.background='#E5AC00'" onmouseout="this.style.background='#FFC107'">Accepter tout</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var consent = localStorage.getItem('bm_cookies');
+  if(!consent) setTimeout(function(){document.getElementById('cookie-banner').style.display='block';},1200);
+})();
+function acceptCookies(type){
+  localStorage.setItem('bm_cookies', type);
+  localStorage.setItem('bm_cookies_date', new Date().toISOString());
+  document.getElementById('cookie-banner').style.display='none';
+  if(type==='all') console.log('Analytics cookies enabled');
+}
+</script>
+
+<!-- EXIT INTENT POPUP -->
+<div id="exit-popup" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:24px;padding:2.5rem 2rem;max-width:460px;width:100%;position:relative;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.3);animation:popIn .35s cubic-bezier(.34,1.56,.64,1)">
+    <button onclick="closeExit()" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;cursor:pointer;font-size:1.1rem;color:#999;line-height:1">✕</button>
+    <div style="font-size:2.2rem;margin-bottom:.5rem">⚡</div>
+    <div style="font-size:1.2rem;font-weight:900;letter-spacing:-.2px;margin-bottom:.4rem;color:#111">Attends — 7 jours gratuits.</div>
+    <div style="font-size:.84rem;color:#666;line-height:1.65;margin-bottom:1.5rem">Tu pars sans avoir essayé. Le BoostMe Starter est <strong style="color:#111">100% gratuit</strong>, sans carte bancaire. 7 jours pour te prouver que ça marche pour toi.</div>
+    <a href="/boostme-signup-v2.html" style="display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.95rem;background:#FFC107;color:#111;font:700 .92rem/1 'Poppins',sans-serif;border-radius:12px;text-decoration:none;box-shadow:0 4px 14px rgba(255,193,7,.4);margin-bottom:.65rem;transition:all .2s" onmouseover="this.style.background='#E5AC00'" onmouseout="this.style.background='#FFC107'">✨ Essayer gratuitement — 7 jours</a>
+    <div onclick="closeExit()" style="font-size:.74rem;color:#999;cursor:pointer;transition:color .15s" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#999'">Non merci, je reviendrai plus tard →</div>
+  </div>
+</div>
+<style>
+@keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+#exit-popup.show{display:flex}
+</style>
+<script>
+var _exitShown = false;
+var _exitTimeout;
+function showExit(){
+  if(_exitShown) return;
+  if(localStorage.getItem('bm_exit_seen')) return;
+  _exitShown = true;
+  document.getElementById('exit-popup').classList.add('show');
+}
+function closeExit(){
+  document.getElementById('exit-popup').classList.remove('show');
+  localStorage.setItem('bm_exit_seen', '1');
+}
+document.addEventListener('mouseleave', function(e){
+  if(e.clientY <= 0 && !_exitShown) showExit();
+});
+// Mobile: show after 45s of inactivity
+_exitTimeout = setTimeout(function(){
+  if(!_exitShown && document.hidden === false) showExit();
+}, 45000);
+document.addEventListener('click', function(){clearTimeout(_exitTimeout);_exitTimeout=setTimeout(function(){if(!_exitShown)showExit();},45000);});
+</script>
+</body>
+</html>

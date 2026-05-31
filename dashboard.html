@@ -262,7 +262,7 @@ var _SB = window.supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co
   var res = await _SB.auth.getSession();
   var session = res.data.session;
   if (!session) {
-    window.location.href = '/boostme-login.html?redirect=/boostme-app/dashboard.html';
+    window.location.href = '/login';
     return;
   }
   var pr = await _SB.from('profiles').select('*').eq('id', session.user.id).single();
@@ -283,7 +283,7 @@ var _SB = window.supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co
 
 function doLogout() {
   _SB.auth.signOut().then(function() {
-    window.location.href = '/boostme-login.html';
+    window.location.href = '/login';
   });
 }
 </script>

@@ -103,7 +103,7 @@ html, body { height: auto !important; overflow-y: scroll !important; }
   var _SB=window.supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ');
   var r=await _SB.auth.getSession();
   if(!r.data.session){
-    window.location.href='/boostme-login.html?redirect='+encodeURIComponent(window.location.pathname);
+    window.location.href='/login';
   }
 })();
 </script>
