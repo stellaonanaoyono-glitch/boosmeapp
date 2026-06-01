@@ -690,7 +690,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:3.75re
       <div class="ft-ch">Contact</div>
       <div class="ft-ci"><span class="ft-ci-i">📧</span>boostmeapp@gmail.com</div>
       <div class="ft-ci"><span class="ft-ci-i">📱
-      <div class="ft-ci"><span class="ft-ci-i">📍</span><span>Nkolfoulou, Yaoundé<br>Cameroun</span></div>
+      
       <div class="ft-pay-h">Paiements</div>
       <div class="ft-pay">&#128179; Visa &amp; Mastercard<br>Cartes pr&eacute;pay&eacute;es accept&eacute;es<br>&#128274; S&eacute;curis&eacute; par Stripe</div>
     </div>
@@ -789,5 +789,67 @@ _exitTimeout = setTimeout(function(){
 }, 45000);
 document.addEventListener('click', function(){clearTimeout(_exitTimeout);_exitTimeout=setTimeout(function(){if(!_exitShown)showExit();},45000);});
 </script>
+
+<!-- PWA Install Banner -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:.85rem 1rem;background:linear-gradient(135deg,#111,#1c1c1c);border-top:2px solid #FFC107">
+  <div style="max-width:480px;margin:0 auto;display:flex;align-items:center;gap:.75rem">
+    <div style="width:44px;height:44px;border-radius:12px;background:#FFC107;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">⚡</div>
+    <div style="flex:1">
+      <div style="font:800 .88rem Poppins,sans-serif;color:#fff;margin-bottom:.1rem">Installer BOOST.ME</div>
+      <div style="font:500 .72rem Poppins,sans-serif;color:rgba(255,255,255,.6)">Accès rapide depuis ton écran d'accueil</div>
+    </div>
+    <button id="pwa-install-btn" style="padding:.55rem 1rem;background:#FFC107;color:#111;border:none;border-radius:8px;font:800 .78rem Poppins,sans-serif;cursor:pointer;white-space:nowrap">Installer</button>
+    <button onclick="document.getElementById('pwa-banner').style.display='none';localStorage.setItem('pwa-dismissed','1')" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:1.2rem;cursor:pointer;padding:.2rem;line-height:1">×</button>
+  </div>
+</div>
+
+<!-- iOS Install modal -->
+<div id="ios-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:none;align-items:flex-end">
+  <div style="background:#fff;border-radius:20px 20px 0 0;padding:1.5rem;width:100%;max-width:480px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:1rem">
+      <div style="font:800 1rem Poppins,sans-serif;color:#111;margin-bottom:.4rem">Installer BOOST.ME sur iOS</div>
+      <div style="font:500 .83rem Poppins,sans-serif;color:#666;line-height:1.5">Appuie sur <strong>Partager</strong> <span style="font-size:1.1rem">⬆️</span> en bas de Safari, puis sélectionne <strong>Sur l'écran d'accueil</strong></div>
+    </div>
+    <div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:.75rem">
+      <div style="background:#F5F5F5;border-radius:10px;padding:.6rem .85rem;font:.7rem Poppins,sans-serif;color:#333;text-align:center"><div style="font-size:1.3rem">⬆️</div><div>Partager</div></div>
+      <div style="color:#bbb;align-self:center;font-size:1rem">→</div>
+      <div style="background:#F5F5F5;border-radius:10px;padding:.6rem .85rem;font:.7rem Poppins,sans-serif;color:#333;text-align:center"><div style="font-size:1.3rem">➕</div><div>Écran d'accueil</div></div>
+    </div>
+    <button onclick="document.getElementById('ios-modal').style.display='none';localStorage.setItem('pwa-dismissed','1')" style="width:100%;padding:.8rem;background:#111;color:#fff;border:none;border-radius:10px;font:700 .88rem Poppins,sans-serif;cursor:pointer">Compris</button>
+  </div>
+</div>
+
+<script>
+// PWA Install prompt
+var _deferredPrompt=null;
+if(!localStorage.getItem('pwa-dismissed')){
+  var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
+  var isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
+  if(isIOS&&!isStandalone){
+    setTimeout(function(){
+      document.getElementById('pwa-banner').style.display='block';
+      document.getElementById('pwa-install-btn').onclick=function(){
+        document.getElementById('pwa-banner').style.display='none';
+        document.getElementById('ios-modal').style.display='flex';
+      };
+    },3000);
+  }else if(!isStandalone){
+    window.addEventListener('beforeinstallprompt',function(e){
+      e.preventDefault();
+      _deferredPrompt=e;
+      setTimeout(function(){
+        document.getElementById('pwa-banner').style.display='block';
+        document.getElementById('pwa-install-btn').onclick=function(){
+          document.getElementById('pwa-banner').style.display='none';
+          _deferredPrompt.prompt();
+          _deferredPrompt.userChoice.then(function(){_deferredPrompt=null;});
+          localStorage.setItem('pwa-dismissed','1');
+        };
+      },3000);
+    });
+  }
+}
+</script>
+
 </body>
 </html>

@@ -121,7 +121,18 @@ var _uc=null,_ch=null,_c=null;
 
 async function run(){
   var u=await initUser();if(!u)return;
-  var r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
+  // Multi-challenge support: check sessionStorage for requested challenge
+  var reqChId=sessionStorage.getItem('bm_active_ch');
+  var r;
+  if(reqChId){
+    r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('challenge_id',reqChId).maybeSingle();
+    if(!r.data||r.data.status==='completed'){
+      // Fallback to most recent active
+      r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
+    }
+  }else{
+    r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
+  }
   if(!r.data){window.location.href='/challenges';return;}
   _uc=r.data; _ch=chById(r.data.challenge_id);
   renderHeader();

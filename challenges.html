@@ -126,8 +126,10 @@ async function run(){
     var n=document.getElementById("nav-nm");if(n)n.textContent=_p.prenom||"";
     var pl=document.getElementById("nav-pl");
     if(pl){var lb={free:"Starter",unit:"Challenge",annual:"Annuel",pending:"En attente"};pl.textContent=lb[(_p&&_p.plan)||"free"]||"Starter";}
-    var ac=await _sb.from("user_challenges").select("challenge_id").eq("user_id",_u.id).eq("status","active").maybeSingle();
-    _aid=ac.data?ac.data.challenge_id:null;
+    var ac=await _sb.from("user_challenges").select("challenge_id,status").eq("user_id",_u.id);
+    _allUC=ac.data||[];
+    var acAct=_allUC.find(function(x){return x.status==="active";});
+    _aid=acAct?acAct.challenge_id:null;
   }else{
     document.getElementById("banner-zone").innerHTML='<div class="login-banner"><p>Connecte-toi pour démarrer un challenge.</p><div style="display:flex;gap:.5rem"><a class="bg2" href="/login" style="font-size:.78rem">Connexion</a><a class="by" href="/signup" style="font-size:.78rem">Créer un compte</a></div></div>';
   }
@@ -144,8 +146,14 @@ function render(){
   var html="";
   list.forEach(function(ch){
     var isCur=ch.id===_aid;
-    var canAcc=ch.free||(_p&&_p.plan==="annual");
-    var bdg=isCur?"<span class=\"bdg bdg-c\">En cours</span>":
+    var hasPurchased=_allUC.some(function(x){return x.challenge_id===ch.id;});
+    var canAcc=ch.free||(_p&&_p.plan==="annual")||hasPurchased;
+    var ucEntry=_allUC.find(function(x){return x.challenge_id===ch.id;});
+    var isCompleted=ucEntry&&ucEntry.status==="completed";
+    var isPaused=ucEntry&&ucEntry.status==="paused";
+    var bdg=isCur?"<span class=\"bdg bdg-c\">▶ En cours</span>":
+            isCompleted?"<span class=\"bdg\" style=\"background:#D1FAE5;color:#059669\">✓ Terminé</span>":
+            isPaused?"<span class=\"bdg\" style=\"background:#FEF3C7;color:#D97706\">⏸ En pause</span>":
             ch.free?"<span class=\"bdg bdg-f\">Gratuit</span>":
             canAcc?"<span class=\"bdg bdg-i\">Inclus</span>":
             "<span class=\"bdg bdg-p\">&euro;"+ch.price+"/challenge</span>";
@@ -156,6 +164,10 @@ function render(){
       actionBtn="<a class=\"by\" href=\"/signup\" style=\"font-size:.84rem\">Créer un compte gratuit</a>";
     }else if(isCur){
       actionBtn="<a class=\"by\" href=\"/challenge-day\" style=\"font-size:.84rem\">Continuer &rarr;</a>";
+    }else if(isPaused){
+      actionBtn="<button class=\"by\" onclick=\"resumeCh(event,'"+ch.id+"')\" style=\"font-size:.84rem;background:#FFF8E1;color:#111;border:1.5px solid #FFC107\">↩ Reprendre</button>";
+    }else if(isCompleted){
+      actionBtn="<button class=\"by\" onclick=\"startCh(event,'"+ch.id+"')\" style=\"font-size:.84rem;background:#E8F5E9;color:#111;border:1.5px solid #4CAF50\">🔄 Refaire</button>";
     }else if(ch.free||canAcc){
       actionBtn="<button class=\"by\" onclick=\"startCh(event,'"+ch.id+"')\" style=\"font-size:.84rem\">Démarrer ce challenge</button>";
     }else{
