@@ -92,7 +92,7 @@ exports.handler = async (event) => {
   <div class="header"><div class="logo">BOOST.ME</div></div>
   <div class="hero">
     <h1>Bienvenue, ${name}&nbsp;! 🎉</h1>
-    <p class="sub">Tu viens de rejoindre BOOST.ME. Confirme ton email pour activer ton compte et commencer ta transformation.</p>
+    <p class="sub">Ton compte BOOST.ME est actif. Decouvre les challenges et commence ta transformation maintenant.</p>
     <a class="cta" href="${SITE}/login">Accéder à mon espace →</a>
   </div>
   <div class="vision">
@@ -121,7 +121,7 @@ exports.handler = async (event) => {
     const r = await brevo({
       sender: { name: 'BOOST.ME', email: SENDER },
       to: [{ email, name: prenom || email }],
-      subject: `Bienvenue sur BOOST.ME, ${name} ! Confirme ton compte ✨`,
+      subject: `Bienvenue sur BOOST.ME, ${name} ! Ton compte est actif`,
       htmlContent: html,
     }, key);
 
