@@ -1,518 +1,442 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Jeux &amp; Détente — BOOST.ME</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jeux &amp; Détente — BOOST.ME</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:#F2F2F2;color:#111;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+body{font-family:Poppins,sans-serif;background:#F2F2F2;color:#111;padding-bottom:80px}
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;height:60px;display:flex;align-items:center;padding:0 1.25rem;justify-content:space-between}
-.nav-logo{height:34px;width:auto;object-fit:contain}
-.nav-r{display:flex;align-items:center;gap:.6rem}
-.nav-nm{font-size:.8rem;font-weight:600;color:#333;display:none}
-.nav-pl{background:#FFF8E1;color:#E5AC00;font-size:.62rem;font-weight:800;padding:.15rem .5rem;border-radius:4px;text-transform:uppercase}
-.btn-sm{padding:.4rem .85rem;background:none;border:1.5px solid #E2E2E2;border-radius:8px;font:600 .74rem 'Poppins',sans-serif;cursor:pointer;color:#666}
+.btn-sm{padding:.4rem .85rem;background:none;border:1.5px solid #E2E2E2;border-radius:8px;font:600 .74rem Poppins,sans-serif;cursor:pointer;color:#666}
+.nav-pl{background:#FFF8E1;color:#E5AC00;font-size:.62rem;font-weight:800;padding:.15rem .5rem;border-radius:4px}
 .bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E2E2E2;display:grid;grid-template-columns:repeat(4,1fr);height:58px;z-index:100}
-.bn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:.58rem;font-weight:600;color:#999;text-decoration:none;border:none;background:none;font-family:'Poppins',sans-serif;cursor:pointer;transition:color .15s}
-.bn:hover{color:#FFC107}.bni{font-size:1.1rem;line-height:1}
-.pg{margin-top:60px;padding:1.5rem 1.25rem;max-width:860px;margin-left:auto;margin-right:auto}
-.by{display:inline-flex;align-items:center;justify-content:center;padding:.78rem 1.4rem;background:#FFC107;color:#111;font:700 .86rem 'Poppins',sans-serif;border:none;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none}
+.bn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.58rem;font-weight:600;color:#999;text-decoration:none;border:none;background:none;cursor:pointer}
+.bn.on,.bn:hover{color:#FFC107}
+.bni{font-size:1.1rem}
+.pg{margin-top:60px;padding:1.25rem;max-width:600px;margin-left:auto;margin-right:auto}
+.by{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.4rem;background:#FFC107;color:#111;font:700 .86rem Poppins,sans-serif;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
 .by:hover{background:#E5AC00}
-.bg2{display:inline-flex;align-items:center;padding:.65rem 1.1rem;background:none;color:#666;font:600 .8rem 'Poppins',sans-serif;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer}
-.toast{position:fixed;bottom:4.5rem;right:1rem;background:#111;color:#fff;padding:.62rem 1rem;border-radius:10px;font-size:.74rem;font-weight:600;border-left:3px solid #FFC107;transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{transform:translateY(0);opacity:1}
-@media(min-width:600px){.nav-nm{display:block}}
-
-.d-hero{background:linear-gradient(135deg,#111,#1c1c1c);border-radius:16px;padding:1.5rem 1.25rem;margin-bottom:1.25rem;position:relative;overflow:hidden}
-.d-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,193,7,.08),transparent 65%)}
-.d-hero h1{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:.25rem;position:relative;z-index:1}
-.d-hero p{font-size:.78rem;color:rgba(255,255,255,.5);position:relative;z-index:1;line-height:1.55}
-.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
-.game-tile{background:#fff;border-radius:14px;padding:1.1rem;border:1.5px solid #E2E2E2;cursor:pointer;transition:all .2s;text-align:center}
-.game-tile:hover,.game-tile.on{border-color:#FFC107;box-shadow:0 6px 20px rgba(255,193,7,.15);transform:translateY(-2px)}
-.gt-ico{font-size:2rem;display:block;margin-bottom:.5rem}
-.gt-nm{font-size:.82rem;font-weight:800;color:#111;margin-bottom:.2rem}
-.gt-ds{font-size:.68rem;color:#999;line-height:1.4}
-.gt-badge{display:inline-block;background:#FFF8E1;color:#E5AC00;font-size:.6rem;font-weight:800;padding:.12rem .45rem;border-radius:4px;margin-top:.35rem}
-/* Game area */
-.game-area{background:#fff;border-radius:16px;padding:1.25rem;border:1px solid #E2E2E2;display:none}
-.game-area.on{display:block}
-.ga-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.ga-title{font-size:.95rem;font-weight:800}
-.ga-close{width:28px;height:28px;border-radius:50%;background:#F5F5F5;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .15s}
-.ga-close:hover{background:#E2E2E2}
-/* Quiz */
-.quiz-q{font-size:.9rem;font-weight:700;color:#111;margin-bottom:1rem;line-height:1.5}
-.quiz-opts{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.85rem}
-.qo{padding:.78rem 1rem;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer;font:600 .82rem 'Poppins',sans-serif;transition:all .15s;text-align:left;background:#fff}
-.qo:hover{border-color:#FFC107}
-.qo.correct{border-color:#22C55E;background:#D1FAE5;color:#065F46}
-.qo.wrong{border-color:#EF4444;background:#FEE2E2;color:#991B1B}
-.quiz-progress{display:flex;align-items:center;justify-content:space-between;font-size:.7rem;color:#bbb;font-weight:700;margin-bottom:.85rem}
-.qp-bar{flex:1;height:4px;background:#F0F0F0;border-radius:50px;margin:0 .75rem;overflow:hidden}
-.qp-fill{height:100%;background:#FFC107;border-radius:50px;transition:width .3s}
-.quiz-score{text-align:center;padding:1.5rem}
-.qs-num{font-size:3rem;font-weight:900;color:#FFC107;line-height:1}
-.qs-sub{font-size:.84rem;color:#666;margin-top:.4rem}
-/* Perso test */
-.pt-q{font-size:.9rem;font-weight:700;margin-bottom:.85rem;line-height:1.5}
-.pt-opts{display:flex;flex-direction:column;gap:.5rem}
-.pto{padding:.75rem 1rem;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer;font:600 .8rem 'Poppins',sans-serif;transition:all .15s;text-align:left;background:#fff}
-.pto:hover{border-color:#6366F1;background:#EEF2FF}
-.pto.on{border-color:#6366F1;background:#EEF2FF;color:#4338CA}
-.pt-result{text-align:center;padding:1rem 0}
-.pt-res-ico{font-size:2.5rem;display:block;margin-bottom:.6rem}
-.pt-res-nm{font-size:1.1rem;font-weight:900;color:#111;margin-bottom:.35rem}
-.pt-res-ds{font-size:.82rem;color:#555;line-height:1.65;margin-bottom:1rem}
-/* Flashcards */
-.fc-card{background:linear-gradient(135deg,#111,#1c1c1c);border-radius:14px;padding:1.75rem 1.25rem;text-align:center;margin-bottom:.85rem;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:pointer}
-.fc-quote{font-size:1.05rem;font-style:italic;color:#fff;line-height:1.6;margin-bottom:.6rem}
-.fc-author{font-size:.72rem;color:rgba(255,193,7,.7);font-weight:700}
-.fc-hint{font-size:.65rem;color:rgba(255,255,255,.25);margin-top:.6rem}
-.fc-back{display:none;padding:.85rem;background:#FFF8E1;border-radius:10px;margin-bottom:.75rem}
-.fc-card.flipped .fc-hint{display:none}
-.fc-back.show{display:block}
-.fc-nav{display:flex;align-items:center;justify-content:space-between}
-.fc-num{font-size:.72rem;color:#bbb;font-weight:700}
-/* Word game */
-.wg-grid{display:grid;gap:2px;margin-bottom:.85rem;justify-content:center}
-.wg-cell{width:34px;height:34px;border:1.5px solid #E2E2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;cursor:pointer;user-select:none;transition:all .1s;background:#fff}
-.wg-cell.selected{background:#FFF8E1;border-color:#FFC107;color:#E5AC00}
-.wg-cell.found{background:#D1FAE5;border-color:#22C55E;color:#065F46}
-.wg-words{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.85rem}
-.wg-word{font-size:.72rem;font-weight:700;padding:.22rem .6rem;border-radius:4px;border:1px solid #E2E2E2;color:#555;background:#F5F5F5}
-.wg-word.found{background:#D1FAE5;border-color:#22C55E;color:#065F46;text-decoration:line-through}
-@media(max-width:400px){.games-grid{grid-template-columns:1fr}}
-
+.tile{background:#fff;border-radius:12px;padding:.9rem .75rem;border:1.5px solid #E2E2E2;cursor:pointer;text-align:center;transition:all .2s}
+.tile:hover,.tile.on{border-color:#FFC107;box-shadow:0 4px 16px rgba(255,193,7,.15)}
+.tile-ico{font-size:1.8rem;display:block;margin-bottom:.4rem}
+.tile-nm{font-size:.8rem;font-weight:800;color:#111}
+.tile-ds{font-size:.66rem;color:#999;margin-top:.15rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1rem}
+.game{background:#fff;border-radius:14px;padding:1.1rem;border:1px solid #E2E2E2;margin-bottom:1rem;display:none}
+.game.on{display:block}
+.qopt{width:100%;text-align:left;padding:.65rem .85rem;margin:.3rem 0;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:9px;font:600 .82rem Poppins,sans-serif;cursor:pointer}
+.qopt:hover{border-color:#FFC107}
+.qopt.ok{background:#D1FAE5;border-color:#10B981;color:#065F46}
+.qopt.ko{background:#FEE2E2;border-color:#EF4444;color:#991B1B}
+.sec-title{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#bbb;margin:1.25rem 0 .6rem;padding-top:.75rem;border-top:1px solid #F0F0F0}
 </style>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<nav class="nav"><a href="/" style="text-decoration:none;display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;background:#111;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#FFC107;font-weight:900;font-size:11px;font-family:Poppins,sans-serif;letter-spacing:-0.5px">BM</span></div><span style="font:900 15px/1 Poppins,sans-serif;color:#111;letter-spacing:0.5px">BOOST<span style="color:#FFC107">.ME</span></span></a><div class="nav-r"><span class="nav-nm" id="nav-nm"></span><span class="nav-pl" id="nav-pl">Starter</span><button class="btn-sm" onclick="doLogout()">Quitter</button></div></nav><nav class="bnav"><a class="bn" href="/dashboard"><span class="bni">🏠</span>Accueil</a><a class="bn" href="/challenges"><span class="bni">🎯</span>Challenges</a><a class="bn" href="/challenge-day"><span class="bni">⚡</span>En cours</a><a class="bn" href="/mon-espace"><span class="bni">👤</span>Moi</a></nav>
+<nav class="nav">
+  <a href="/" style="text-decoration:none;display:flex;align-items:center;gap:6px">
+    <div style="width:28px;height:28px;background:#111;border-radius:6px;display:flex;align-items:center;justify-content:center">
+      <span style="color:#FFC107;font-weight:900;font-size:11px">BM</span>
+    </div>
+    <span style="font:900 15px/1 Poppins,sans-serif;color:#111">BOOST<span style="color:#FFC107">.ME</span></span>
+  </a>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <span class="nav-pl" id="nav-pl">Starter</span>
+    <button class="btn-sm" onclick="doLogout()">Quitter</button>
+  </div>
+</nav>
+<nav class="bnav">
+  <a class="bn" href="/dashboard"><span class="bni">🏠</span>Accueil</a>
+  <a class="bn" href="/challenges"><span class="bni">🎯</span>Challenges</a>
+  <a class="bn" href="/challenge-day"><span class="bni">⚡</span>En cours</a>
+  <a class="bn" href="/mon-espace"><span class="bni">👤</span>Moi</a>
+</nav>
+
 <div class="pg">
-<div class="d-hero">
-  <h1 style="font-size:1.3rem;font-weight:900;color:#111;margin-bottom:.25rem">🎮 Jeux &amp; Détente</h1>
-  <p style="font-size:.82rem;color:#999;margin-bottom:1.25rem">Des mini-jeux en lien avec tes challenges. Apprendre en jouant.</p>
+  <h1 style="font-size:1.2rem;font-weight:900;margin-bottom:.25rem">🎮 Jeux &amp; Détente</h1>
+  <p style="font-size:.8rem;color:#999;margin-bottom:1.25rem">Apprendre en jouant.</p>
 
-</div>
-<!-- GAME CONTENT -->
-<div style="margin-top:1.25rem">
-  <!-- CATÉGORIES FILTRE -->
-  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.1rem" id="cat-filters">
-    <button class="cat-btn on" onclick="filterCat('all',this)">Tous</button>
-    <button class="cat-btn" onclick="filterCat('Mind',this)">🧠 Mind</button>
-    <button class="cat-btn" onclick="filterCat('Money',this)">💰 Money</button>
-    <button class="cat-btn" onclick="filterCat('Perf',this)">🎯 Performance</button>
-    <button class="cat-btn" onclick="filterCat('Career',this)">🚀 Carrière</button>
-    <button class="cat-btn" onclick="filterCat('Body',this)">💚 Corps</button>
-    <button class="cat-btn" onclick="filterCat('Well',this)">🧘 Bien-être</button>
-  </div>
-
-  <style>
-  .cat-btn{padding:.38rem .75rem;border-radius:20px;border:1.5px solid #E2E2E2;background:#fff;font:600 .72rem Poppins,sans-serif;cursor:pointer;color:#666;transition:all .15s}
-  .cat-btn.on{background:#FFC107;border-color:#FFC107;color:#111}
-  .game-section{margin-bottom:1.25rem}
-  .game-section-title{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#bbb;margin-bottom:.6rem;padding-top:.5rem;border-top:1px solid #F0F0F0}
-  .games-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.25rem}
-  .game-tile{background:#fff;border-radius:12px;padding:.85rem .75rem;border:1.5px solid #E2E2E2;cursor:pointer;transition:all .2s;text-align:center}
-  .game-tile:active{transform:scale(.97)}
-  .game-tile:hover,.game-tile.on{border-color:#FFC107;box-shadow:0 4px 16px rgba(255,193,7,.15)}
-  .gt-ico{font-size:1.6rem;display:block;margin-bottom:.35rem}
-  .gt-nm{font-size:.78rem;font-weight:800;color:#111;margin-bottom:.15rem}
-  .gt-ds{font-size:.65rem;color:#999;line-height:1.4}
-  .gt-badge{display:inline-block;background:#FFF8E1;color:#E5AC00;font-size:.58rem;font-weight:800;padding:.1rem .4rem;border-radius:4px;margin-top:.25rem}
-  .game-area{background:#fff;border-radius:14px;padding:1.1rem;border:1px solid #E2E2E2;margin-bottom:1rem;display:none}
-  .game-area.on{display:block}
-  .q-opt{width:100%;text-align:left;padding:.65rem .85rem;margin:.3rem 0;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:9px;font:600 .82rem Poppins,sans-serif;cursor:pointer;transition:all .15s}
-  .q-opt:hover{border-color:#FFC107}
-  .q-opt.correct{background:#D1FAE5;border-color:#10B981;color:#065F46}
-  .q-opt.wrong{background:#FEE2E2;border-color:#EF4444;color:#991B1B}
-  .q-score{font-size:.82rem;font-weight:800;color:#FFC107;margin-top:.5rem}
-  .fc-card{background:linear-gradient(135deg,#111,#222);border-radius:12px;padding:1.5rem;color:#fff;text-align:center;min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:.75rem}
-  .fc-quote{font-size:.9rem;font-weight:700;line-height:1.5;margin-bottom:.5rem}
-  .fc-author{font-size:.72rem;color:#FFC107;font-weight:600}
-  .breath-ring{width:90px;height:90px;border-radius:50%;border:4px solid #FFC107;margin:1rem auto;display:flex;align-items:center;justify-content:center;font:800 .85rem Poppins,sans-serif;color:#111;transition:all 1s ease;background:#FFF8E1}
-  </style>
-
-  <!-- SECTION MIND -->
-  <div class="game-section" data-cat="Mind">
-    <div class="game-section-title">🧠 Mind — Glow Up · Confiance · Mental Detox</div>
-    <div class="games-grid">
-      <div class="game-tile" onclick="openGame('quiz-mindset')">
-        <span class="gt-ico">🧠</span>
-        <div class="gt-nm">Quiz Mindset</div>
-        <div class="gt-ds">10 questions sur l'état d'esprit de croissance</div>
-        <div class="gt-badge">Mind</div>
-      </div>
-      <div class="game-tile" onclick="openGame('flashcards-mind')">
-        <span class="gt-ico">⚡</span>
-        <div class="gt-nm">Flash Cards</div>
-        <div class="gt-ds">Citations de chercheurs pour te booster</div>
-        <div class="gt-badge">Mind</div>
-      </div>
-      <div class="game-tile" onclick="openGame('affirmations')">
-        <span class="gt-ico">💬</span>
-        <div class="gt-nm">Affirmations</div>
-        <div class="gt-ds">5 affirmations puissantes à pratiquer</div>
-        <div class="gt-badge">Confiance</div>
-      </div>
-      <div class="game-tile" onclick="openGame('respiration')">
-        <span class="gt-ico">🌬️</span>
-        <div class="gt-nm">Respiration 4-7-8</div>
-        <div class="gt-ds">Exercice guidé de 3 minutes</div>
-        <div class="gt-badge">Bien-être</div>
-      </div>
+  <!-- MIND -->
+  <div class="sec-title">🧠 Mind</div>
+  <div class="grid">
+    <div class="tile" id="t-quiz-mindset" onclick="showGame('quiz-mindset')">
+      <span class="tile-ico">🧠</span>
+      <div class="tile-nm">Quiz Mindset</div>
+      <div class="tile-ds">5 questions</div>
+    </div>
+    <div class="tile" id="t-flashcards" onclick="showGame('flashcards')">
+      <span class="tile-ico">⚡</span>
+      <div class="tile-nm">Flash Cards</div>
+      <div class="tile-ds">Citations de chercheurs</div>
+    </div>
+    <div class="tile" id="t-affirmations" onclick="showGame('affirmations')">
+      <span class="tile-ico">💬</span>
+      <div class="tile-nm">Affirmations</div>
+      <div class="tile-ds">5 affirmations du jour</div>
+    </div>
+    <div class="tile" id="t-respiration" onclick="showGame('respiration')">
+      <span class="tile-ico">🌬️</span>
+      <div class="tile-nm">Respiration 4-7-8</div>
+      <div class="tile-ds">3 minutes guidées</div>
     </div>
   </div>
 
-  <!-- SECTION MONEY -->
-  <div class="game-section" data-cat="Money">
-    <div class="game-section-title">💰 Money — Cash Clarity · Side Hustle</div>
-    <div class="games-grid">
-      <div class="game-tile" onclick="openGame('quiz-money')">
-        <span class="gt-ico">💰</span>
-        <div class="gt-nm">Quiz Finances</div>
-        <div class="gt-ds">Connais-tu vraiment les bases de l'argent ?</div>
-        <div class="gt-badge">Money</div>
-      </div>
-      <div class="game-tile" onclick="openGame('idee-generator')">
-        <span class="gt-ico">🎲</span>
-        <div class="gt-nm">Générateur d'idées</div>
-        <div class="gt-ds">Trouve ton idée de revenu en 60s</div>
-        <div class="gt-badge">Side Hustle</div>
-      </div>
+  <!-- MONEY -->
+  <div class="sec-title">💰 Money</div>
+  <div class="grid">
+    <div class="tile" id="t-quiz-money" onclick="showGame('quiz-money')">
+      <span class="tile-ico">💰</span>
+      <div class="tile-nm">Quiz Finances</div>
+      <div class="tile-ds">5 questions</div>
+    </div>
+    <div class="tile" id="t-idees" onclick="showGame('idees')">
+      <span class="tile-ico">🎲</span>
+      <div class="tile-nm">Idée de revenu</div>
+      <div class="tile-ds">Génère une idée</div>
     </div>
   </div>
 
-  <!-- SECTION PERFORMANCE -->
-  <div class="game-section" data-cat="Perf">
-    <div class="game-section-title">🎯 Performance — Deep Work · Morning Power · Read &amp; Lead</div>
-    <div class="games-grid">
-      <div class="game-tile" onclick="openGame('quiz-focus')">
-        <span class="gt-ico">🎯</span>
-        <div class="gt-nm">Quiz Deep Work</div>
-        <div class="gt-ds">À quel point es-tu concentré(e) ?</div>
-        <div class="gt-badge">Performance</div>
-      </div>
-      <div class="game-tile" onclick="openGame('intention-game')">
-        <span class="gt-ico">📝</span>
-        <div class="gt-nm">Intention du jour</div>
-        <div class="gt-ds">Génère ton intention en 3 clics</div>
-        <div class="gt-badge">Morning</div>
-      </div>
-      <div class="game-tile" onclick="openGame('resume-game')">
-        <span class="gt-ico">📖</span>
-        <div class="gt-nm">Résumés Express</div>
-        <div class="gt-ds">10 grands livres en 60 mots chacun</div>
-        <div class="gt-badge">Read</div>
-      </div>
-      <div class="game-tile" onclick="openGame('mots-perf')">
-        <span class="gt-ico">🔤</span>
-        <div class="gt-nm">Mots Cachés</div>
-        <div class="gt-ds">Retrouve les mots-clés de la performance</div>
-        <div class="gt-badge">Performance</div>
-      </div>
+  <!-- PERFORMANCE -->
+  <div class="sec-title">🎯 Performance</div>
+  <div class="grid">
+    <div class="tile" id="t-intention" onclick="showGame('intention')">
+      <span class="tile-ico">📝</span>
+      <div class="tile-nm">Intention du jour</div>
+      <div class="tile-ds">Génère ton intention</div>
+    </div>
+    <div class="tile" id="t-resumes" onclick="showGame('resumes')">
+      <span class="tile-ico">📖</span>
+      <div class="tile-nm">Résumés Express</div>
+      <div class="tile-ds">5 livres en 60 mots</div>
+    </div>
+    <div class="tile" id="t-hydra" onclick="showGame('hydra')">
+      <span class="tile-ico">💧</span>
+      <div class="tile-nm">Hydratation</div>
+      <div class="tile-ds">Calcule ton besoin</div>
+    </div>
+    <div class="tile" id="t-routine" onclick="showGame('routine')">
+      <span class="tile-ico">🌅</span>
+      <div class="tile-nm">Routine Idéale</div>
+      <div class="tile-ds">Construis ta routine</div>
     </div>
   </div>
 
-  <!-- SECTION CARRIÈRE -->
-  <div class="game-section" data-cat="Career">
-    <div class="game-section-title">🚀 Carrière — Build Your Brand · Network · Own the Room</div>
-    <div class="games-grid">
-      <div class="game-tile" onclick="openGame('pitch-game')">
-        <span class="gt-ico">🎤</span>
-        <div class="gt-nm">Pitch en 60s</div>
-        <div class="gt-ds">Construis ton pitch parfait en 4 étapes</div>
-        <div class="gt-badge">Carrière</div>
-      </div>
-      <div class="game-tile" onclick="openGame('icebreaker')">
-        <span class="gt-ico">🤝</span>
-        <div class="gt-nm">Ice-Breakers</div>
-        <div class="gt-ds">10 phrases pour briser la glace</div>
-        <div class="gt-badge">Network</div>
-      </div>
+  <!-- CARRIÈRE -->
+  <div class="sec-title">🚀 Carrière</div>
+  <div class="grid">
+    <div class="tile" id="t-icebreaker" onclick="showGame('icebreaker')">
+      <span class="tile-ico">🤝</span>
+      <div class="tile-nm">Ice-Breakers</div>
+      <div class="tile-ds">10 phrases networking</div>
+    </div>
+    <div class="tile" id="t-mots" onclick="showGame('mots')">
+      <span class="tile-ico">🔤</span>
+      <div class="tile-nm">Mots Cachés</div>
+      <div class="tile-ds">Trouve les mots clés</div>
     </div>
   </div>
 
-  <!-- SECTION CORPS & BIEN-ÊTRE -->
-  <div class="game-section" data-cat="Body">
-    <div class="game-section-title">💚 Corps &amp; Bien-être — Body Reset · Glow Up</div>
-    <div class="games-grid">
-      <div class="game-tile" onclick="openGame('routine-game')">
-        <span class="gt-ico">🌅</span>
-        <div class="gt-nm">Routine Idéale</div>
-        <div class="gt-ds">Assemble ta routine matinale parfaite</div>
-        <div class="gt-badge">Glow Up</div>
-      </div>
-      <div class="game-tile" onclick="openGame('hydra-game')">
-        <span class="gt-ico">💧</span>
-        <div class="gt-nm">Défi Hydratation</div>
-        <div class="gt-ds">Calcule ton besoin en eau quotidien</div>
-        <div class="gt-badge">Corps</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ZONE JEU ACTIVE -->
-  <div class="game-area on" id="game-welcome" style="background:#FFF8E1;border-color:#FFC107;text-align:center;padding:1.5rem">
+  <!-- GAME AREAS -->
+  <div id="g-welcome" class="game on" style="background:#FFF8E1;border-color:#FFC107;text-align:center;padding:1.5rem">
     <div style="font-size:2rem;margin-bottom:.5rem">🎮</div>
-    <div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.35rem">Choisis un jeu !</div>
-    <div style="font-size:.78rem;color:#666">Clique sur l'une des tuiles ci-dessus pour démarrer.</div>
+    <div style="font:800 .9rem Poppins,sans-serif;color:#111">Clique sur un jeu pour démarrer !</div>
   </div>
-  <div class="game-area" id="game-quiz-mindset"></div>
-  <div class="game-area" id="game-flashcards-mind"></div>
-  <div class="game-area" id="game-affirmations"></div>
-  <div class="game-area" id="game-respiration"></div>
-  <div class="game-area" id="game-quiz-money"></div>
-  <div class="game-area" id="game-idee-generator"></div>
-  <div class="game-area" id="game-quiz-focus"></div>
-  <div class="game-area" id="game-intention-game"></div>
-  <div class="game-area" id="game-resume-game"></div>
-  <div class="game-area" id="game-mots-perf"></div>
-  <div class="game-area" id="game-pitch-game"></div>
-  <div class="game-area" id="game-icebreaker"></div>
-  <div class="game-area" id="game-routine-game"></div>
-  <div class="game-area" id="game-hydra-game"></div></div>
+  <div id="g-quiz-mindset" class="game"></div>
+  <div id="g-flashcards" class="game"></div>
+  <div id="g-affirmations" class="game"></div>
+  <div id="g-respiration" class="game"></div>
+  <div id="g-quiz-money" class="game"></div>
+  <div id="g-idees" class="game"></div>
+  <div id="g-intention" class="game"></div>
+  <div id="g-resumes" class="game"></div>
+  <div id="g-hydra" class="game"></div>
+  <div id="g-routine" class="game"></div>
+  <div id="g-icebreaker" class="game"></div>
+  <div id="g-mots" class="game"></div>
+</div>
+
+<div id="toast" style="position:fixed;bottom:4.5rem;right:1rem;background:#111;color:#fff;padding:.62rem 1rem;border-radius:10px;font-size:.74rem;font-weight:600;border-left:3px solid #FFC107;transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none;z-index:999"></div>
 
 <script>
-// Data
-var FLASHCARDS=[
-  {quote:"La zone de confort ne disparaît pas — elle s'élargit. Chaque action courageuse recalibre ton seuil de peur.",author:"Carol Dweck, Stanford"},
-  {quote:"Seulement 10 à 15% des individus se voient réellement tels qu'ils sont.",author:"Tasha Eurich, Chercheuse"},
-  {quote:"La qualité du sommeil est le prédicteur numéro un de l'apparence perçue — avant le maquillage.",author:"Journal of Clinical Sleep Medicine, 2021"},
-  {quote:"La probabilité de réaliser un objectif passe à 95% avec un engagement public et un témoin.",author:"ASTD Research"},
-  {quote:"Se parler à la 2ème personne active les circuits de régulation émotionnelle comme si tu conseillais un ami.",author:"Ethan Kross, Université du Michigan"},
-  {quote:"Il faut 66 jours — pas 21 — pour qu'un comportement devienne automatique.",author:"Phillippa Lally, UCL"}
-];
-var AFFIRMATIONS=["Je suis capable de créer la vie que je veux — un jour à la fois.","Mes actions d'aujourd'hui construisent ma version de demain.","Je mérite d'investir en moi. C'est le meilleur retour sur investissement.","Je n'ai pas besoin d'être parfaite — j'ai besoin d'être cohérente.","Chaque obstacle est une information, pas une sentence."];
-var INTENTIONS=["Aujourd'hui, je choisis la clarté sur l'urgence.","Aujourd'hui, je fais une chose que j'ai repoussée.","Aujourd'hui, je protège mon énergie comme une ressource précieuse.","Aujourd'hui, je remarque une chose dont je suis fière.","Aujourd'hui, j'agis avant de me sentir prête.","Aujourd'hui, je dis non à ce qui me vide.","Aujourd'hui, je célèbre un petit progrès."];
-var RESUMES=[
-  {title:"Atomic Habits — James Clear",txt:"Les petites habitudes de 1% s'accumulent en transformations radicales. Ce n'est pas le but qui compte mais le système. L'identité précède le comportement : deviens d'abord la personne qui fait la chose."},
-  {title:"The 5 AM Club — Robin Sharma",txt:"Se lever à 5h crée 20 minutes de victoire silencieuse. La formule 20/20/20 : exercice, planification, apprentissage. La discipline du matin décide du reste de la journée."},
-  {title:"Deep Work — Cal Newport",txt:"La concentration sans distraction est une compétence rare et précieuse. Le travail superficiel ne laisse aucune trace. Protège tes blocs de travail profond comme des réunions inamovibles."},
-  {title:"The Psychology of Money — Morgan Housel",txt:"L'argent est plus psychologique que mathématique. La patience est le plus grand avantage en finance. Assez est une notion sous-estimée dans notre culture de l'accumulation."},
-  {title:"Mindset — Carol Dweck",txt:"L'état d'esprit fixe croit que les qualités sont innées. L'état d'esprit de croissance croit qu'elles se développent. Changer de mindset change les résultats mesurables."}
-];
-var ICEBREAKERS=["Quelle est la compétence dont tu es la plus fière cette année ?","Si tu pouvais maîtriser une chose en 30 jours, ce serait quoi ?","Quelle habitude a le plus changé ta vie récemment ?","Qu'est-ce que tu n'aurais pas osé faire il y a 2 ans ?","Quelle est ton application secrète de productivité ?","Qui t'a le plus influencé(e) professionnellement, et pourquoi ?","Si tu devais pitcher ton projet en 1 phrase, ce serait quoi ?","Quelle est ta définition personnelle du succès en ce moment ?","Qu'est-ce qui t'a surpris dans ton dernier challenge ?","Quelle est la prochaine grande étape pour toi ?"];
-var ROUTINE_ELEMENTS=["💧 Grand verre d'eau","🌅 2 min d'étirements","📝 1 intention du jour","☀️ 5 min sans écran","🎵 Musique qui me booste","🧘 1 min de respiration","📖 3 pages de lecture","✅ Revoir mes 3 priorités"];
-var PITCH_STEPS=["<strong>1. 🎯 Le problème</strong><br>En 1 phrase : quel problème résous-tu pour qui ?","<strong>2. 💡 Ta solution</strong><br>Comment tu le résous, simplement.","<strong>3. ✨ Ta différence</strong><br>Pourquoi toi ? Qu'est-ce que tu fais différemment ?","<strong>4. 🚀 L'appel à l'action</strong><br>Qu'est-ce que tu veux que l'autre fasse maintenant ?"];
-var QUIZ_DATA={
-  "quiz-mindset":{title:"🧠 Quiz Mindset",questions:[
-    {q:"Selon Carol Dweck, qu'est-ce qu'un 'growth mindset' ?",opts:["Croire que l'intelligence est fixe","Croire qu'on peut développer ses capacités","Éviter les défis pour ne pas échouer","Se comparer aux autres"],ans:1},
-    {q:"Quelle phrase reflète un état d'esprit de croissance ?",opts:["Je ne suis pas fait pour ça","Les autres réussissent, pas moi","Je n'y arrive pas encore","C'est trop difficile"],ans:2},
-    {q:"L'inconfort est un signal de...",opts:["Danger imminent","Croissance personnelle","Faiblesse","Qu'il faut s'arrêter"],ans:1},
-    {q:"Combien de jours pour créer une habitude selon Lally (2010) ?",opts:["21 jours","30 jours","66 jours en moyenne","90 jours"],ans:2},
-    {q:"L'auto-dialogue à quelle personne est le plus efficace sous pression ?",opts:["1ère personne (je)","2ème personne (tu)","3ème personne (elle)","2ème ou 3ème"],ans:3}
-  ]},
-  "quiz-money":{title:"💰 Quiz Finances",questions:[
-    {q:"Quelle est la règle 50/30/20 ?",opts:["50% épargne, 30% loisirs, 20% nécessités","50% nécessités, 30% envies, 20% épargne","50% investissement, 30% dépenses, 20% impôts","50% loyer, 30% nourriture, 20% reste"],ans:1},
-    {q:"L'effet des intérêts composés ?",opts:["Payer plus d'impôts","Les intérêts génèrent eux-mêmes des intérêts","Un frais bancaire caché","Une pénalité"],ans:1},
-    {q:"La première étape d'un budget sain ?",opts:["Couper toutes les dépenses plaisir","Investir en bourse","Connaître ses revenus et dépenses réels","Ouvrir un compte épargne"],ans:2},
-    {q:"Le fonds d'urgence idéal représente combien de mois de dépenses ?",opts:["1 mois","2 mois","3 à 6 mois","12 mois"],ans:2},
-    {q:"La différence entre actif et passif ?",opts:["Un actif coûte, un passif génère","Un actif génère, un passif coûte","Ce sont la même chose","Ça dépend"],ans:1}
-  ]},
-  "quiz-focus":{title:"🎯 Quiz Deep Work",questions:[
-    {q:"Cal Newport définit le Deep Work comme...",opts:["Travailler tard le soir","Travailler sans distraction sur des tâches exigeantes","Faire plusieurs tâches en même temps","Travailler plus de 10h"],ans:1},
-    {q:"Temps pour retrouver sa concentration après une interruption ?",opts:["30 secondes","2 minutes","23 minutes en moyenne","1 heure"],ans:2},
-    {q:"La technique Pomodoro recommande des sessions de...",opts:["15 minutes","25 minutes","45 minutes","60 minutes"],ans:1},
-    {q:"Quelle habitude détruit le plus la concentration ?",opts:["Vérifier ses emails par heure","Les notifications en continu","Écouter de la musique","Faire des pauses"],ans:1}
-  ]}
+// ---- DATA ----
+var QUIZZES = {
+  "quiz-mindset": {
+    title: "Quiz Mindset",
+    q: [
+      {q: "Qu'est-ce qu'un 'growth mindset' selon Carol Dweck ?", opts: ["L'intelligence est fixe", "On peut developper ses capacites", "Eviter les defis", "Se comparer aux autres"], a: 1},
+      {q: "L'inconfort est un signal de quoi ?", opts: ["Danger", "Croissance", "Faiblesse", "Arret"], a: 1},
+      {q: "Combien de jours pour creer une habitude (Lally 2010) ?", opts: ["21 jours", "30 jours", "66 jours", "90 jours"], a: 2},
+      {q: "L'auto-dialogue a quelle personne est le plus efficace ?", opts: ["1ere (je)", "2eme (tu)", "3eme (elle)", "2eme ou 3eme"], a: 3},
+      {q: "La zone de confort : que se passe-t-il quand on agit malgre la peur ?", opts: ["Elle disparait", "Elle s'elargit", "Elle se retrecit", "Elle reste identique"], a: 1}
+    ]
+  },
+  "quiz-money": {
+    title: "Quiz Finances",
+    q: [
+      {q: "La regle 50/30/20 : que signifie le 20 ?", opts: ["Loyer", "Epargne", "Loisirs", "Nourriture"], a: 1},
+      {q: "Fonds d'urgence ideal : combien de mois de depenses ?", opts: ["1 mois", "2 mois", "3 a 6 mois", "12 mois"], a: 2},
+      {q: "Difference entre actif et passif ?", opts: ["Actif coute, passif rapporte", "Actif rapporte, passif coute", "Identiques", "Depends"], a: 1},
+      {q: "Les interets composes, c'est quoi ?", opts: ["Frais bancaires", "Interets qui generent des interets", "Penalite", "Taxe"], a: 1},
+      {q: "Premiere etape d'un budget sain ?", opts: ["Investir en bourse", "Couper les depenses", "Connaitre revenus et depenses", "Ouvrir un compte epargne"], a: 2}
+    ]
+  }
 };
 
-var _fc_idx=0;
-var _pitch_step=0;
-var _routine_sel=[];
-var _breath_timer=null;
-var _quiz_idx=0;
-var _quiz_score=0;
-var _quiz_id='';
+var FLASHCARDS = [
+  {q: "La zone de confort ne disparait pas - elle s'elargit. Chaque action courageuse recalibre ton seuil de peur.", a: "Carol Dweck, Stanford"},
+  {q: "10 a 15% seulement des individus se voient tels qu'ils sont reellement.", a: "Tasha Eurich, Chercheuse"},
+  {q: "Le sommeil est le predicteur numero 1 de l'apparence percue - avant le maquillage.", a: "Journal of Clinical Sleep Medicine, 2021"},
+  {q: "La probabilite de realiser un objectif passe a 95% avec un engagement public.", a: "ASTD Research"},
+  {q: "Il faut 66 jours - pas 21 - pour qu'un comportement devienne automatique.", a: "Phillippa Lally, UCL"}
+];
 
-function filterCat(cat,btn){
-  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
-  document.querySelectorAll('.game-section').forEach(function(s){
-    s.style.display=(cat==='all'||s.dataset.cat===cat)?'block':'none';
-  });
-}
+var AFFIRMATIONS = [
+  "Je suis capable de creer la vie que je veux - un jour a la fois.",
+  "Mes actions d'aujourd'hui construisent ma version de demain.",
+  "Je merite d'investir en moi. C'est le meilleur retour sur investissement.",
+  "Je n'ai pas besoin d'etre parfaite - j'ai besoin d'etre coherente.",
+  "Chaque obstacle est une information, pas une sentence."
+];
 
-function openGame(id){
-  document.querySelectorAll('.game-area').forEach(function(a){a.classList.remove('on');a.style.display='none';});
-  document.querySelectorAll('.game-tile').forEach(function(t){t.classList.remove('on');});
-  var el=document.getElementById('game-'+id);
-  if(!el){console.error('game area not found: game-'+id);return;}
-  el.classList.add('on');
-  el.style.display='block';
-  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+var INTENTIONS = [
+  "Aujourd'hui, je choisis la clarte sur l'urgence.",
+  "Aujourd'hui, je fais une chose que j'ai repoussee.",
+  "Aujourd'hui, je protege mon energie comme une ressource precieuse.",
+  "Aujourd'hui, j'agis avant de me sentir prete.",
+  "Aujourd'hui, je celebre un petit progres."
+];
 
-  if(id==='quiz-mindset'||id==='quiz-money'||id==='quiz-focus'){
-    _quiz_id=id; _quiz_idx=0; _quiz_score=0;
-    renderQuizQuestion(el);
-  } else if(id==='flashcards-mind'){
-    _fc_idx=0; renderFlashcard(el);
-  } else if(id==='affirmations'){
-    var html='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:1rem">💬 Tes 5 affirmations du jour</div>';
-    for(var i=0;i<AFFIRMATIONS.length;i++){
-      html+='<div style="background:#FFF8E1;border-radius:10px;padding:.85rem 1rem;margin-bottom:.6rem;border-left:3px solid #FFC107;font-size:.83rem;font-weight:600;color:#111;line-height:1.5">'+(i+1)+'. '+AFFIRMATIONS[i]+'</div>';
+var RESUMES = [
+  {t: "Atomic Habits - James Clear", r: "Les petites habitudes de 1% s'accumulent en transformations radicales. Ce n'est pas le but qui compte mais le systeme. L'identite precede le comportement."},
+  {t: "Deep Work - Cal Newport", r: "La concentration sans distraction est une competence rare et precieuse. Protege tes blocs de travail profond comme des reunions inamovibles."},
+  {t: "The Psychology of Money - Morgan Housel", r: "L'argent est plus psychologique que mathematique. La patience est le plus grand avantage en finance."},
+  {t: "Mindset - Carol Dweck", r: "L'etat d'esprit fixe croit que les qualites sont innees. L'etat d'esprit de croissance croit qu'elles se developpent."},
+  {t: "Atomic Habits en bref", r: "Identite > Processus > Resultats. Deviens d'abord la personne qui fait la chose, le reste suit naturellement."}
+];
+
+var ICEBREAKERS = [
+  "Quelle est la competence dont tu es la plus fiere cette annee ?",
+  "Si tu pouvais maitriser une chose en 30 jours, ce serait quoi ?",
+  "Quelle habitude a le plus change ta vie recemment ?",
+  "Qu'est-ce que tu n'aurais pas ose faire il y a 2 ans ?",
+  "Quelle est ton application secrete de productivite ?",
+  "Qui t'a le plus influence(e) professionnellement, et pourquoi ?",
+  "Si tu devais pitcher ton projet en 1 phrase, ce serait quoi ?",
+  "Quelle est ta definition personnelle du succes en ce moment ?",
+  "Qu'est-ce qui t'a surpris dans ton dernier challenge ?",
+  "Quelle est la prochaine grande etape pour toi ?"
+];
+
+var ROUTINE = ["Verre d'eau au reveil", "2 min d'etirements", "1 intention du jour", "5 min sans ecran", "Musique qui booste", "1 min respiration", "3 pages de lecture", "3 priorites du jour"];
+
+var CATS = ["Coaching","Contenu digital","Vente en ligne","Formation en ligne","Freelance creatif","Consulting"];
+var SKILLS = ["tes competences actuelles","ta passion principale","ton experience pro","ce qu'on te demande souvent gratuitement"];
+var FORMATS = ["une offre de service","un produit numerique","un abonnement mensuel","des sessions 1-to-1","un atelier en ligne"];
+
+// ---- STATE ----
+var _qIdx = 0, _qScore = 0, _qId = "";
+var _fcIdx = 0;
+var _routineSel = [];
+var _breathTimer = null;
+
+// ---- CORE FUNCTION ----
+function showGame(id) {
+  // Hide all tiles highlight
+  document.querySelectorAll(".tile").forEach(function(t) { t.classList.remove("on"); });
+  var tEl = document.getElementById("t-" + id);
+  if (tEl) tEl.classList.add("on");
+
+  // Hide all games
+  document.querySelectorAll(".game").forEach(function(g) { g.style.display = "none"; });
+
+  var el = document.getElementById("g-" + id);
+  if (!el) { alert("Jeu introuvable: " + id); return; }
+  el.style.display = "block";
+  el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+  if (id === "quiz-mindset" || id === "quiz-money") {
+    _qId = id; _qIdx = 0; _qScore = 0;
+    renderQ(el);
+  } else if (id === "flashcards") {
+    _fcIdx = 0;
+    renderFC(el);
+  } else if (id === "affirmations") {
+    var h = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:1rem'>Tes 5 affirmations du jour</div>";
+    for (var i = 0; i < AFFIRMATIONS.length; i++) {
+      h += "<div style='background:#FFF8E1;border-radius:10px;padding:.85rem;margin-bottom:.6rem;border-left:3px solid #FFC107;font-size:.83rem;font-weight:600;line-height:1.5'>" + (i+1) + ". " + AFFIRMATIONS[i] + "</div>";
     }
-    html+='<p style="font-size:.72rem;color:#999;margin-top:.75rem">Lis-les à voix haute chaque matin pendant 30 jours.</p>';
-    el.innerHTML=html;
-  } else if(id==='respiration'){
-    el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.5rem;text-align:center">🌬️ Technique 4-7-8</div><p style="font-size:.78rem;color:#666;text-align:center;margin-bottom:1rem">Inspire 4s · Retiens 7s · Expire 8s</p><div id="breath-ring" style="width:90px;height:90px;border-radius:50%;border:4px solid #FFC107;margin:1rem auto;display:flex;align-items:center;justify-content:center;font:800 .85rem Poppins,sans-serif;color:#111;transition:all 1s ease;background:#FFF8E1">Prêt</div><p id="breath-inst" style="text-align:center;font-size:.75rem;color:#999;margin-bottom:1rem">Appuie pour démarrer</p><button class="by" onclick="startBreath()" style="width:100%;font-size:.82rem">Démarrer — 3 cycles</button><div id="breath-done" style="display:none;text-align:center;margin-top:.75rem;font:700 .85rem Poppins,sans-serif;color:#10B981">✓ Terminé — 3 cycles complétés 🎉</div>';
-  } else if(id==='idee-generator'){
-    el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:1rem">🎲 Générateur d'idée de revenu</div><div id="idee-out" style="background:#FFF8E1;border-radius:12px;padding:1.1rem;border:1.5px solid #FFC107;font-size:.88rem;line-height:1.6;min-height:60px"></div><button class="by" onclick="genIdeeClick()" style="width:100%;margin-top:.75rem;font-size:.82rem">🎲 Nouvelle idée</button>';
-    genIdeeClick();
-  } else if(id==='intention-game'){
-    el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:1rem">📝 Intention du jour</div><div id="int-out" style="background:linear-gradient(135deg,#111,#222);border-radius:12px;padding:1.25rem;color:#fff;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center;font:600 .85rem/1.6 Poppins,sans-serif;margin-bottom:.75rem">'+INTENTIONS[0]+'</div><button class="by" onclick="nextIntention()" style="width:100%;font-size:.82rem">🔄 Autre intention</button>';
-  } else if(id==='resume-game'){
-    var rhtml='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.85rem">📖 Résumés Express</div>';
-    for(var i=0;i<RESUMES.length;i++){
-      rhtml+='<div style="background:#FAFAFA;border-radius:10px;padding:.85rem;margin-bottom:.6rem;border-left:3px solid #FFC107"><div style="font:800 .8rem Poppins,sans-serif;color:#111;margin-bottom:.35rem">'+RESUMES[i].title+'</div><div style="font-size:.76rem;color:#555;line-height:1.6">'+RESUMES[i].txt+'</div></div>';
+    el.innerHTML = h;
+  } else if (id === "respiration") {
+    el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.5rem;text-align:center'>Respiration 4-7-8</div><p style='font-size:.78rem;color:#666;text-align:center;margin-bottom:1rem'>Inspire 4s - Retiens 7s - Expire 8s</p><div id='bRing' style='width:90px;height:90px;border-radius:50%;border:4px solid #FFC107;margin:1rem auto;display:flex;align-items:center;justify-content:center;font:800 .85rem Poppins,sans-serif;background:#FFF8E1;transition:all 1s'>Pret</div><p id='bInst' style='text-align:center;font-size:.75rem;color:#999;margin-bottom:1rem'>Appuie pour demarrer</p><button class='by' onclick='startBreath()' style='width:100%;font-size:.82rem'>Demarrer - 3 cycles</button><div id='bDone' style='display:none;text-align:center;margin-top:.75rem;font:700 .85rem Poppins,sans-serif;color:#10B981'>Termine - 3 cycles!</div>";
+  } else if (id === "idees") {
+    function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    var idea = "Lance " + rnd(FORMATS) + " autour de " + rnd(SKILLS) + ", dans le domaine de " + rnd(CATS) + ".";
+    el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:1rem'>Idee de revenu</div><div id='ideaOut' style='background:#FFF8E1;border-radius:12px;padding:1.1rem;border:1.5px solid #FFC107;font-size:.88rem;line-height:1.6;margin-bottom:.75rem'>" + idea + "</div><button class='by' onclick='newIdea()' style='width:100%;font-size:.82rem'>Nouvelle idee</button>";
+  } else if (id === "intention") {
+    el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:1rem'>Intention du jour</div><div id='intOut' style='background:linear-gradient(135deg,#111,#222);border-radius:12px;padding:1.25rem;color:#fff;text-align:center;font:600 .88rem/1.6 Poppins,sans-serif;margin-bottom:.75rem'>" + INTENTIONS[0] + "</div><button class='by' onclick='newIntention()' style='width:100%;font-size:.82rem'>Autre intention</button>";
+  } else if (id === "resumes") {
+    var h2 = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.85rem'>Resumes Express</div>";
+    for (var i = 0; i < RESUMES.length; i++) {
+      h2 += "<div style='background:#FAFAFA;border-radius:10px;padding:.85rem;margin-bottom:.6rem;border-left:3px solid #FFC107'><div style='font:800 .8rem Poppins,sans-serif;color:#111;margin-bottom:.35rem'>" + RESUMES[i].t + "</div><div style='font-size:.76rem;color:#555;line-height:1.6'>" + RESUMES[i].r + "</div></div>";
     }
-    el.innerHTML=rhtml;
-  } else if(id==='mots-perf'){
-    el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.5rem">🔤 Mots Cachés</div><p style="font-size:.76rem;color:#666;margin-bottom:.85rem">Retrouve ces mots : <strong>FOCUS · HABIT · ROUTINE · MINDSET · ACTION</strong></p><div style="font-family:monospace;font-size:.9rem;line-height:2;background:#F5F5F5;padding:.85rem;border-radius:10px;letter-spacing:.2em">F O C U S R A B<br>H A B I T M O U<br>R O U T I N E T<br>A C T I O N T X<br>M I N D S E T Z<br>P L A N G O A L</div><p style="font-size:.7rem;color:#bbb;margin-top:.6rem">Horizontal uniquement 😄</p>';
-  } else if(id==='pitch-game'){
-    _pitch_step=0; renderPitchStep(el);
-  } else if(id==='icebreaker'){
-    var html2='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.75rem">🤝 Ice-Breakers Networking</div>';
-    for(var i=0;i<ICEBREAKERS.length;i++){
-      html2+='<div style="background:#FAFAFA;border-radius:9px;padding:.7rem .9rem;margin-bottom:.45rem;font-size:.8rem;color:#333;line-height:1.5;border-left:2px solid #FFC107"><span style="font-weight:800;color:#FFC107">'+(i+1)+'.</span> '+ICEBREAKERS[i]+'</div>';
+    el.innerHTML = h2;
+  } else if (id === "hydra") {
+    el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.75rem'>Calcul Hydratation</div><label style='font-size:.8rem;font-weight:700;display:block;margin-bottom:.35rem'>Poids (kg)</label><input type='number' id='hydPoids' placeholder='65' style='width:100%;padding:.65rem;border:1.5px solid #E2E2E2;border-radius:9px;font:500 .85rem Poppins,sans-serif;margin-bottom:.75rem;box-sizing:border-box'><button class='by' onclick='calcHydra()' style='width:100%;font-size:.82rem'>Calculer</button><div id='hydRes' style='display:none;margin-top:.75rem;background:#EFF6FF;border-radius:10px;padding:.85rem;font-size:.85rem;color:#1E3A8A'></div>";
+  } else if (id === "routine") {
+    _routineSel = [];
+    var h3 = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.5rem'>Routine Ideale</div><p style='font-size:.76rem;color:#666;margin-bottom:.75rem'>Choisis 4 elements</p><div style='display:grid;grid-template-columns:1fr 1fr;gap:.45rem' id='routGrid'>";
+    for (var i = 0; i < ROUTINE.length; i++) {
+      h3 += "<div onclick='toggleRout(" + i + ",this)' style='background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:9px;padding:.65rem;font-size:.78rem;font-weight:600;cursor:pointer;text-align:center'>" + ROUTINE[i] + "</div>";
     }
-    html2+='<p style="font-size:.7rem;color:#bbb;margin-top:.5rem">Utilise ces questions lors de ton prochain événement networking.</p>';
-    el.innerHTML=html2;
-  } else if(id==='routine-game'){
-    _routine_sel=[];
-    var html3='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.5rem">🌅 Routine Idéale</div><p style="font-size:.76rem;color:#666;margin-bottom:.75rem">Choisis 4 éléments pour ta routine du matin :</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem" id="routine-grid">';
-    for(var i=0;i<ROUTINE_ELEMENTS.length;i++){
-      html3+='<div onclick="toggleRoutineItem('+i+',this)" style="background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:9px;padding:.65rem;font-size:.78rem;font-weight:600;cursor:pointer;text-align:center;transition:all .15s">'+ROUTINE_ELEMENTS[i]+'</div>';
+    h3 += "</div><div id='routRes' style='display:none;margin-top:.85rem;background:#FFF8E1;border-radius:10px;padding:.85rem;border:1.5px solid #FFC107'><div style='font:800 .82rem Poppins,sans-serif;margin-bottom:.4rem'>Ta routine</div><div id='routList' style='font-size:.78rem;color:#333;line-height:1.8'></div></div>";
+    el.innerHTML = h3;
+  } else if (id === "icebreaker") {
+    var h4 = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.75rem'>Ice-Breakers Networking</div>";
+    for (var i = 0; i < ICEBREAKERS.length; i++) {
+      h4 += "<div style='background:#FAFAFA;border-radius:9px;padding:.7rem .9rem;margin-bottom:.45rem;font-size:.8rem;color:#333;line-height:1.5;border-left:2px solid #FFC107'><b style='color:#FFC107'>" + (i+1) + ".</b> " + ICEBREAKERS[i] + "</div>";
     }
-    html3+='</div><div id="routine-result" style="display:none;margin-top:.85rem;background:#FFF8E1;border-radius:10px;padding:.85rem;border:1.5px solid #FFC107"><div style="font:800 .82rem Poppins,sans-serif;margin-bottom:.4rem">✅ Ta routine</div><div id="routine-list" style="font-size:.78rem;color:#333;line-height:1.8"></div></div>';
-    el.innerHTML=html3;
-  } else if(id==='hydra-game'){
-    el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.75rem">💧 Calcul Hydratation</div><label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:.35rem">Ton poids (kg)</label><input type="number" id="hydra-poids" placeholder="ex: 65" style="width:100%;padding:.65rem;border:1.5px solid #E2E2E2;border-radius:9px;font:500 .85rem Poppins,sans-serif;margin-bottom:.75rem;box-sizing:border-box"><label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:.35rem">Niveau d'activité</label><select id="hydra-act" style="width:100%;padding:.65rem;border:1.5px solid #E2E2E2;border-radius:9px;font:500 .85rem Poppins,sans-serif;margin-bottom:.75rem"><option value="1">Sédentaire</option><option value="1.2">Légèrement actif(ve)</option><option value="1.4">Actif(ve)</option><option value="1.6">Très actif(ve)</option></select><button class="by" onclick="calcHydra()" style="width:100%;font-size:.82rem">Calculer</button><div id="hydra-res" style="display:none;margin-top:.75rem;background:#EFF6FF;border-radius:10px;padding:.85rem;border:1.5px solid #93C5FD;font-size:.85rem;color:#1E3A8A;line-height:1.6"></div>';
+    el.innerHTML = h4;
+  } else if (id === "mots") {
+    el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.5rem'>Mots Caches</div><p style='font-size:.76rem;color:#666;margin-bottom:.85rem'>Retrouve : FOCUS - HABIT - ROUTINE - MINDSET - ACTION</p><div style='font-family:monospace;font-size:.9rem;line-height:2;background:#F5F5F5;padding:.85rem;border-radius:10px;letter-spacing:.2em'>F O C U S R A B<br>H A B I T M O U<br>R O U T I N E T<br>A C T I O N T X<br>M I N D S E T Z<br>P L A N G O A L</div><p style='font-size:.7rem;color:#bbb;margin-top:.6rem'>Horizontal uniquement</p>";
   }
 }
 
-// Quiz
-function renderQuizQuestion(el){
-  var data=QUIZ_DATA[_quiz_id];
-  if(_quiz_idx>=data.questions.length){
-    el.innerHTML='<div style="text-align:center;padding:.5rem"><div style="font-size:2rem">'+(_quiz_score>=data.questions.length*0.8?"🏆":_quiz_score>=data.questions.length*0.5?"👏":"💪")+'</div><div style="font:800 1rem Poppins,sans-serif;color:#111;margin:.5rem 0">Score : '+_quiz_score+'/'+data.questions.length+'</div><div style="font-size:.8rem;color:#666;margin-bottom:1rem">'+(_quiz_score===data.questions.length?"Parfait ! 🎉":_quiz_score>=data.questions.length*0.8?"Excellent !":_quiz_score>=data.questions.length*0.5?"Bon début !":"Reviens après le challenge !")+'</div><button class="by" onclick="openGame(''+_quiz_id+'')" style="font-size:.8rem">Recommencer</button></div>';
+// ---- QUIZ ----
+function renderQ(el) {
+  var data = QUIZZES[_qId];
+  if (_qIdx >= data.q.length) {
+    el.innerHTML = "<div style='text-align:center;padding:1rem'><div style='font-size:2.5rem'>" + (_qScore >= 4 ? "🏆" : _qScore >= 3 ? "👏" : "💪") + "</div><div style='font:800 1rem Poppins,sans-serif;color:#111;margin:.5rem 0'>Score: " + _qScore + "/" + data.q.length + "</div><button class='by' onclick='showGame("" + _qId + "")' style='font-size:.82rem;margin-top:.75rem'>Recommencer</button></div>";
     return;
   }
-  var q=data.questions[_quiz_idx];
-  var html='<div style="font:800 .82rem Poppins,sans-serif;color:#FFC107;margin-bottom:.35rem">'+data.title+' — '+(_quiz_idx+1)+'/'+data.questions.length+'</div>';
-  html+='<div style="font:700 .88rem/1.5 Poppins,sans-serif;color:#111;margin-bottom:.75rem">'+q.q+'</div>';
-  for(var i=0;i<q.opts.length;i++){
-    html+='<button class="q-opt" onclick="answerQuiz(this,'+i+','+q.ans+')">'+q.opts[i]+'</button>';
+  var q = data.q[_qIdx];
+  var h = "<div style='font:800 .75rem Poppins,sans-serif;color:#FFC107;margin-bottom:.5rem'>" + data.title + " - " + (_qIdx+1) + "/" + data.q.length + "</div>";
+  h += "<div style='font:700 .88rem/1.5 Poppins,sans-serif;color:#111;margin-bottom:.75rem'>" + q.q + "</div>";
+  for (var i = 0; i < q.opts.length; i++) {
+    h += "<button class='qopt' onclick='ansQ(this," + i + "," + q.a + ")'>" + q.opts[i] + "</button>";
   }
-  html+='<div id="q-fb" style="display:none;font-size:.82rem;font-weight:800;margin-top:.5rem"></div>';
-  el.innerHTML=html;
-}
-function answerQuiz(btn,idx,correct){
-  var btns=btn.parentNode.querySelectorAll('.q-opt');
-  for(var i=0;i<btns.length;i++) btns[i].disabled=true;
-  if(idx===correct){btn.style.background='#D1FAE5';btn.style.borderColor='#10B981';btn.style.color='#065F46';_quiz_score++;}
-  else{btn.style.background='#FEE2E2';btn.style.borderColor='#EF4444';btn.style.color='#991B1B';btns[correct].style.background='#D1FAE5';btns[correct].style.borderColor='#10B981';}
-  var fb=document.getElementById('q-fb');
-  fb.style.display='block';
-  fb.textContent=idx===correct?'✓ Correct !':'✗ Réponse : '+QUIZ_DATA[_quiz_id].questions[_quiz_idx].opts[correct];
-  fb.style.color=idx===correct?'#10B981':'#EF4444';
-  _quiz_idx++;
-  var el=document.getElementById('game-'+_quiz_id);
-  setTimeout(function(){renderQuizQuestion(el);},1400);
+  h += "<div id='qfb' style='display:none;font-size:.82rem;font-weight:800;margin-top:.5rem'></div>";
+  el.innerHTML = h;
 }
 
-// Flashcards
-function renderFlashcard(el){
-  var card=FLASHCARDS[_fc_idx];
-  el.innerHTML='<div style="font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.75rem">⚡ Flash Cards Mindset</div><div style="background:linear-gradient(135deg,#111,#222);border-radius:12px;padding:1.5rem;color:#fff;text-align:center;min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:.75rem"><div style="font-size:.9rem;font-weight:700;line-height:1.5;margin-bottom:.5rem">"'+card.quote+'"</div><div style="font-size:.72rem;color:#FFC107;font-weight:600">— '+card.author+'</div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><span style="font-size:.75rem;color:#bbb">'+(_fc_idx+1)+'/'+FLASHCARDS.length+'</span></div><button class="by" onclick="nextFlashcard()" style="width:100%;font-size:.82rem">'+(_fc_idx<FLASHCARDS.length-1?'Carte suivante →':'Recommencer 🔄')+'</button>';
-}
-function nextFlashcard(){_fc_idx=(_fc_idx+1)%FLASHCARDS.length;renderFlashcard(document.getElementById('game-flashcards-mind'));}
-
-// Idée
-function genIdeeClick(){
-  var cats=["Coaching","Contenu digital","Vente en ligne","Services aux entreprises","Créations manuelles","Formation en ligne","Freelance créatif","Consulting spécialisé"];
-  var skills=["tes compétences actuelles","ta passion principale","ton expérience pro","ce qu'on te demande souvent gratuitement"];
-  var formats=["une offre de service","un produit numérique","un abonnement mensuel","des sessions 1-to-1","un atelier en ligne"];
-  function rnd(a){return a[Math.floor(Math.random()*a.length)];}
-  var out=document.getElementById('idee-out');
-  if(out) out.innerHTML='💡 Lance <strong>'+rnd(formats)+'</strong> autour de <strong>'+rnd(skills)+'</strong>, dans le domaine de <strong>'+rnd(cats)+'</strong>.';
+function ansQ(btn, idx, correct) {
+  var btns = btn.parentNode.querySelectorAll(".qopt");
+  for (var i = 0; i < btns.length; i++) btns[i].disabled = true;
+  if (idx === correct) { btn.classList.add("ok"); _qScore++; }
+  else { btn.classList.add("ko"); btns[correct].classList.add("ok"); }
+  var fb = document.getElementById("qfb");
+  fb.style.display = "block";
+  fb.textContent = idx === correct ? "Correct !" : "Reponse : " + QUIZZES[_qId].q[_qIdx].opts[correct];
+  fb.style.color = idx === correct ? "#10B981" : "#EF4444";
+  _qIdx++;
+  var el = document.getElementById("g-" + _qId);
+  setTimeout(function() { renderQ(el); }, 1400);
 }
 
-// Intention
-function nextIntention(){
-  var out=document.getElementById('int-out');
-  if(out) out.textContent=INTENTIONS[Math.floor(Math.random()*INTENTIONS.length)];
+// ---- FLASHCARDS ----
+function renderFC(el) {
+  var c = FLASHCARDS[_fcIdx];
+  el.innerHTML = "<div style='font:800 .9rem Poppins,sans-serif;color:#111;margin-bottom:.75rem'>Flash Cards</div><div style='background:linear-gradient(135deg,#111,#222);border-radius:12px;padding:1.5rem;color:#fff;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.75rem'><div style='font-size:.9rem;font-weight:700;line-height:1.5;margin-bottom:.5rem'>" + c.q + "</div><div style='font-size:.72rem;color:#FFC107;font-weight:600'>- " + c.a + "</div></div><div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem'><span style='font-size:.75rem;color:#bbb'>" + (_fcIdx+1) + "/" + FLASHCARDS.length + "</span></div><button class='by' onclick='nextFC()' style='width:100%;font-size:.82rem'>" + (_fcIdx < FLASHCARDS.length-1 ? "Suivante" : "Recommencer") + "</button>";
+}
+function nextFC() { _fcIdx = (_fcIdx + 1) % FLASHCARDS.length; renderFC(document.getElementById("g-flashcards")); }
+
+// ---- OTHER GAMES ----
+function newIdea() {
+  function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  var el = document.getElementById("ideaOut");
+  if (el) el.textContent = "Lance " + rnd(FORMATS) + " autour de " + rnd(SKILLS) + ", dans le domaine de " + rnd(CATS) + ".";
 }
 
-// Pitch
-function renderPitchStep(el){
-  if(_pitch_step>=PITCH_STEPS.length){
-    el.innerHTML='<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎤</div><div style="font:800 .9rem Poppins,sans-serif;color:#111;margin:.5rem 0">Ton pitch est prêt !</div><div style="font-size:.78rem;color:#666">Pratique-le jusqu’à le dire en 60 secondes.</div><button class="by" onclick="openGame(&quot;pitch-game&quot;)" style="margin-top:.75rem;font-size:.8rem">Recommencer</button></div>';
-    return;
+function newIntention() {
+  var el = document.getElementById("intOut");
+  if (el) el.textContent = INTENTIONS[Math.floor(Math.random() * INTENTIONS.length)];
+}
+
+function calcHydra() {
+  var p = parseFloat(document.getElementById("hydPoids").value);
+  if (!p) return;
+  var ml = Math.round(p * 35 / 100) * 100;
+  var el = document.getElementById("hydRes");
+  el.innerHTML = "Besoin estimé : <strong>" + ml + " ml</strong> / jour - soit " + (ml/250).toFixed(1) + " verres de 250ml";
+  el.style.display = "block";
+}
+
+function toggleRout(idx, el2) {
+  var pos = _routineSel.indexOf(idx);
+  if (pos > -1) {
+    _routineSel.splice(pos, 1);
+    el2.style.background = "#FAFAFA";
+    el2.style.borderColor = "#E2E2E2";
+  } else if (_routineSel.length < 4) {
+    _routineSel.push(idx);
+    el2.style.background = "#FFF8E1";
+    el2.style.borderColor = "#FFC107";
   }
-  el.innerHTML='<div style="font:800 .92rem Poppins,sans-serif;color:#111;margin-bottom:.75rem">🎤 Construis ton Pitch en 60s</div><div style="background:#FFF8E1;border-radius:10px;padding:1rem;border-left:3px solid #FFC107;font-size:.85rem;line-height:1.6;margin-bottom:.75rem">'+PITCH_STEPS[_pitch_step]+'<div style="margin-top:.75rem"><input type="text" placeholder="Note ta réponse..." style="width:100%;padding:.6rem;border:1.5px solid #E2E2E2;border-radius:8px;font:500 .8rem Poppins,sans-serif;box-sizing:border-box"></div></div><div style="font-size:.75rem;color:#bbb;margin-bottom:.5rem">Étape '+(_pitch_step+1)+'/'+PITCH_STEPS.length+'</div><button class="by" onclick="_pitch_step++;renderPitchStep(document.getElementById(&quot;game-pitch-game&quot;))" style="width:100%;font-size:.82rem">'+(_pitch_step<PITCH_STEPS.length-1?'Étape suivante →':'Terminer ✓')+'</button>';
-}
-
-// Routine
-function toggleRoutineItem(idx,el2){
-  var pos=_routine_sel.indexOf(idx);
-  if(pos>-1){_routine_sel.splice(pos,1);el2.style.background='#FAFAFA';el2.style.borderColor='#E2E2E2';}
-  else if(_routine_sel.length<4){_routine_sel.push(idx);el2.style.background='#FFF8E1';el2.style.borderColor='#FFC107';}
-  var res=document.getElementById('routine-result');
-  var lst=document.getElementById('routine-list');
-  if(_routine_sel.length===4&&res&&lst){
-    res.style.display='block';
-    var txt='';
-    for(var i=0;i<_routine_sel.length;i++) txt+='▸ '+ROUTINE_ELEMENTS[_routine_sel[i]]+'<br>';
-    lst.innerHTML=txt;
-  }else if(res){res.style.display='none';}
-}
-
-// Hydra
-function calcHydra(){
-  var p=+document.getElementById('hydra-poids').value;
-  var a=+document.getElementById('hydra-act').value;
-  if(!p)return;
-  var ml=Math.round(p*35*a/100)*100;
-  var res=document.getElementById('hydra-res');
-  res.innerHTML='💧 Ton besoin estimé : <strong>'+ml+' ml</strong> par jour<br><span style="font-size:.72rem;color:#555">soit environ <strong>'+(ml/250).toFixed(1)+' verres</strong> de 250ml</span>';
-  res.style.display='block';
-}
-
-// Respiration
-function startBreath(){
-  var ring=document.getElementById('breath-ring');
-  var inst=document.getElementById('breath-inst');
-  var done=document.getElementById('breath-done');
-  if(!ring)return;
-  var cycle=0;
-  function phase(label,color,size,dur,next){
-    ring.textContent=label; ring.style.background=color; ring.style.width=size; ring.style.height=size;
-    if(inst) inst.textContent='Cycle '+(cycle+1)+'/3 — '+label;
-    clearTimeout(_breath_timer); _breath_timer=setTimeout(next,dur*1000);
+  if (_routineSel.length === 4) {
+    var res = document.getElementById("routRes");
+    var lst = document.getElementById("routList");
+    if (res && lst) {
+      res.style.display = "block";
+      var txt = "";
+      for (var i = 0; i < _routineSel.length; i++) txt += "- " + ROUTINE[_routineSel[i]] + "<br>";
+      lst.innerHTML = txt;
+    }
   }
-  function runCycle(){
-    if(cycle>=3){ring.textContent='✓';if(done)done.style.display='block';return;}
+}
+
+function startBreath() {
+  var ring = document.getElementById("bRing");
+  var inst = document.getElementById("bInst");
+  var done = document.getElementById("bDone");
+  if (!ring) return;
+  var cycle = 0;
+  function ph(label, bg, size, dur, next) {
+    ring.textContent = label;
+    ring.style.background = bg;
+    ring.style.width = size;
+    ring.style.height = size;
+    if (inst) inst.textContent = "Cycle " + (cycle+1) + "/3 - " + label;
+    clearTimeout(_breathTimer);
+    _breathTimer = setTimeout(next, dur * 1000);
+  }
+  function go() {
+    if (cycle >= 3) { ring.textContent = "Fini !"; if (done) done.style.display = "block"; return; }
     cycle++;
-    phase('Inspire...','#FFF8E1','110px',4,function(){
-      phase('Retiens...','#FFF3CD','110px',7,function(){
-        phase('Expire...','#FAFAFA','90px',8,function(){runCycle();});
+    ph("Inspire...", "#EFF6FF", "110px", 4, function() {
+      ph("Retiens...", "#FFF3CD", "110px", 7, function() {
+        ph("Expire...", "#FAFAFA", "90px", 8, function() { go(); });
       });
     });
   }
-  runCycle();
+  go();
 }
 
-// Auth + init
-var _sb3=window._sb||null;
-document.addEventListener('DOMContentLoaded',function(){
-  if(window.Supabase&&!_sb3){
-    try{_sb3=window.Supabase.createClient('https://hddxbjmdtbxvxwmmdxmj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcxNDY2NDAsImV4cCI6MjA2MjcyMjY0MH0.q_e5MUWIJCUlFODKe2kpNaJt4X0t_Gra4uzZxD-3lVA');}catch(e){}
-  }
-});
-function doLogout(){if(window._sb)window._sb.auth.signOut().then(function(){window.location.href='/';});else window.location.href='/';}
+// ---- AUTH ----
+var _sb = null;
+try {
+  _sb = window.supabase.createClient(
+    "https://hddxbjmdtbxvxwmmdxmj.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ"
+  );
+  _sb.auth.getSession().then(function(r) {
+    if (r.data && r.data.session) {
+      var u = r.data.session.user;
+      _sb.from("profiles").select("prenom,plan").eq("id", u.id).single().then(function(pr) {
+        if (pr.data) {
+          var pl = document.getElementById("nav-pl");
+          var labels = {free:"Starter", unit:"Challenge", annual:"Annuel"};
+          if (pl) pl.textContent = labels[pr.data.plan] || "Starter";
+        }
+      });
+    }
+  });
+} catch(e) { console.log("Supabase init error:", e); }
+
+function doLogout() {
+  if (_sb) _sb.auth.signOut().then(function() { window.location.href = "/"; });
+  else window.location.href = "/";
+}
 </script>
 </body>
 </html>

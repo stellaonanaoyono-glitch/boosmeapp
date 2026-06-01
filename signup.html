@@ -130,7 +130,7 @@ function setPlan(p){
   _plan=p;
   ["free","annual"].forEach(function(x){document.getElementById("pl-"+x).classList.remove("on");});
   document.getElementById("pl-"+p).classList.add("on");
-  document.getElementById("btn2").textContent=p==="free"?"\u{1F680} Activer mon compte":"Proc\u00e9der au paiement \u2192";
+  document.getElementById("btn2").textContent=p==="free"?"🚀 Activer mon compte":"Proc\u00e9der au paiement \u2192";
 }
 function next1(){
   hideErr();
@@ -178,7 +178,7 @@ async function signup(){
   btn.textContent="\u23f3 Cr\u00e9ation...";btn.disabled=true;
   var r=await sb3.auth.signUp({email:em,password:pw,options:{data:{prenom:pn,pays:py},emailRedirectTo:"https://boostme.social/login"}});
   if(r.error){
-    btn.disabled=false;btn.textContent=_plan==="free"?"\u{1F680} Activer mon compte":"Proc\u00e9der au paiement \u2192";
+    btn.disabled=false;btn.textContent=_plan==="free"?"🚀 Activer mon compte":"Proc\u00e9der au paiement \u2192";
     if(r.error.message.includes("already"))showErr("Un compte existe d\u00e9j\u00e0 avec cet email.");
     else showErr(r.error.message);
     return;
