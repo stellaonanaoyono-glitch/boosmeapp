@@ -82,6 +82,26 @@ exports.handler = async (event) => {
       htmlContent: html,
     }, key);
 
+    // Notification admin paiement
+    const ADMIN_P = process.env.ADMIN_EMAIL || 'boostmeapp@gmail.com';
+    const SENDER_P = process.env.BREVO_SENDER || 'aeliservicescmr@gmail.com';
+    try {
+      await brevo({
+        sender: { name: 'BOOST.ME System', email: SENDER_P },
+        to: [{ email: ADMIN_P, name: 'Admin' }],
+        subject: `[BOOST.ME] Nouveau paiement — ${prenom || email} — ${isAnnual ? 'Annuel' : 'Challenge'} — ${amt} EUR`,
+        htmlContent: `<p style="font-family:sans-serif">
+          <strong>Nouveau paiement confirme BOOST.ME</strong><br><br>
+          Prenom : ${prenom || '—'}<br>
+          Email : ${email}<br>
+          Plan : ${isAnnual ? 'Acces Annuel' : 'Challenge ' + (challengeName||'')}<br>
+          Montant : ${amt} EUR<br>
+          Date : ${new Date().toLocaleString('fr-FR')}<br><br>
+          <a href="https://boostme.social/admin">Voir le tableau de bord admin</a>
+        </p>`,
+      }, key);
+    } catch(e) { console.log('[payment] Admin notify failed'); }
+
     return { statusCode: r.status < 300 ? 200 : r.status, body: r.body };
   } catch (err) {
     return { statusCode: 500, body: JSON.stringify({ error: err.message }) };

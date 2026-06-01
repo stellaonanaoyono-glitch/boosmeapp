@@ -131,6 +131,24 @@ exports.handler = async (event) => {
       console.error('[send-welcome] Brevo error body:', r.body);
       return { statusCode: r.status, body: r.body };
     }
+
+    // Notification admin
+    const ADMIN = process.env.ADMIN_EMAIL || 'boostmeapp@gmail.com';
+    try {
+      await brevo({
+        sender: { name: 'BOOST.ME System', email: SENDER },
+        to: [{ email: ADMIN, name: 'Admin' }],
+        subject: `[BOOST.ME] Nouvelle inscription — ${name}`,
+        htmlContent: `<p style="font-family:sans-serif">
+          <strong>Nouvelle inscription BOOST.ME</strong><br><br>
+          Prenom : ${name}<br>
+          Email : ${email}<br>
+          Date : ${new Date().toLocaleString('fr-FR')}<br><br>
+          <a href="https://boostme.social/admin">Voir le tableau de bord admin</a>
+        </p>`,
+      }, key);
+    } catch(adminErr) { console.log('[send-welcome] Admin notify failed (non-bloquant)'); }
+
     return { statusCode: 200, body: JSON.stringify({ sent: true, email }) };
   } catch (err) {
     console.error('[send-welcome] Exception:', err.message);
