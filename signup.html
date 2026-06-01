@@ -1,209 +1,240 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Inscription &#8212; BOOST.ME</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:#F2F2F2;color:#111;-webkit-font-smoothing:antialiased;padding-bottom:0}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;height:60px;display:flex;align-items:center;padding:0 1.25rem;gap:1rem;justify-content:space-between}
-.nav-logo{height:34px;width:auto;object-fit:contain;flex-shrink:0}
-.nav-r{display:flex;align-items:center;gap:.6rem}
-.nav-nm{font-size:.8rem;font-weight:600;color:#333}
-.nav-pl{background:#FFF8E1;color:#E5AC00;font-size:.62rem;font-weight:800;padding:.15rem .5rem;border-radius:4px;text-transform:uppercase}
-.btn-sm{padding:.4rem .85rem;background:none;border:1.5px solid #E2E2E2;border-radius:8px;font:600 .74rem Poppins,sans-serif;cursor:pointer;color:#666;text-decoration:none;display:inline-flex;align-items:center}
-.btn-sm:hover{border-color:#111;color:#111}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E2E2E2;display:grid;grid-template-columns:repeat(5,1fr);height:58px;z-index:100}
-.bn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:.58rem;font-weight:600;color:#999;text-decoration:none;border:none;background:none;font-family:Poppins,sans-serif;cursor:pointer;transition:color .15s}
-.bn.on,.bn:hover{color:#FFC107}.bni{font-size:1.1rem;line-height:1}
-.pg{margin-top:60px;padding:1.5rem 1.25rem;max-width:860px;margin-left:auto;margin-right:auto}
-.by{display:inline-flex;align-items:center;justify-content:center;padding:.78rem 1.4rem;background:#FFC107;color:#111;font:700 .86rem Poppins,sans-serif;border:none;border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none}
-.by:hover{background:#E5AC00}.by:disabled{background:#ccc;color:#888;cursor:not-allowed}
-.bg{display:inline-flex;align-items:center;padding:.65rem 1.1rem;background:none;color:#666;font:600 .8rem Poppins,sans-serif;border:1.5px solid #E2E2E2;border-radius:10px;cursor:pointer;text-decoration:none}
-.bg:hover{border-color:#111;color:#111}
-.card{background:#fff;border-radius:14px;padding:1.25rem;border:1px solid #E2E2E2;margin-bottom:1rem}
-.sec-h{font-size:.9rem;font-weight:800;margin-bottom:.9rem}
-.spin{width:18px;height:18px;border:2.5px solid #E2E2E2;border-top-color:#FFC107;border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0}
-@keyframes sp{to{transform:rotate(360deg)}}
-.toast{position:fixed;bottom:4.5rem;right:1rem;background:#111;color:#fff;padding:.62rem 1rem;border-radius:10px;font-size:.74rem;font-weight:600;border-left:3px solid #FFC107;transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{transform:translateY(0);opacity:1}
-body{background:#111;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
-.bx{background:#fff;border-radius:20px;padding:2.25rem;width:100%;max-width:400px}
-.lg{text-align:center;margin-bottom:1.5rem}.lg img{height:36px;width:auto;object-fit:contain}
-h1{font-size:1.3rem;font-weight:800;text-align:center;margin-bottom:.2rem}
-.sub{font-size:.82rem;color:#666;text-align:center;margin-bottom:1.5rem}
-label{display:block;font-size:.72rem;font-weight:700;color:#444;margin-bottom:.3rem;margin-top:.75rem}
-label:first-of-type{margin-top:0}
-input,select{width:100%;padding:.72rem .95rem;border:1.5px solid #ddd;border-radius:10px;font:500 .88rem Poppins,sans-serif;outline:none;background:#F8F8F8;transition:border-color .15s;-webkit-appearance:none}
-input:focus,select:focus{border-color:#FFC107;background:#fff}
-.btn{width:100%;padding:.88rem;background:#FFC107;color:#111;font:700 .92rem Poppins,sans-serif;border:none;border-radius:10px;cursor:pointer;transition:all .2s;margin-top:.5rem}
-.btn:hover{background:#E5AC00}.btn:disabled{background:#ccc;cursor:not-allowed}
-.msg{padding:.72rem 1rem;border-radius:8px;font-size:.8rem;margin-bottom:.9rem;display:none}
-.msg.err{background:#FEE2E2;color:#991B1B;display:block}
-.msg.ok{background:#D1FAE5;color:#065F46;display:block}
-.lnk{text-align:center;font-size:.78rem;color:#999;margin-top:1rem}
-.lnk a{color:#E5AC00;font-weight:700;text-decoration:none}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Inscription — BOOST.ME</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#F2F2F2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.bx{background:#fff;border-radius:20px;padding:2rem 1.75rem;width:100%;max-width:440px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.lg{text-align:center;margin-bottom:1.5rem}
+.logo{font:900 22px/1 Poppins,sans-serif;color:#111}
+.logo span{color:#FFC107}
+h1{font-size:1.3rem;font-weight:800;color:#111;margin-bottom:.25rem}
+.sub{font-size:.82rem;color:#999;margin-bottom:1.5rem}
 .steps{display:flex;gap:.4rem;margin-bottom:1.5rem}
-.st{flex:1;height:3px;border-radius:50px;background:#E2E2E2;transition:background .3s}
+.st{height:4px;border-radius:2px;background:#F0F0F0;flex:1;transition:background .3s}
 .st.on{background:#FFC107}
-.panel{display:none}.panel.on{display:block}
-.plans{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.9rem}
-.pl{display:flex;align-items:center;gap:.8rem;background:#F8F8F8;border:1.5px solid #E2E2E2;border-radius:12px;padding:.82rem .95rem;cursor:pointer;transition:all .15s}
-.pl:hover{border-color:#E5AC00}.pl.on{border-color:#FFC107;background:#FFFAEC}
-.pl-r{width:16px;height:16px;border-radius:50%;border:2px solid #ccc;flex-shrink:0;transition:all .15s;position:relative}
+label{display:block;font-size:.78rem;font-weight:700;color:#555;margin-bottom:.3rem;margin-top:.9rem}
+label:first-of-type{margin-top:0}
+input,select{width:100%;padding:.72rem .9rem;border:1.5px solid #E2E2E2;border-radius:10px;font:500 .88rem Poppins,sans-serif;color:#111;background:#fff;outline:none;transition:border-color .2s}
+input:focus,select:focus{border-color:#FFC107}
+.btn{width:100%;padding:.85rem;background:#FFC107;color:#111;border:none;border-radius:12px;font:800 .95rem Poppins,sans-serif;cursor:pointer;margin-top:1.25rem;transition:background .2s}
+.btn:hover{background:#E5AC00}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-back{width:100%;padding:.75rem;background:none;border:1.5px solid #E2E2E2;border-radius:12px;font:600 .88rem Poppins,sans-serif;cursor:pointer;margin-top:.5rem;color:#666}
+.btn-back:hover{border-color:#111;color:#111}
+.lnk{text-align:center;font-size:.82rem;color:#999;margin-top:1rem}
+.lnk a{color:#FFC107;font-weight:700;text-decoration:none}
+.msg{font-size:.8rem;padding:.6rem .85rem;border-radius:8px;margin-bottom:.75rem;display:none}
+.msg.err{display:block;background:#FEE2E2;color:#991B1B;border:1px solid #FECACA}
+.panel{display:none}
+.panel.on{display:block}
+.plans{display:flex;flex-direction:column;gap:.6rem;margin:.5rem 0 1rem}
+.pl{border:2px solid #E2E2E2;border-radius:12px;padding:.9rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.85rem;transition:all .2s}
+.pl.on{border-color:#FFC107;background:#FFFAEC}
+.pl-r{width:18px;height:18px;border-radius:50%;border:2px solid #ccc;flex-shrink:0;position:relative}
 .pl.on .pl-r{background:#FFC107;border-color:#FFC107}
-.pl.on .pl-r::after{content:'';position:absolute;width:5px;height:5px;border-radius:50%;background:#111;top:50%;left:50%;transform:translate(-50%,-50%)}
-.pl-in{flex:1}.pl-nm{font-size:.82rem;font-weight:700}.pl-ds{font-size:.68rem;color:#666}
-.pl-px{font-size:.9rem;font-weight:800;white-space:nowrap}
-.suc-wrap{text-align:center;padding:1.5rem 0}
-.suc-ico{font-size:2.8rem;display:block;margin-bottom:.75rem}
-.suc-h{font-size:1.25rem;font-weight:800;margin-bottom:.4rem}
-.suc-p{font-size:.82rem;color:#666;line-height:1.65;margin-bottom:1.5rem}
+.pl.on .pl-r::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:#111;top:50%;left:50%;transform:translate(-50%,-50%)}
+.pl-in{flex:1}
+.pl-nm{font-size:.88rem;font-weight:700;color:#111}
+.pl-ds{font-size:.72rem;color:#666}
+.pl-px{font-size:1rem;font-weight:900;white-space:nowrap;color:#111}
+.suc-wrap{text-align:center;padding:.5rem 0}
+.suc-ico{font-size:3rem;display:block;margin-bottom:.75rem}
+.suc-h{font-size:1.2rem;font-weight:800;color:#111;margin-bottom:.5rem}
+.suc-p{font-size:.85rem;color:#555;line-height:1.65;margin-bottom:1.25rem}
+.tip{background:#FFF8E1;border-radius:10px;padding:.85rem;font-size:.8rem;color:#666;line-height:1.6;margin-bottom:.75rem;text-align:left}
 </style>
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-function toggleObj(el){
-  el.classList.toggle('sel');
-  if(el.classList.contains('sel')){
-    el.style.background='#FFF8E1';
-    el.style.borderColor='#FFC107';
-  }else{
-    el.style.background='#FAFAFA';
-    el.style.borderColor='#E2E2E2';
-  }
-}
-</script>
-<div class="bx"><div class="lg"><a href="/" style="text-decoration:none;display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;background:#111;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#FFC107;font-weight:900;font-size:11px;font-family:Poppins,sans-serif;letter-spacing:-0.5px">BM</span></div><span style="font:900 15px/1 Poppins,sans-serif;color:#111;letter-spacing:0.5px">BOOST<span style="color:#FFC107">.ME</span></span></a></div><h1 id="sp-h">Créer mon compte</h1><p class="sub" id="sp-s">Étape 1 sur 3 — Tes informations</p><div class="steps"><div class="st on" id="st1"></div><div class="st" id="st2"></div><div class="st" id="st3"></div></div><div id="err" class="msg"></div><div class="panel on" id="p1"><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem"><div><label>Prénom *</label><input type="text" id="pn" placeholder="Marie" autocomplete="given-name"></div><div><label>Nom</label><input type="text" id="nm" placeholder="Ngo" autocomplete="family-name"></div></div><label>Email *</label><input type="email" id="em" placeholder="marie@email.com" autocomplete="email"><label>Mot de passe * <span style="font-weight:400;color:#bbb;font-size:.66rem">(8 car. min.)</span></label><input type="password" id="pw" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="new-password"><label>Pays</label><select id="py"><option value="">Sélectionner&#8230;</option><option value="FR">France</option><option value="BE">Belgique</option><option value="CH">Suisse</option><option value="CA">Canada</option><option value="GB">Royaume-Uni</option><option value="US">États-Unis</option><option value="CM">Cameroun</option><option value="GA">Gabon</option><option value="CG">Congo</option><option value="CI">Côte d'Ivoire</option><option value="SN">Sénégal</option><option value="other">Autre</option></select><button class="btn" onclick="next1()">Continuer &#8594;</button><div class="lnk">Déjà membre ? <a href="/login">Se connecter</a></div></div><div class="panel" id="p1b">
-  <p style="font-size:.8rem;color:#666;margin-bottom:1rem">Pour te recommander les bons challenges.</p>
-  <label>Tranche d'âge</label>
-  <select id="age">
-    <option value="">Sélectionner…</option>
-    <option value="18-24">18 – 24 ans</option>
-    <option value="25-34">25 – 34 ans</option>
-    <option value="35-44">35 – 44 ans</option>
-    <option value="45-54">45 – 54 ans</option>
-    <option value="55+">55 ans et plus</option>
-  </select>
-  <label style="margin-top:.75rem">Situation professionnelle</label>
-  <select id="situ">
-    <option value="">Sélectionner…</option>
-    <option value="salarie">Salarié(e)</option>
-    <option value="entrepreneur">Entrepreneur(e) / Freelance</option>
-    <option value="etudiant">Étudiant(e)</option>
-    <option value="sans-emploi">En recherche d'emploi</option>
-    <option value="autre">Autre</option>
-  </select>
-  <label style="margin-top:.75rem">Tes principaux objectifs <span style="font-weight:400;color:#bbb;font-size:.7rem">(plusieurs choix)</span></label>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.85rem" id="obj-grid">
-    <div class="obj-item" data-val="confiance" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">💪 Confiance en soi</div>
-    <div class="obj-item" data-val="finances" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">💰 Finances</div>
-    <div class="obj-item" data-val="productivite" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">🎯 Productivité</div>
-    <div class="obj-item" data-val="image" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">✨ Image personnelle</div>
-    <div class="obj-item" data-val="carriere" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">🚀 Carrière / Marque</div>
-    <div class="obj-item" data-val="mental" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">🧠 Équilibre mental</div>
-    <div class="obj-item" data-val="corps" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">💚 Corps & Santé</div>
-    <div class="obj-item" data-val="revenus" onclick="toggleObj(this)" style="display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.8rem;background:#FAFAFA;border:1.5px solid #E2E2E2;border-radius:8px;padding:.5rem .65rem;cursor:pointer;user-select:none">💡 Revenus supplémentaires</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div class="bx">
+  <div class="lg">
+    <div class="logo">BOOST<span>.ME</span></div>
   </div>
-  <button class="btn" onclick="next1b()">Continuer &#8594;</button>
-  <button style="width:100%;padding:.75rem;background:none;border:1.5px solid #E2E2E2;border-radius:10px;font:600 .83rem Poppins,sans-serif;cursor:pointer;margin-top:.5rem" onclick="goBackP1()">← Retour</button>
-</div>
-<div class="panel" id="p2"><p style="font-size:.8rem;color:#666;margin-bottom:1rem">Choisis ton plan pour commencer.</p><div class="plans"><div class="pl on" id="pl-free" onclick="setPlan('free')"><div class="pl-r"></div><div class="pl-in"><div class="pl-nm">Commencer gratuitement</div><div class="pl-ds">BoostMe Starter &#183; 7 jours</div></div><div class="pl-px" style="color:#22C55E">Gratuit</div></div><div class="pl" id="pl-annual" onclick="setPlan('annual')"><div class="pl-r"></div><div class="pl-in"><div class="pl-nm">Accès Annuel Illimité <span style="background:#FFC107;color:#111;font-size:.55rem;font-weight:800;padding:.06rem .35rem;border-radius:3px;margin-left:.3rem">&#11088;</span></div><div class="pl-ds">13 challenges &#183; Sans limite</div></div><div class="pl-px">&#8364;49<small style="font-size:.6rem;font-weight:400;color:#999">/an</small></div></div></div><button class="btn" id="btn2" onclick="signup()">&#128640; Activer mon compte</button><button style="width:100%;padding:.75rem;background:none;border:1.5px solid #E2E2E2;border-radius:10px;font:600 .83rem Poppins,sans-serif;cursor:pointer;margin-top:.5rem" onclick="goBack()">← Retour</button></div><div class="panel" id="p-ok">
-  <div class="suc-wrap">
-    <div style="width:64px;height:64px;border-radius:50%;background:#FFF8E1;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:2rem">📧</div>
-    <h2 class="suc-h">Vérifie ta boîte email !</h2>
-    <p class="suc-p" id="suc-msg" style="font-size:.9rem;color:#555;line-height:1.6;margin-bottom:1.25rem">Un email de confirmation t'a été envoyé à <strong id="conf-email"></strong>.<br>Clique sur le lien dans cet email pour activer ton compte.</p>
-    <div style="background:#FFF8E1;border-radius:12px;padding:1rem;margin-bottom:1.25rem;font-size:.82rem;color:#666;text-align:left;line-height:1.6">
-      <div style="font-weight:800;color:#111;margin-bottom:.35rem">💡 Astuce</div>
-      Vérifie aussi ton dossier <strong>Spam</strong> ou <strong>Promotions</strong> si tu ne vois pas l'email dans ta boîte principale. L'email vient de <em>BOOST.ME</em>.
+  <h1 id="sp-h">Creer mon compte</h1>
+  <p class="sub" id="sp-s">Etape 1 sur 2 - Tes informations</p>
+  <div class="steps"><div class="st on" id="st1"></div><div class="st" id="st2"></div></div>
+  <div id="err" class="msg"></div>
+
+  <!-- STEP 1 -->
+  <div class="panel on" id="p1">
+    <label>Prenom *</label>
+    <input type="text" id="pn" placeholder="Marie" autocomplete="given-name">
+    <label>Email *</label>
+    <input type="email" id="em" placeholder="marie@email.com" autocomplete="email">
+    <label>Mot de passe * <span style="font-weight:400;color:#bbb;font-size:.68rem">(8 car. min.)</span></label>
+    <input type="password" id="pw" placeholder="••••••••" autocomplete="new-password">
+    <label>Pays</label>
+    <select id="py">
+      <option value="">Selectionner...</option>
+      <option value="CM">Cameroun</option>
+      <option value="FR">France</option>
+      <option value="BE">Belgique</option>
+      <option value="CH">Suisse</option>
+      <option value="CA">Canada</option>
+      <option value="GB">Royaume-Uni</option>
+      <option value="US">Etats-Unis</option>
+      <option value="GA">Gabon</option>
+      <option value="CG">Congo</option>
+      <option value="CI">Cote d'Ivoire</option>
+      <option value="SN">Senegal</option>
+      <option value="other">Autre</option>
+    </select>
+    <button class="btn" onclick="next1()">Continuer</button>
+    <div class="lnk">Deja membre ? <a href="/login">Se connecter</a></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="panel" id="p2">
+    <p style="font-size:.82rem;color:#666;margin-bottom:.75rem">Choisis ton plan pour commencer.</p>
+    <div class="plans">
+      <div class="pl on" id="pl-free" onclick="setPlan('free')">
+        <div class="pl-r"></div>
+        <div class="pl-in">
+          <div class="pl-nm">Commencer gratuitement</div>
+          <div class="pl-ds">BoostMe Starter - 7 jours</div>
+        </div>
+        <div class="pl-px" style="color:#22C55E">Gratuit</div>
+      </div>
+      <div class="pl" id="pl-annual" onclick="setPlan('annual')">
+        <div class="pl-r"></div>
+        <div class="pl-in">
+          <div class="pl-nm">Acces Annuel Illimite &#11088;</div>
+          <div class="pl-ds">13 challenges - Toute l'annee</div>
+        </div>
+        <div class="pl-px">&#8364;49<small style="font-size:.62rem;font-weight:500;color:#999">/an</small></div>
+      </div>
     </div>
-    <p style="font-size:.75rem;color:#bbb;margin-top:.5rem">Une fois confirmé, connecte-toi pour commencer.</p>
-    <a class="btn" href="/login" style="display:block;text-align:center;text-decoration:none;margin-top:.85rem">Aller à la connexion →</a>
+    <button class="btn" id="btn2" onclick="doSignup()">Activer mon compte</button>
+    <button class="btn-back" onclick="goBack()">Retour</button>
   </div>
-</div></div>
+
+  <!-- SUCCESS -->
+  <div class="panel" id="p-ok">
+    <div class="suc-wrap">
+      <span class="suc-ico">&#128231;</span>
+      <div class="suc-h">Verifie ta boite email !</div>
+      <div class="suc-p">Un email de confirmation a ete envoye a <strong id="conf-em"></strong>.<br>Clique sur le lien pour activer ton compte.</div>
+      <div class="tip">
+        <strong>Astuce :</strong> Verifie aussi ton dossier <strong>Spam</strong> ou <strong>Promotions</strong>. L'email vient de BOOST.ME.
+      </div>
+      <a class="btn" href="/login" style="display:block;text-align:center;text-decoration:none;margin-top:.5rem">Aller a la connexion</a>
+    </div>
+  </div>
+</div>
+
 <script>
-var sb3=window.supabase.createClient("https://hddxbjmdtbxvxwmmdxmj.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ");
-sb3.auth.getSession().then(function(r){if(r.data.session)window.location.href="/dashboard";});
-var _plan="free";
-function showErr(m){var e=document.getElementById("err");e.textContent=m;e.className="msg err";window.scrollTo(0,0);}
-function hideErr(){document.getElementById("err").className="msg";}
-function setPlan(p){
-  _plan=p;
-  ["free","annual"].forEach(function(x){document.getElementById("pl-"+x).classList.remove("on");});
-  document.getElementById("pl-"+p).classList.add("on");
-  document.getElementById("btn2").textContent=p==="free"?"🚀 Activer mon compte":"Proc\u00e9der au paiement \u2192";
+var _sb = window.supabase.createClient(
+  "https://hddxbjmdtbxvxwmmdxmj.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ"
+);
+
+// Redirect if already logged in
+_sb.auth.getSession().then(function(r) {
+  if (r.data && r.data.session) window.location.href = "/dashboard";
+});
+
+var _plan = "free";
+
+function showErr(m) {
+  var e = document.getElementById("err");
+  e.textContent = m;
+  e.className = "msg err";
 }
-function next1(){
+function hideErr() {
+  document.getElementById("err").className = "msg";
+}
+
+function setPlan(p) {
+  _plan = p;
+  document.getElementById("pl-free").classList.toggle("on", p === "free");
+  document.getElementById("pl-annual").classList.toggle("on", p === "annual");
+}
+
+function next1() {
   hideErr();
-  var pn=document.getElementById("pn").value.trim();
-  var em=document.getElementById("em").value.trim();
-  var pw=document.getElementById("pw").value;
-  if(!pn){showErr("Entre ton pr\u00e9nom.");return;}
-  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showErr("Email invalide.");return;}
-  if(pw.length<8){showErr("Mot de passe trop court (8 caract\u00e8res minimum).");return;}
+  var pn = document.getElementById("pn").value.trim();
+  var em = document.getElementById("em").value.trim();
+  var pw = document.getElementById("pw").value;
+  if (!pn) { showErr("Entre ton prenom."); return; }
+  if (!em || em.indexOf("@") < 0) { showErr("Email invalide."); return; }
+  if (pw.length < 8) { showErr("Mot de passe trop court (8 caracteres minimum)."); return; }
   document.getElementById("p1").classList.remove("on");
-  document.getElementById("p1b").classList.add("on");
-  document.getElementById("st2").classList.add("on");
-  document.getElementById("sp-h").textContent="Presque l\u00e0 !";
-  document.getElementById("sp-s").textContent="\u00c9tape 2 sur 3 \u2014 Ton profil";
-}
-function next1b(){
-  document.getElementById("p1b").classList.remove("on");
   document.getElementById("p2").classList.add("on");
-  document.getElementById("st3").classList.add("on");
-  document.getElementById("sp-h").textContent="Choisis ton plan";
-  document.getElementById("sp-s").textContent="\u00c9tape 3 sur 3 \u2014 Ton plan";
-  window.scrollTo(0,0);
+  document.getElementById("st2").classList.add("on");
+  document.getElementById("sp-s").textContent = "Etape 2 sur 2 - Ton plan";
 }
-function goBackP1(){
-  document.getElementById("p1b").classList.remove("on");
-  document.getElementById("p1").classList.add("on");
-  document.getElementById("st2").classList.remove("on");
-  document.getElementById("sp-h").textContent="Cr\u00e9er mon compte";
-  document.getElementById("sp-s").textContent="\u00c9tape 1 sur 3 \u2014 Tes informations";
-}
-function goBack(){
+
+function goBack() {
   document.getElementById("p2").classList.remove("on");
   document.getElementById("p1").classList.add("on");
   document.getElementById("st2").classList.remove("on");
-  document.getElementById("sp-h").textContent="Cr\u00e9er mon compte";
-  document.getElementById("sp-s").textContent="\u00c9tape 1 sur 2 \u2014 Tes informations";
+  document.getElementById("sp-s").textContent = "Etape 1 sur 2 - Tes informations";
 }
-async function signup(){
+
+async function doSignup() {
   hideErr();
-  var pn=document.getElementById("pn").value.trim();
-  var em=document.getElementById("em").value.trim();
-  var pw=document.getElementById("pw").value;
-  var py=document.getElementById("py").value;
-  var btn=document.getElementById("btn2");
-  btn.textContent="\u23f3 Cr\u00e9ation...";btn.disabled=true;
-  var r=await sb3.auth.signUp({email:em,password:pw,options:{data:{prenom:pn,pays:py},emailRedirectTo:"https://boostme.social/login"}});
-  if(r.error){
-    btn.disabled=false;btn.textContent=_plan==="free"?"🚀 Activer mon compte":"Proc\u00e9der au paiement \u2192";
-    if(r.error.message.includes("already"))showErr("Un compte existe d\u00e9j\u00e0 avec cet email.");
-    else showErr(r.error.message);
+  var pn = document.getElementById("pn").value.trim();
+  var em = document.getElementById("em").value.trim();
+  var pw = document.getElementById("pw").value;
+  var py = document.getElementById("py").value;
+  var btn = document.getElementById("btn2");
+  btn.textContent = "Creation...";
+  btn.disabled = true;
+
+  var r = await _sb.auth.signUp({
+    email: em,
+    password: pw,
+    options: {
+      data: { prenom: pn, pays: py },
+      emailRedirectTo: "https://boostme.social/login"
+    }
+  });
+
+  if (r.error) {
+    btn.disabled = false;
+    btn.textContent = "Activer mon compte";
+    if (r.error.message.indexOf("already") >= 0) {
+      showErr("Un compte existe deja avec cet email.");
+    } else {
+      showErr(r.error.message);
+    }
     return;
   }
-  var uid=r.data.user.id;
-  var age=document.getElementById("age")?document.getElementById("age").value:"";
-  var situ=document.getElementById("situ")?document.getElementById("situ").value:"";
-  var objChecked=[...document.querySelectorAll("#obj-grid .obj-item.sel")].map(function(x){return x.dataset.val;});
-  await sb3.from("profiles").upsert({id:uid,prenom:pn,pays:py||"other",plan:_plan==="free"?"free":"pending",age_range:age||null,situation:situ||null,objectifs:objChecked.length?objChecked:null});
-  // Send welcome email (non-blocking)
-  var _wem=em,_wpn=pn;
-  setTimeout(function(){fetch("/.netlify/functions/send-welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:_wem,prenom:_wpn})}).catch(function(){});},500);
 
-  if(_plan==="free"){
-    await sb3.from("user_challenges").upsert({user_id:uid,challenge_id:"boostme-starter",current_day:1,status:"active",streak:0},{onConflict:"user_id,challenge_id"});
-    document.getElementById("suc-msg").textContent="Ton acc\u00e8s gratuit est activ\u00e9. Le BoostMe Starter t\u2019attend !";
-  }else{
-    document.getElementById("suc-msg").textContent="Compte cr\u00e9\u00e9 ! Contacte-nous pour activer ton plan annuel.";
+  // Save profile
+  var uid = r.data.user ? r.data.user.id : null;
+  if (uid) {
+    await _sb.from("profiles").upsert({
+      id: uid,
+      prenom: pn,
+      pays: py || "other",
+      plan: _plan === "free" ? "free" : "pending"
+    });
+
+    if (_plan === "free") {
+      await _sb.from("user_challenges").upsert({
+        user_id: uid,
+        challenge_id: "boostme-starter",
+        current_day: 1,
+        status: "active",
+        streak: 0,
+        last_active: new Date().toISOString()
+      }, { onConflict: "user_id,challenge_id" });
+    }
   }
-  var confEl=document.getElementById("conf-email");
-  if(confEl)confEl.textContent=em;
+
+  // Show success
+  var confEl = document.getElementById("conf-em");
+  if (confEl) confEl.textContent = em;
   document.getElementById("p2").classList.remove("on");
   document.getElementById("p-ok").classList.add("on");
-  document.getElementById("sp-h").textContent="";
-  document.getElementById("sp-s").textContent="";
+  document.getElementById("sp-h").textContent = "Bienvenue !";
+  document.getElementById("sp-s").textContent = "";
 }
 </script>
 </body>

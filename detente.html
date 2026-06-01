@@ -412,29 +412,30 @@ function startBreath() {
   go();
 }
 
-// ---- AUTH ----
-var _sb = null;
-try {
-  _sb = window.supabase.createClient(
-    "https://hddxbjmdtbxvxwmmdxmj.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ"
-  );
-  _sb.auth.getSession().then(function(r) {
-    if (r.data && r.data.session) {
-      var u = r.data.session.user;
-      _sb.from("profiles").select("prenom,plan").eq("id", u.id).single().then(function(pr) {
-        if (pr.data) {
-          var pl = document.getElementById("nav-pl");
-          var labels = {free:"Starter", unit:"Challenge", annual:"Annuel"};
-          if (pl) pl.textContent = labels[pr.data.plan] || "Starter";
+// Auth (non-blocking - games work without login)
+window.addEventListener("load", function() {
+  try {
+    if (window.supabase) {
+      var sb = window.supabase.createClient(
+        "https://hddxbjmdtbxvxwmmdxmj.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ"
+      );
+      sb.auth.getSession().then(function(r) {
+        if (r.data && r.data.session) {
+          sb.from("profiles").select("prenom,plan").eq("id", r.data.session.user.id).single().then(function(pr) {
+            if (pr.data) {
+              var pl = document.getElementById("nav-pl");
+              if (pl) pl.textContent = {free:"Starter",unit:"Challenge",annual:"Annuel"}[pr.data.plan] || "Starter";
+            }
+          });
         }
       });
+      window._sbDetente = sb;
     }
-  });
-} catch(e) { console.log("Supabase init error:", e); }
-
+  } catch(e) {}
+});
 function doLogout() {
-  if (_sb) _sb.auth.signOut().then(function() { window.location.href = "/"; });
+  if (window._sbDetente) window._sbDetente.auth.signOut().then(function() { window.location.href = "/"; });
   else window.location.href = "/";
 }
 </script>

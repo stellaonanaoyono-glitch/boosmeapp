@@ -132,31 +132,12 @@ var _uc=null,_ch=null,_c=null;
 
 async function run(){
   var u=await initUser();if(!u)return;
-  // Multi-challenge support: check sessionStorage for requested challenge
-  var reqChId=sessionStorage.getItem('bm_active_ch');
-  var r;
-  if(reqChId){
-    // Load the specifically requested challenge (any status)
-    r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('challenge_id',reqChId).maybeSingle();
-    // Only fallback if challenge truly doesn't exist for this user
-    if(!r.data){
-      r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
-    }
-  }else{
-    // Try active first, then fall back to any status (paused/completed)
-    r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
-    if(!r.data){
-      r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).order('last_active',{ascending:false}).limit(1).maybeSingle();
-    }
-  }
+  // Load active challenge - simple
+  var r=await _sb.from('user_challenges').select('*').eq('user_id',u.id).eq('status','active').order('last_active',{ascending:false}).limit(1).maybeSingle();
   if(!r.data){window.location.href='/challenges';return;}
   _uc=r.data; _ch=chById(r.data.challenge_id);
   renderHeader();
-  // Show paused banner if needed
-  if(_uc.status==='paused'){
-    var banner=document.getElementById('status-banner');
-    if(banner){banner.style.display='block';banner.innerHTML='<div style="background:#FEF3C7;border:1.5px solid #FCD34D;border-radius:10px;padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.75rem"><span style="font-size:1.1rem">⏸</span><div><div style="font:700 .83rem Poppins,sans-serif;color:#92400E">Challenge en pause</div><div style="font-size:.75rem;color:#92400E;opacity:.8">Reprends là où tu t'es arrêté(e)</div></div><button onclick="resumeFromDay()" style="margin-left:auto;padding:.35rem .8rem;background:#FFC107;border:none;border-radius:8px;font:700 .75rem Poppins,sans-serif;cursor:pointer">▶ Reprendre</button></div>';}
-  }
+
   await loadContent();
   renderValidation();
 }
