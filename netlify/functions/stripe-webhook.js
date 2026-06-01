@@ -30,6 +30,14 @@ async function activatePlan(userId, plan, challengeId) {
   else console.log('[activate] profile updated OK');
 
   if (plan === 'unit' && challengeId) {
+    // Pause any currently active challenge (including boostme-starter)
+    await sb.from('user_challenges')
+      .update({ status: 'paused' })
+      .eq('user_id', userId)
+      .eq('status', 'active')
+      .neq('challenge_id', challengeId);
+    console.log('[activate] paused other active challenges for', userId);
+
     // 2a. Unit plan: activate the specific challenge
     const uc = await sb.from('user_challenges').upsert({
       user_id: userId,

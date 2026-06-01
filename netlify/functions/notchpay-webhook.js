@@ -51,6 +51,9 @@ async function activatePlan(userId, plan, challengeId) {
   }).eq('id', userId);
 
   if (plan === 'unit' && challengeId) {
+    // Pause other active challenges first (including boostme-starter)
+    await sb.from('user_challenges').update({status:'paused'}).eq('user_id',userId).eq('status','active').neq('challenge_id',challengeId);
+    console.log('[NP-activate] paused other active challenges');
     // Activate specific challenge
     const r = await sb.from('user_challenges').upsert({
       user_id: userId,
