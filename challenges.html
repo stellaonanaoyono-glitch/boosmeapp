@@ -163,7 +163,7 @@ function render(){
     if(!_auth){
       actionBtn="<a class=\"by\" href=\"/signup\" style=\"font-size:.84rem\">Créer un compte gratuit</a>";
     }else if(isCur){
-      actionBtn="<a class=\"by\" href=\"/challenge-day\" style=\"font-size:.84rem\">Continuer &rarr;</a>";
+      actionBtn="<a class=\"by\" href=\"/challenge-day\" onclick=\"sessionStorage.setItem('bm_active_ch','"+ch.id+"')\" style=\"font-size:.84rem\">Continuer &rarr;</a>";
     }else if(isPaused){
       actionBtn="<button class=\"by\" onclick=\"resumeCh(event,'"+ch.id+"')\" style=\"font-size:.84rem;background:#FFF8E1;color:#111;border:1.5px solid #FFC107\">↩ Reprendre</button>";
     }else if(isCompleted){
