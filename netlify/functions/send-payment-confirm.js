@@ -83,7 +83,7 @@ exports.handler = async (event) => {
     }, key);
 
     // Notification admin paiement
-    const ADMIN_P = process.env.ADMIN_EMAIL || 'boostmeapp@gmail.com';
+    const ADMIN_P = process.env.ADMIN_EMAIL || 'aeliservicescmr@gmail.com';
     const SENDER_P = process.env.BREVO_SENDER || 'aeliservicescmr@gmail.com';
     try {
       await brevo({

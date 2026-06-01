@@ -133,7 +133,7 @@ exports.handler = async (event) => {
     }
 
     // Notification admin
-    const ADMIN = process.env.ADMIN_EMAIL || 'boostmeapp@gmail.com';
+    const ADMIN = process.env.ADMIN_EMAIL || 'aeliservicescmr@gmail.com';
     try {
       await brevo({
         sender: { name: 'BOOST.ME System', email: SENDER },
