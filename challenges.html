@@ -233,8 +233,15 @@ function selPO(opt){
 
 function proceedPay(){
   closePM();
-  if(_pmOpt==="unit"){window.location.href="/paiement?plan=unit&ch="+encodeURIComponent(_pmId);}
-  else{window.location.href="/paiement?plan=annual";}
+  if(_pmOpt==="unit"){
+    sessionStorage.setItem("bm_plan","unit");
+    sessionStorage.setItem("bm_ch",_pmId||"");
+    window.location.href="/paiement?plan=unit&ch="+encodeURIComponent(_pmId);
+  }else{
+    sessionStorage.setItem("bm_plan","annual");
+    sessionStorage.setItem("bm_ch","");
+    window.location.href="/paiement?plan=annual";
+  }
 }
 
 run();

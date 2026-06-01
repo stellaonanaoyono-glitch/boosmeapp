@@ -127,6 +127,8 @@ function buyUnit(){
   goPay("unit",_sel);
 }
 function goPay(plan,ch){
+  sessionStorage.setItem('bm_plan',plan);
+  sessionStorage.setItem('bm_ch',ch||'');
   var url="/paiement?plan="+plan;
   if(ch)url+="&ch="+encodeURIComponent(ch);
   window.location.href=url;
