@@ -221,10 +221,11 @@ async function startCh(e,id){
 async function resumeCh(e,id){
   if(e){e.stopPropagation();e.preventDefault();}
   if(!_auth){window.location.href="/signup";return;}
-  toast("Reprise en cours…");
-  await _sb.from("user_challenges").update({status:"active",last_active:new Date().toISOString()}).eq("user_id",_u.id).eq("challenge_id",id);
+  toast("Chargement...");
+  // Fire update without waiting - challenge-day handles paused state
+  _sb.from("user_challenges").update({status:"active",last_active:new Date().toISOString()}).eq("user_id",_u.id).eq("challenge_id",id).then(function(){});
   sessionStorage.setItem("bm_active_ch",id);
-  setTimeout(function(){window.location.href="/challenge-day";},800);
+  window.location.href="/challenge-day";
 }
 
 function openPM(e,id,name){

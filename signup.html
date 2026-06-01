@@ -146,6 +146,21 @@ function next1(){
   document.getElementById("sp-h").textContent="Presque l\u00e0 !";
   document.getElementById("sp-s").textContent="\u00c9tape 2 sur 3 \u2014 Ton profil";
 }
+function next1b(){
+  document.getElementById("p1b").classList.remove("on");
+  document.getElementById("p2").classList.add("on");
+  document.getElementById("st3").classList.add("on");
+  document.getElementById("sp-h").textContent="Choisis ton plan";
+  document.getElementById("sp-s").textContent="\u00c9tape 3 sur 3 \u2014 Ton plan";
+  window.scrollTo(0,0);
+}
+function goBackP1(){
+  document.getElementById("p1b").classList.remove("on");
+  document.getElementById("p1").classList.add("on");
+  document.getElementById("st2").classList.remove("on");
+  document.getElementById("sp-h").textContent="Cr\u00e9er mon compte";
+  document.getElementById("sp-s").textContent="\u00c9tape 1 sur 3 \u2014 Tes informations";
+}
 function goBack(){
   document.getElementById("p2").classList.remove("on");
   document.getElementById("p1").classList.add("on");
