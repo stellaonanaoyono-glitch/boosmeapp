@@ -116,13 +116,9 @@ input:focus,select:focus{border-color:#FFC107}
   <!-- SUCCESS -->
   <div class="panel" id="p-ok">
     <div class="suc-wrap">
-      <span class="suc-ico">&#128231;</span>
-      <div class="suc-h">Verifie ta boite email !</div>
-      <div class="suc-p">Un email de confirmation a ete envoye a <strong id="conf-em"></strong>.<br>Clique sur le lien pour activer ton compte.</div>
-      <div class="tip">
-        <strong>Astuce :</strong> Verifie aussi ton dossier <strong>Spam</strong> ou <strong>Promotions</strong>. L'email vient de BOOST.ME.
-      </div>
-      <a class="btn" href="/login" style="display:block;text-align:center;text-decoration:none;margin-top:.5rem">Aller a la connexion</a>
+      <span class="suc-ico">&#127881;</span>
+      <div class="suc-h">Bienvenue !</div>
+      <div class="suc-p">Ton compte est cree. Tu rejoins ton espace dans quelques secondes...</div>
     </div>
   </div>
 </div>
@@ -228,13 +224,12 @@ async function doSignup() {
     }
   }
 
-  // Show success
-  var confEl = document.getElementById("conf-em");
-  if (confEl) confEl.textContent = em;
+  // Show success briefly then redirect
   document.getElementById("p2").classList.remove("on");
   document.getElementById("p-ok").classList.add("on");
   document.getElementById("sp-h").textContent = "Bienvenue !";
   document.getElementById("sp-s").textContent = "";
+  setTimeout(function() { window.location.href = "/dashboard"; }, 1500);
 }
 </script>
 </body>
