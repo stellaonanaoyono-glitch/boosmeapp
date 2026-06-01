@@ -224,6 +224,13 @@ async function doSignup() {
     }
   }
 
+  // Send welcome email (non-blocking)
+  fetch("/.netlify/functions/send-welcome", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: em, prenom: pn })
+  }).catch(function(){});
+
   // Show success briefly then redirect
   document.getElementById("p2").classList.remove("on");
   document.getElementById("p-ok").classList.add("on");
