@@ -87,3 +87,8 @@
 
 [functions.send-weekly-reminder]
   schedule = "0 9 * * 1"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200

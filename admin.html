@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin — BOOST.ME</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#0F0F0F;color:#111;min-height:100vh}
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0F0F0F}
+.login-box{background:#1A1A1A;border-radius:20px;padding:2.5rem 2rem;width:100%;max-width:380px;border:1px solid #2A2A2A}
+.login-logo{font:900 20px/1 Poppins,sans-serif;color:#FFC107;text-align:center;margin-bottom:.3rem;letter-spacing:1px}
+.login-sub{font-size:.72rem;color:#666;text-align:center;margin-bottom:1.75rem}
+.lbl{display:block;font-size:.72rem;font-weight:700;color:#666;margin-bottom:.3rem;margin-top:.85rem}
+.inp{width:100%;padding:.72rem .9rem;background:#111;border:1.5px solid #2A2A2A;border-radius:9px;font:500 .88rem Poppins,sans-serif;color:#fff;outline:none}
+.inp:focus{border-color:#FFC107}
+.lbtn{width:100%;padding:.85rem;background:#FFC107;color:#111;border:none;border-radius:10px;font:800 .92rem Poppins,sans-serif;cursor:pointer;margin-top:1.25rem}
+.lbtn:hover{background:#E5AC00}
+.lerr{font-size:.75rem;color:#EF4444;margin-top:.6rem;text-align:center;min-height:1.1em}
+/* PANEL */
+.panel{display:none;min-height:100vh;background:#F4F4F4}
+.topbar{background:#111;height:56px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-logo{font:900 14px/1 Poppins,sans-serif;color:#FFC107;letter-spacing:1px}
+.tb-r{display:flex;align-items:center;gap:.75rem}
+.tb-em{font-size:.72rem;color:#666}
+.tb-btn{padding:.35rem .8rem;background:none;border:1px solid #333;border-radius:6px;font:600 .7rem Poppins,sans-serif;cursor:pointer;color:#777}
+.tb-btn:hover{border-color:#FFC107;color:#FFC107}
+.pg{max-width:1140px;margin:0 auto;padding:1.5rem 1.25rem}
+.pg-title{font:900 1.05rem/1 Poppins,sans-serif;color:#111;margin-bottom:.3rem}
+.pg-sub{font-size:.73rem;color:#999;margin-bottom:1.5rem}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-bottom:1.5rem}
+.stat{background:#fff;border-radius:13px;padding:1.1rem 1.2rem;border:1px solid #E8E8E8}
+.stat-n{font:900 1.9rem/1 Poppins,sans-serif;color:#111}
+.stat-l{font-size:.7rem;font-weight:600;color:#aaa;margin-top:.3rem}
+.stat-s{font-size:.68rem;font-weight:700;color:#22C55E;margin-top:.2rem}
+/* CARDS */
+.card{background:#fff;border-radius:14px;border:1px solid #E8E8E8;margin-bottom:1.15rem;overflow:hidden}
+.card-head{padding:.9rem 1.25rem;border-bottom:1px solid #F0F0F0;display:flex;align-items:center;justify-content:space-between}
+.card-title{font:800 .88rem Poppins,sans-serif;color:#111}
+.card-sub{font-size:.7rem;color:#bbb}
+.card-body{padding:1.1rem 1.25rem}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:.76rem}
+.tbl th{text-align:left;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#ccc;padding:.55rem .7rem;border-bottom:1.5px solid #F0F0F0}
+.tbl td{padding:.6rem .7rem;border-bottom:1px solid #F8F8F8;color:#444;vertical-align:middle}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:#FAFAFA}
+/* BADGES */
+.bdg{display:inline-block;padding:.15rem .55rem;border-radius:20px;font-size:.6rem;font-weight:800;white-space:nowrap}
+.bdg-free{background:#FFF8E1;color:#D97706}
+.bdg-unit{background:#EEF2FF;color:#4338CA}
+.bdg-annual{background:#D1FAE5;color:#065F46}
+.bdg-pending{background:#FEF3C7;color:#92400E}
+.bdg-expired{background:#FEE2E2;color:#991B1B}
+/* TOOLS */
+.tool-row{display:flex;gap:.6rem;margin-bottom:.75rem}
+.t-inp{flex:1;padding:.68rem .9rem;border:1.5px solid #E8E8E8;border-radius:9px;font:500 .83rem Poppins,sans-serif;color:#111;outline:none;background:#fff}
+.t-inp:focus{border-color:#FFC107}
+.t-btn{padding:.68rem 1.15rem;background:#FFC107;color:#111;border:none;border-radius:9px;font:700 .8rem Poppins,sans-serif;cursor:pointer;white-space:nowrap}
+.t-btn:hover{background:#E5AC00}
+.t-btn.alt{background:#F0F0F0;color:#555}
+.t-btn.alt:hover{background:#E0E0E0}
+.t-btn.red{background:#FEE2E2;color:#991B1B}
+.res{background:#F8F8F8;border-radius:10px;padding:.9rem 1rem;font-size:.78rem;line-height:1.75;min-height:40px;border:1px solid #F0F0F0;display:none}
+.res.ok{background:#D1FAE5;border-color:#6EE7B7;color:#065F46}
+.res.err{background:#FEE2E2;border-color:#FCA5A5;color:#991B1B}
+.diag-row{display:flex;align-items:center;gap:.5rem;padding:.38rem 0;border-bottom:1px solid #F5F5F5;font-size:.78rem}
+.diag-row:last-child{border:none}
+.d-ico{font-size:.9rem;width:20px;flex-shrink:0}
+.d-lbl{color:#aaa;width:130px;flex-shrink:0;font-size:.72rem}
+.d-val{font-weight:700;color:#111;flex:1}
+.d-act{margin-left:auto}
+/* SEARCH */
+.srch{width:100%;padding:.6rem .9rem;border:1.5px solid #E8E8E8;border-radius:9px;font:500 .8rem Poppins,sans-serif;outline:none;margin-bottom:.85rem;background:#fff}
+.srch:focus{border-color:#FFC107}
+/* EMAIL DIAG */
+.ediag-item{display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:8px;margin-bottom:.4rem;font-size:.78rem}
+.ediag-ok{background:#D1FAE5;color:#065F46}
+.ediag-err{background:#FEE2E2;color:#991B1B}
+.ediag-warn{background:#FEF3C7;color:#92400E}
+/* SPIN */
+.spin{display:inline-block;width:13px;height:13px;border:2px solid #ddd;border-top-color:#FFC107;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:.3rem}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* TOAST */
+.toast-el{position:fixed;bottom:1.5rem;right:1.5rem;background:#111;color:#fff;padding:.7rem 1rem;border-radius:10px;font:600 .78rem Poppins,sans-serif;border-left:3px solid #FFC107;transform:translateY(50px);opacity:0;transition:all .3s;z-index:9999;pointer-events:none}
+.toast-el.show{transform:translateY(0);opacity:1}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.tool-row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- LOGIN -->
+<div id="login-wrap" class="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">BOOST.ME</div>
+    <div class="login-sub">Acces administrateur</div>
+    <label class="lbl">Email</label>
+    <input class="inp" type="email" id="l-em" placeholder="boostmeapp@gmail.com" onkeydown="if(event.key==='Enter')doLogin()">
+    <label class="lbl">Mot de passe</label>
+    <input class="inp" type="password" id="l-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lbtn" onclick="doLogin()">Connexion</button>
+    <div class="lerr" id="l-err"></div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panel" class="panel">
+  <div class="topbar">
+    <div class="tb-logo">BOOST.ME ADMIN</div>
+    <div class="tb-r">
+      <span class="tb-em" id="tb-em"></span>
+      <button class="tb-btn" onclick="loadAll()">Actualiser</button>
+      <button class="tb-btn" onclick="doLogout()">Deconnexion</button>
+    </div>
+  </div>
+  <div class="pg">
+    <div class="pg-title">Tableau de bord</div>
+    <div class="pg-sub" id="pg-sub">Chargement...</div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="s-tot">—</div><div class="stat-l">Inscrits total</div></div>
+      <div class="stat"><div class="stat-n" id="s-pay">—</div><div class="stat-l">Plans actifs</div><div class="stat-s" id="s-mrr"></div></div>
+      <div class="stat"><div class="stat-n" id="s-new">—</div><div class="stat-l">Nouveaux (7j)</div></div>
+      <div class="stat"><div class="stat-n" id="s-rev">—</div><div class="stat-l">Revenus total</div><div class="stat-s">Paiements confirmes</div></div>
+    </div>
+
+    <!-- USERS -->
+    <div class="card">
+      <div class="card-head">
+        <div><div class="card-title">Utilisateurs</div><div class="card-sub" id="u-count"></div></div>
+      </div>
+      <div class="card-body">
+        <input class="srch" id="srch" placeholder="Rechercher email ou prenom..." oninput="filterUsers()">
+        <div style="overflow-x:auto">
+          <table class="tbl">
+            <thead><tr><th>Prenom</th><th>Email</th><th>Plan</th><th>Pays</th><th>Inscription</th><th>Action</th></tr></thead>
+            <tbody id="u-body"><tr><td colspan="6" style="text-align:center;padding:1.5rem;color:#bbb"><span class="spin"></span>Chargement...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSTIC -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">Diagnostic utilisateur</div><div class="card-sub">Email → diagnostic complet + actions</div></div>
+      <div class="card-body">
+        <div class="tool-row">
+          <input class="t-inp" id="d-em" placeholder="email@exemple.com" onkeydown="if(event.key==='Enter')runDiag()">
+          <button class="t-btn" onclick="runDiag()">Diagnostiquer</button>
+        </div>
+        <div class="res" id="d-res"></div>
+      </div>
+    </div>
+
+    <!-- EMAIL DIAGNOSTIC -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">Diagnostic emails</div><div class="card-sub">Verifie que Brevo est correctement configure</div></div>
+      <div class="card-body">
+        <div class="tool-row">
+          <button class="t-btn" onclick="testEmail()">Tester la configuration email</button>
+          <button class="t-btn alt" onclick="sendTestEmail()">Envoyer un email test</button>
+        </div>
+        <div class="res" id="e-res"></div>
+      </div>
+    </div>
+
+    <!-- STRIPE RECOVERY -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">Recuperation Stripe</div><div class="card-sub">Paiement OK dans Stripe mais pas en base</div></div>
+      <div class="card-body">
+        <div class="tool-row">
+          <input class="t-inp" id="s-id" placeholder="cs_live_xxxxxxxxxxxx">
+          <button class="t-btn" onclick="recoverStripe()">Recuperer</button>
+        </div>
+        <div class="res" id="s-res"></div>
+      </div>
+    </div>
+
+    <!-- PAIEMENTS -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">Paiements recents</div><div class="card-sub">20 derniers confirmes</div></div>
+      <div class="card-body">
+        <div style="overflow-x:auto">
+          <table class="tbl">
+            <thead><tr><th>Date</th><th>Email</th><th>Plan</th><th>Montant</th><th>Methode</th></tr></thead>
+            <tbody id="p-body"><tr><td colspan="5" style="text-align:center;padding:1.5rem;color:#bbb"><span class="spin"></span>Chargement...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="toast-el" id="toast"></div>
+
+<script>
+
+var _sb, _tt, _users = [];
+const ADM = 'boostmeapp@gmail.com';
+const SB_URL = 'https://hddxbjmdtbxvxwmmdxmj.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkZHhiam1kdGJ4dnh3bW1keG1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMzI5NjksImV4cCI6MjA5NTgwODk2OX0.CmiVvDxN1qorQ8MPo5D70zA2uRoUWEofAPqMsXpr4oQ';
+const PLANS = {free:'Starter',unit:'Challenge',annual:'Annuel',pending:'En attente',expired:'Expire'};
+const PCLS  = {free:'bdg-free',unit:'bdg-unit',annual:'bdg-annual',pending:'bdg-pending',expired:'bdg-expired'};
+
+function toast(m,ok){
+  var e=document.getElementById('toast');
+  e.textContent=m; e.style.borderLeftColor=ok===false?'#EF4444':'#FFC107';
+  e.classList.add('show'); clearTimeout(_tt);
+  _tt=setTimeout(function(){e.classList.remove('show');},3200);
+}
+function bdg(p){return '<span class="bdg '+(PCLS[p]||'bdg-free')+'">'+(PLANS[p]||p||'—')+'</span>';}
+
+window.addEventListener('load',function(){
+  _sb = window.supabase.createClient(SB_URL,SB_KEY);
+  _sb.auth.getSession().then(function(r){
+    if(r.data&&r.data.session){
+      var u=r.data.session.user;
+      if(u.email!==ADM){_sb.auth.signOut();return;}
+      showPanel(u.email);
+    }
+  });
+});
+
+async function doLogin(){
+  var em=document.getElementById('l-em').value.trim();
+  var pw=document.getElementById('l-pw').value;
+  var err=document.getElementById('l-err');
+  err.textContent='';
+  if(em!==ADM){err.textContent='Acces non autorise.';return;}
+  var r=await _sb.auth.signInWithPassword({email:em,password:pw});
+  if(r.error){err.textContent=r.error.message;return;}
+  showPanel(em);
+}
+function showPanel(em){
+  document.getElementById('login-wrap').style.display='none';
+  document.getElementById('panel').style.display='block';
+  document.getElementById('tb-em').textContent=em;
+  loadAll();
+}
+function doLogout(){_sb.auth.signOut().then(function(){window.location.reload();});}
+
+async function loadAll(){
+  var now=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('pg-sub').textContent='Mise a jour a '+now;
+  await Promise.all([loadStats(),loadUsers(),loadPayments()]);
+}
+
+async function loadStats(){
+  var [pr,pay]=await Promise.all([
+    _sb.from('profiles').select('id,plan,created_at'),
+    _sb.from('payments').select('amount_eur').eq('status','confirmed')
+  ]);
+  var p=pr.data||[], v=pay.data||[];
+  var week=new Date(Date.now()-7*86400000).toISOString();
+  document.getElementById('s-tot').textContent=p.length;
+  var active=p.filter(function(x){return x.plan==='annual'||x.plan==='unit';}).length;
+  document.getElementById('s-pay').textContent=active;
+  document.getElementById('s-mrr').textContent='dont '+ p.filter(function(x){return x.plan==='annual';}).length+' annuel(s)';
+  document.getElementById('s-new').textContent='+'+p.filter(function(x){return x.created_at>week;}).length;
+  var rev=v.reduce(function(s,x){return s+(x.amount_eur||0);},0);
+  document.getElementById('s-rev').textContent=rev.toFixed(0)+' EUR';
+}
+
+async function loadUsers(){
+  var r=await _sb.from('profiles').select('id,prenom,email,plan,pays,created_at').order('created_at',{ascending:false}).limit(300);
+  _users=r.data||[];
+  document.getElementById('u-count').textContent=_users.length+' utilisateurs';
+  renderUsers(_users);
+}
+function renderUsers(list){
+  var tb=document.getElementById('u-body');
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:#bbb">Aucun resultat</td></tr>';return;}
+  tb.innerHTML=list.map(function(u){
+    var d=u.created_at?new Date(u.created_at).toLocaleDateString('fr-FR'):'—';
+    return '<tr>'+
+      '<td><strong>'+(u.prenom||'—')+'</strong></td>'+
+      '<td style="font-size:.7rem;color:#888">'+(u.email||'—')+'</td>'+
+      '<td>'+bdg(u.plan)+'</td>'+
+      '<td>'+(u.pays||'—')+'</td>'+
+      '<td>'+d+'</td>'+
+      '<td><button onclick="quickDiag(\''+escape(u.email||'')+'\')" style="font-size:.63rem;padding:.18rem .55rem;background:#F0F0F0;border:1px solid #E0E0E0;border-radius:5px;cursor:pointer;font-family:Poppins,sans-serif">Voir</button></td>'+
+      '</tr>';
+  }).join('');
+}
+function filterUsers(){
+  var q=document.getElementById('srch').value.toLowerCase();
+  renderUsers(q?_users.filter(function(u){return (u.email||'').toLowerCase().includes(q)||(u.prenom||'').toLowerCase().includes(q);}):_users);
+}
+function quickDiag(em){
+  document.getElementById('d-em').value=unescape(em);
+  document.getElementById('d-res').style.display='none';
+  document.getElementById('d-res').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(runDiag,400);
+}
+
+async function runDiag(){
+  var em=document.getElementById('d-em').value.trim();
+  var box=document.getElementById('d-res');
+  if(!em){box.className='res err';box.style.display='block';box.textContent='Entrez un email.';return;}
+  box.className='res';box.style.display='block';
+  box.innerHTML='<span class="spin"></span>Diagnostic en cours...';
+  var pr=await _sb.from('profiles').select('*').eq('email',em).maybeSingle();
+  var prof=pr.data;
+  if(!prof){box.className='res err';box.textContent='Aucun compte trouve pour '+em;return;}
+  var uc=await _sb.from('user_challenges').select('*').eq('user_id',prof.id);
+  var challenges=uc.data||[];
+  var active=challenges.find(function(c){return c.status==='active';});
+  var plan=prof.plan||'free';
+  var expires=prof.plan_expires_at?new Date(prof.plan_expires_at).toLocaleDateString('fr-FR'):null;
+  var dLeft=prof.plan_expires_at?Math.ceil((new Date(prof.plan_expires_at)-new Date())/86400000):null;
+  var rows=[
+    {ico:'&#128100;',lbl:'Prenom',val:prof.prenom||'—'},
+    {ico:'&#128231;',lbl:'Email',val:prof.email},
+    {ico:'&#127757;',lbl:'Pays',val:prof.pays||'—'},
+    {ico:'&#128179;',lbl:'Plan',val:bdg(plan)},
+    {ico:'&#128197;',lbl:'Inscription',val:prof.created_at?new Date(prof.created_at).toLocaleDateString('fr-FR'):'—'},
+    {ico:'&#8987;',lbl:'Expiration',val:expires||'—',extra:dLeft!==null?(' <span style="color:'+(dLeft<7?'#EF4444':'#22C55E')+';font-weight:800">'+dLeft+'j</span>'):''},
+    {ico:'&#9889;',lbl:'Challenge actif',val:active?active.challenge_id+' (Jour '+active.current_day+')':'Aucun',
+     action:!active?'<button class="t-btn alt" style="font-size:.63rem;padding:.22rem .6rem" onclick="createCh(\''+prof.id+'\')">+ Creer</button>':''},
+    {ico:'&#128202;',lbl:'Challenges total',val:challenges.length+''},
+  ];
+  var h=rows.map(function(r){
+    return '<div class="diag-row"><span class="d-ico">'+r.ico+'</span><span class="d-lbl">'+r.lbl+'</span><span class="d-val">'+r.val+(r.extra||'')+'</span>'+(r.action?'<span class="d-act">'+r.action+'</span>':'')+'</div>';
+  }).join('');
+  if(plan==='free'||plan==='expired'||!plan){
+    h+='<div style="margin-top:.85rem;padding-top:.75rem;border-top:1px solid #F0F0F0"><div style="font-size:.68rem;font-weight:800;color:#bbb;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.5px">Actions manuelles</div>'+
+    '<div style="display:flex;gap:.5rem;flex-wrap:wrap">'+
+    '<button class="t-btn" style="font-size:.7rem;padding:.4rem .8rem" onclick="setPlan(\''+prof.id+'\',\'unit\')">Activer plan unitaire</button>'+
+    '<button class="t-btn" style="font-size:.7rem;padding:.4rem .8rem" onclick="setPlan(\''+prof.id+'\',\'annual\')">Activer acces annuel</button>'+
+    '</div></div>';
+  }
+  box.className='res';box.innerHTML=h;
+}
+async function createCh(uid){
+  var id=prompt('ID du challenge (ex: glow-up, morning-power, cash-clarity):');
+  if(!id)return;
+  await _sb.from('user_challenges').upsert({user_id:uid,challenge_id:id.trim(),current_day:1,status:'active',streak:0,last_active:new Date().toISOString()},{onConflict:'user_id,challenge_id'});
+  toast('Challenge '+id+' active !');runDiag();
+}
+async function setPlan(uid,plan){
+  var upd={plan:plan,plan_updated_at:new Date().toISOString()};
+  if(plan==='annual')upd.plan_expires_at=new Date(Date.now()+365*86400000).toISOString();
+  await _sb.from('profiles').update(upd).eq('id',uid);
+  toast('Plan '+plan+' active !');runDiag();loadStats();loadUsers();
+}
+
+async function testEmail(){
+  var box=document.getElementById('e-res');
+  box.className='res';box.style.display='block';
+  box.innerHTML='<span class="spin"></span>Test en cours...';
+  try{
+    var r=await fetch('/.netlify/functions/send-welcome',{method:'GET'});
+    var d=await r.json();
+    if(d.has_key){
+      box.className='res ok';
+      box.innerHTML='<div class="ediag-ok ediag-item">&#10003; BREVO_API_KEY configuree</div>'+
+        '<div class="ediag-item" style="background:#F8F8F8">&#128231; Expediteur : '+d.sender+'</div>'+
+        '<div class="ediag-item" style="background:#F8F8F8">&#127760; Site : '+d.site+'</div>';
+    } else {
+      box.className='res err';
+      box.innerHTML='&#10007; BREVO_API_KEY non configuree dans Netlify.<br><br>'+
+        'Va dans Netlify &#8594; Site configuration &#8594; Environment variables &#8594; ajouter BREVO_API_KEY avec ta cle API Brevo (commence par xkeysib-...).';
+    }
+  }catch(e){
+    box.className='res err';box.textContent='Erreur : '+e.message;
+  }
+}
+async function sendTestEmail(){
+  var box=document.getElementById('e-res');
+  box.className='res';box.style.display='block';
+  box.innerHTML='<span class="spin"></span>Envoi en cours...';
+  try{
+    var r=await fetch('/.netlify/functions/send-welcome',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:ADM,prenom:'Admin Test'})
+    });
+    var d=await r.json();
+    if(d.sent){
+      box.className='res ok';box.textContent='Email test envoye a '+ADM+'. Verifie ta boite mail.';
+      toast('Email test envoye !');
+    } else {
+      box.className='res err';box.textContent='Echec : '+JSON.stringify(d);
+    }
+  }catch(e){box.className='res err';box.textContent='Erreur : '+e.message;}
+}
+
+async function recoverStripe(){
+  var sid=document.getElementById('s-id').value.trim();
+  var box=document.getElementById('s-res');
+  if(!sid.startsWith('cs_')){box.className='res err';box.style.display='block';box.textContent='Session ID invalide (doit commencer par cs_live_ ou cs_test_)';return;}
+  box.className='res';box.style.display='block';
+  box.innerHTML='<span class="spin"></span>Verification...';
+  try{
+    var r=await fetch('/.netlify/functions/stripe-verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sid})});
+    var d=await r.json();
+    if(d.error){box.className='res err';box.textContent='Erreur : '+d.error;return;}
+    box.className='res ok';
+    box.innerHTML='Recuperation reussie !<br>Email : '+(d.email||'—')+'<br>Plan : '+(d.plan||'—')+'<br>Statut : Actif';
+    toast('Paiement recupere !');loadAll();
+  }catch(e){box.className='res err';box.textContent='Erreur : '+e.message;}
+}
+
+async function loadPayments(){
+  var r=await _sb.from('payments').select('confirmed_at,plan,amount_eur,provider,user_id,profiles(email)').eq('status','confirmed').order('confirmed_at',{ascending:false}).limit(20);
+  var pays=r.data||[];
+  var tb=document.getElementById('p-body');
+  if(!pays.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:1.5rem;color:#bbb">Aucun paiement</td></tr>';return;}
+  tb.innerHTML=pays.map(function(p){
+    var d=p.confirmed_at?new Date(p.confirmed_at).toLocaleDateString('fr-FR'):'—';
+    var em=p.profiles?p.profiles.email:'—';
+    return '<tr><td>'+d+'</td><td style="font-size:.7rem;color:#888">'+em+'</td><td>'+bdg(p.plan)+'</td><td style="font-weight:700">'+(p.amount_eur?p.amount_eur+' EUR':'—')+'</td><td style="text-transform:capitalize">'+(p.provider||'—')+'</td></tr>';
+  }).join('');
+}
+
+</script>
+</body>
+</html>
