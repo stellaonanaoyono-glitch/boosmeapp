@@ -3894,22 +3894,9 @@ function renderHeader(){
     '</div>';
 }
 
-async function loadContent(){
-  // For BoostMe Starter: use predefined content
-  if(_uc.challenge_id==='boostme-starter'){
-    var idx=_uc.current_day-1;
-    if(idx>=0&&idx<STARTER_CONTENT.length){
-      _c=STARTER_CONTENT[idx];
-      renderContent(_c);
-      return;
-    }
-  }
-  // For other challenges: check cache then generate
-  var ex=await _sb.from('daily_content').select('*')
-    .eq('user_id',_u.id).eq('challenge_id',_uc.challenge_id).eq('day_number',_uc.current_day)
-    .maybeSingle();
-  if(ex.data&&ex.data.lesson_title){_c=ex.data;renderContent(ex.data);return;}
-  await generateContent();
+function loadContent(){
+  // Toujours charger depuis les fiches preparees — jamais depuis le cache Supabase
+  generateContent();
 }
 
 function generateContent(){
