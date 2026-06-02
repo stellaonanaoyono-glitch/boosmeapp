@@ -104,7 +104,7 @@ body{font-family:'Poppins',sans-serif;background:#F2F2F2;color:#111;-webkit-font
 <div class="po-px" style="color:#E5AC00">&#8364;49<small style="font-size:.65rem;font-weight:500">/an</small></div>
 </div>
 </div>
-<button class="by" id="pm-btn" onclick="proceedPay()" style="width:100%">Acheter &#8212; &#8364;3,99</button>
+<div style="margin-bottom:.75rem"><div style="display:flex;gap:.5rem"><input id="promo-input" type="text" placeholder="Code ambassadrice (optionnel)" style="flex:1;padding:.62rem .9rem;border:1.5px solid #E2E2E2;border-radius:9px;font:500 .83rem Poppins,sans-serif;outline:none;letter-spacing:1px" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')applyPromo()"><button onclick="applyPromo()" style="padding:.62rem 1rem;background:#F5F5F5;border:1.5px solid #E2E2E2;border-radius:9px;font:700 .8rem Poppins,sans-serif;cursor:pointer;font-family:Poppins,sans-serif">OK</button></div><div id="promo-msg" style="font-size:.74rem;margin-top:.35rem;min-height:.9rem"></div></div><button class="by" id="pm-btn" onclick="proceedPay()" style="width:100%">Acheter &#8212; &#8364;3,99</button>
 <button class="bg2" onclick="closePM()" style="width:100%;justify-content:center;margin-top:.5rem">Annuler</button>
 </div></div>
 <div class="toast" id="toast"></div>
@@ -219,6 +219,10 @@ function openPM(e,id,name){
   document.getElementById("po-unit").classList.add("on");
   document.getElementById("po-annual").classList.remove("on");
   document.getElementById("pay-modal").classList.add("open");
+  var _pi=document.getElementById("promo-input");if(_pi)_pi.value="";
+  var _pm=document.getElementById("promo-msg");if(_pm)_pm.textContent="";
+  var _pb=document.getElementById("pm-btn");if(_pb){_pb.textContent="Acheter — €3,99";_pb.style.background="";}
+  _promoValid=false;
   document.body.style.overflow="hidden";
 }
 
@@ -235,7 +239,64 @@ function selPO(opt){
   btn.textContent=opt==="unit"?"Acheter ce challenge — €3,99":"Plan annuel — €49/an";
 }
 
+
+// =================== PROMO CODE ===================
+var PROMO_CODE = "AMBASSADRICEBOOSTME";
+var PROMO_ACTIVE = true;
+var _promoValid = false;
+
+function applyPromo(){
+  var input = document.getElementById("promo-input");
+  var msg   = document.getElementById("promo-msg");
+  var btn   = document.getElementById("pm-btn");
+  var code  = input ? input.value.trim().toUpperCase() : "";
+  if(msg) msg.textContent = "";
+  _promoValid = false;
+  if(btn){ btn.textContent = "Acheter — €3,99"; btn.style.background = ""; }
+  if(!code) return;
+  if(!PROMO_ACTIVE){
+    if(msg){ msg.style.color="#EF4444"; msg.textContent = "Ce code n’est plus actif."; }
+    return;
+  }
+  if(code !== PROMO_CODE){
+    if(msg){ msg.style.color="#EF4444"; msg.textContent = "Code invalide."; }
+    return;
+  }
+  if(_p && _p.promo_used){
+    if(msg){ msg.style.color="#EF4444"; msg.textContent = "Tu as déjà utilisé ce code."; }
+    return;
+  }
+  _promoValid = true;
+  if(msg){ msg.style.color="#22C55E"; msg.textContent = "✓ Code validé — accès gratuit activé !"; }
+  if(btn){ btn.textContent = "Activer ce challenge gratuitement"; btn.style.background = "#22C55E"; }
+}
+
+async function activatePromo(){
+  var btn = document.getElementById("pm-btn");
+  if(btn){ btn.disabled = true; btn.textContent = "Activation..."; }
+  var r = await _sb.from("user_challenges").upsert({
+    user_id: _u.id,
+    challenge_id: _pmId,
+    current_day: 1,
+    status: "active",
+    streak: 0,
+    last_active: new Date().toISOString()
+  }, { onConflict: "user_id,challenge_id" });
+  if(r.error){
+    if(btn){ btn.disabled = false; btn.textContent = "Activer ce challenge gratuitement"; }
+    toast("Erreur : " + r.error.message);
+    return;
+  }
+  await _sb.from("profiles").update({ promo_used: true }).eq("id", _u.id);
+  if(_p) _p.promo_used = true;
+  closePM();
+  toast("Challenge activé ! Bonne transformation !");
+  setTimeout(function(){ window.location.href = "/challenge-day"; }, 1200);
+}
+// =================== END PROMO ===================
 function proceedPay(){
+  if(!_auth){ window.location.href = "/signup"; return; }
+  if(_promoValid){ activatePromo(); return; }
   closePM();
   if(_pmOpt==="unit"){
     sessionStorage.setItem("bm_plan","unit");
